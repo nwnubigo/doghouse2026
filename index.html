@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리 강아지의 첫 번째 집 만들기 「도그하우스 만들기」 1박 2일 | 팜투어 남원누비고</title>
+<meta name="description" content="가족이 함께 만드는 원목 도그하우스, 애견지도사 산책 교육, 지리산 자락 팜파티와 반려견 동반 시골 민박까지 — 남원 1박 2일 반려견 동반 농촌체험 여행">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7EF; --paper:#FFFFFF; --ink:#3A2E22; --ink-soft:#6C5D4B;
+  --brown:#8A5A33; --brown-d:#5C3D1F; --sand:#F4EADA; --sand-d:#EADFC9;
+  --green:#4C7A4C; --green-d:#38603A; --green-bg:#EFF5EC;
+  --accent:#E9683C; --accent-d:#C94F26; --accent-bg:#FDEEE6;
+  --blue:#2F93C7; --blue-bg:#E8F4FB;
+  --red:#C4472F; --red-bg:#FBEEEA;
+  --line:#E8DCC8; --radius:18px;
+  --shadow:0 6px 24px rgba(90,62,31,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+.page{max-width:860px;margin:0 auto;background:var(--bg);box-shadow:0 0 60px rgba(90,62,31,.08)}
+.inner{padding:0 28px}
+@media(max-width:560px){.inner{padding:0 18px}}
+
+/* ---------- 공통 타이포 ---------- */
+.disp{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:-.01em}
+.sec{padding:72px 0 76px}
+.sec-head{text-align:center;margin-bottom:40px}
+.sec-num{display:inline-block;font-family:'Jua',sans-serif;font-size:14px;letter-spacing:.35em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:'Jua',sans-serif;font-size:34px;line-height:1.3;color:var(--brown-d)}
+.sec-title em{font-style:normal;color:var(--accent)}
+.sec-sub{margin-top:12px;font-size:15.5px;color:var(--ink-soft)}
+@media(max-width:560px){.sec-title{font-size:27px}.sec{padding:56px 0 60px}}
+
+/* ---------- 히어로 ---------- */
+.hero{position:relative;overflow:hidden;color:#fff}
+.hero-img{width:100%;height:640px;object-fit:cover;object-position:center 62%}
+@media(max-width:560px){.hero-img{height:540px}}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,26,14,.55) 0%,rgba(38,26,14,.10) 38%,rgba(38,26,14,.78) 100%)}
+.hero-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px 28px;font-size:13.5px;letter-spacing:.06em}
+.hero-top .brand{font-family:'Jua',sans-serif;font-size:16px}
+.hero-top .brand small{opacity:.85;font-family:'Noto Sans KR';font-weight:400;margin-left:8px;letter-spacing:.02em}
+.hero-body{position:absolute;left:0;right:0;bottom:0;padding:0 28px 44px;text-align:center}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.badge{font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(4px)}
+.badge.hot{background:var(--accent);border-color:var(--accent)}
+.hero-kicker{font-size:16px;font-weight:500;opacity:.95;margin-bottom:8px}
+.hero-title{font-family:'Jua',sans-serif;font-size:52px;line-height:1.18;text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.hero-title .qm{color:#FFD98A}
+@media(max-width:560px){.hero-title{font-size:38px}}
+.hero-date{margin-top:16px;font-size:16px;font-weight:700;letter-spacing:.04em}
+.hero-date span{display:inline-block;background:rgba(0,0,0,.35);padding:6px 16px;border-radius:8px}
+.hero-cta{display:inline-block;margin-top:22px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Jua',sans-serif;font-size:19px;padding:15px 46px;border-radius:999px;box-shadow:0 8px 22px rgba(233,104,60,.45);transition:.2s}
+.hero-cta:hover{background:var(--accent-d);transform:translateY(-2px)}
+
+/* ---------- 인트로 ---------- */
+.intro{background:var(--paper);text-align:center;padding:64px 0}
+.intro p.lead{font-size:19px;line-height:1.95;color:var(--ink)}
+.intro p.lead strong{color:var(--brown)}
+.paw-divider{font-size:22px;letter-spacing:14px;color:var(--brown);opacity:.55;margin:26px 0 0}
+.intro-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
+.chip{background:var(--sand);color:var(--brown-d);font-weight:700;font-size:14px;padding:9px 18px;border-radius:999px;border:1px solid var(--sand-d)}
+
+/* ---------- 개요 테이블 ---------- */
+.overview{background:linear-gradient(180deg,var(--bg),#F6EEDF)}
+.ov-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.ov-row{display:flex;border-bottom:1px solid var(--line)}
+.ov-row:last-child{border-bottom:none}
+.ov-th{flex:0 0 128px;background:var(--sand);color:var(--brown-d);font-weight:700;font-size:14.5px;padding:16px 18px;display:flex;align-items:center}
+.ov-td{flex:1;padding:16px 20px;font-size:15px}
+.ov-td b{color:var(--brown-d)}
+.tbd{display:inline-block;background:var(--accent-bg);color:var(--accent-d);border:1px dashed var(--accent);font-size:13px;font-weight:700;padding:2px 10px;border-radius:6px}
+@media(max-width:560px){.ov-th{flex-basis:96px;font-size:13.5px;padding:14px 12px}.ov-td{padding:14px 14px;font-size:14px}}
+
+/* ---------- 포인트 공통 ---------- */
+.point-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Jua',sans-serif;color:#fff;background:var(--green);font-size:15px;padding:7px 18px;border-radius:999px;margin-bottom:14px}
+.point-tag.orange{background:var(--accent)}
+.point-tag.blue{background:var(--blue)}
+.point-tag.brown{background:var(--brown)}
+.p-title{font-family:'Jua',sans-serif;font-size:30px;color:var(--brown-d);line-height:1.3;margin-bottom:14px}
+.p-desc{font-size:15.5px;color:var(--ink-soft);margin-bottom:26px}
+.p-desc b{color:var(--ink)}
+@media(max-width:560px){.p-title{font-size:24px}}
+.photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:relative}
+.photo img{width:100%;height:100%;object-fit:cover}
+.cap{position:absolute;left:12px;bottom:12px;background:rgba(41,29,17,.65);color:#fff;font-size:12px;padding:4px 12px;border-radius:999px;backdrop-filter:blur(3px)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:560px){.grid3{grid-template-columns:1fr 1fr}}
+.feature-list{list-style:none;margin-top:24px;display:grid;gap:12px}
+.feature-list li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px 18px 15px 52px;position:relative;font-size:15px;box-shadow:0 2px 10px rgba(90,62,31,.05)}
+.feature-list li::before{content:"✔";position:absolute;left:20px;top:14px;color:var(--green);font-weight:900}
+.feature-list li b{color:var(--brown-d)}
+
+/* ---------- 도그하우스 갤러리 ---------- */
+.dh-hero{margin-bottom:14px}
+.dh-hero img{width:100%;height:430px;object-fit:cover}
+@media(max-width:560px){.dh-hero img{height:300px}}
+.gal4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal4 .photo img{height:170px}
+@media(max-width:560px){.gal4{grid-template-columns:repeat(2,1fr)}.gal4 .photo img{height:150px}}
+
+/* ---------- 트레이너 ---------- */
+.trainer-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:stretch}
+@media(max-width:640px){.trainer-wrap{grid-template-columns:1fr}}
+.trainer-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.trainer-card img{width:100%;height:250px;object-fit:cover}
+.trainer-card .tc-body{padding:20px 22px 24px}
+.tc-body h4{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d);margin-bottom:8px}
+.tc-body p{font-size:14px;color:var(--ink-soft)}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.cert-grid .photo img{height:110px}
+.qual-note{margin-top:12px;font-size:12.5px;color:var(--ink-soft);background:var(--sand);border-radius:10px;padding:10px 14px}
+.map-band{margin-top:26px;display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+@media(max-width:640px){.map-band{grid-template-columns:1fr}}
+.map-band .photo img{height:270px}
+
+/* ---------- 쿨링 이벤트 ---------- */
+.cool{background:linear-gradient(160deg,#0F5E86 0%,#2F93C7 55%,#7CC3E8 100%);color:#fff;position:relative;overflow:hidden}
+.cool::before,.cool::after{content:"💦";position:absolute;font-size:110px;opacity:.14}
+.cool::before{top:36px;left:-14px;transform:rotate(-14deg)}
+.cool::after{bottom:30px;right:-10px;transform:rotate(12deg);font-size:140px}
+.cool .sec-num{color:#FFE28A}
+.cool .sec-title{color:#fff}
+.cool-box{position:relative;z-index:1;background:rgba(255,255,255,.13);border:1.5px dashed rgba(255,255,255,.65);border-radius:22px;padding:36px 30px;text-align:center;backdrop-filter:blur(3px)}
+.cool-q{font-family:'Jua',sans-serif;font-size:40px;letter-spacing:.05em;margin-bottom:6px}
+.cool-q .blank{display:inline-block;border-bottom:4px solid #FFE28A;color:#FFE28A;padding:0 6px;min-width:120px}
+.cool-box p{font-size:15.5px;opacity:.95}
+.cool-hints{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+@media(max-width:560px){.cool-hints{grid-template-columns:1fr}}
+.hint{background:rgba(255,255,255,.16);border-radius:14px;padding:18px 14px;font-size:14px}
+.hint .hn{font-family:'Jua',sans-serif;display:block;font-size:15px;color:#FFE28A;margin-bottom:6px}
+.cool-foot{position:relative;z-index:1;margin-top:22px;text-align:center;font-size:13.5px;opacity:.9}
+
+/* ---------- 팜파티/숙박/도시락 ---------- */
+.party-hero img{height:340px}
+@media(max-width:560px){.party-hero img{height:230px}}
+.stay-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+@media(max-width:640px){.stay-cards{grid-template-columns:1fr}}
+.stay-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.stay-card .photo{border-radius:0;box-shadow:none}
+.stay-card img{height:210px;width:100%;object-fit:cover}
+.stay-card .sc-body{padding:18px 20px 22px}
+.sc-body h4{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
+.sc-body .sc-tag{font-size:12px;color:var(--green-d);font-weight:700;background:var(--green-bg);display:inline-block;border-radius:6px;padding:2px 8px;margin:6px 0 8px}
+.sc-body p{font-size:14px;color:var(--ink-soft)}
+.room-list{list-style:none;margin:14px 0 0;border-top:1px dashed var(--line)}
+.room-list li{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:9px 2px;border-bottom:1px dashed var(--line);font-size:13.5px}
+.room-list .rn{font-weight:700;color:var(--brown-d);white-space:nowrap}
+.room-list .ri{color:var(--ink-soft);text-align:right;font-size:12.5px}
+.naver-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;background:#03C75A;color:#fff;text-decoration:none;font-weight:900;font-size:15px;padding:13px 10px;border-radius:12px;transition:.2s;box-shadow:0 4px 14px rgba(3,199,90,.30)}
+.naver-btn:hover{background:#02b04f;transform:translateY(-1px)}
+.naver-btn .nlogo{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:#fff;color:#03C75A;border-radius:4px;font-size:13px;font-weight:900}
+.book-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0 6px}
+@media(max-width:640px){.book-steps{grid-template-columns:1fr 1fr}}
+.bstep{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 12px;text-align:center;box-shadow:0 2px 10px rgba(90,62,31,.05);position:relative}
+.bstep .bn{font-family:'Jua',sans-serif;display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:50%;font-size:15px;margin-bottom:8px}
+.bstep .bt{font-weight:900;font-size:13.5px;color:var(--brown-d)}
+.bstep p{font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.duo .photo img{height:230px}
+@media(max-width:560px){.duo .photo img{height:170px}}
+
+/* ---------- 일정 타임라인 ---------- */
+.schedule{background:var(--paper)}
+.day-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;box-shadow:var(--shadow)}
+.day-card+.day-card{margin-top:26px}
+.day-label{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.day-label .d{font-family:'Jua',sans-serif;background:var(--brown);color:#fff;font-size:17px;padding:7px 18px;border-radius:10px}
+.day-label .d.g{background:var(--green)}
+.day-label span{font-weight:700;color:var(--brown-d)}
+.tl{list-style:none;position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--sand-d)}
+.tl li{position:relative;padding:0 0 22px 12px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-24px;top:7px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+.tl .t{font-weight:900;color:var(--accent-d);font-size:14.5px;letter-spacing:.02em}
+.tl .h{font-weight:700;font-size:16px;color:var(--brown-d);margin:2px 0}
+.tl p{font-size:14px;color:var(--ink-soft)}
+.tl .star{color:var(--blue);font-weight:700}
+
+/* ---------- 참가 조건 ---------- */
+.cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:640px){.cond-grid{grid-template-columns:1fr}}
+.cond{border-radius:var(--radius);padding:26px 24px;border:1.5px solid}
+.cond h4{font-family:'Jua',sans-serif;font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.cond ul{list-style:none;display:grid;gap:9px}
+.cond li{font-size:14.5px;padding-left:24px;position:relative}
+.cond.ok{background:var(--green-bg);border-color:#BAD3B4}
+.cond.ok h4{color:var(--green-d)}
+.cond.ok li::before{content:"✓";position:absolute;left:2px;color:var(--green);font-weight:900}
+.cond.no{background:var(--red-bg);border-color:#E5BEB2}
+.cond.no h4{color:var(--red)}
+.cond.no li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:900}
+.cond .small{font-size:12.5px;color:var(--ink-soft);margin-top:10px}
+.notice-strip{margin-bottom:22px;background:var(--accent-bg);border:1px solid #F2C9B4;border-radius:12px;padding:14px 18px;font-size:14px;color:var(--accent-d);font-weight:500}
+
+/* ---------- 안전수칙 / 동의 / 준비물 ---------- */
+.rule-list{list-style:none;display:grid;gap:12px;counter-reset:rule}
+.rule-list li{counter-increment:rule;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 64px;position:relative;font-size:14.5px;box-shadow:0 2px 10px rgba(90,62,31,.05)}
+.rule-list li::before{content:counter(rule,decimal-leading-zero);position:absolute;left:18px;top:15px;font-family:'Jua',sans-serif;color:var(--accent);font-size:17px}
+.rule-list b{color:var(--brown-d)}
+.agree-list{list-style:none;display:grid;gap:10px}
+.agree-list li{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 18px;font-size:14px}
+.agree-list .at{display:block;font-weight:900;color:var(--brown-d);font-size:14.5px;margin-bottom:3px}
+.agree-list .at::before{content:"☑";color:var(--green);margin-right:8px}
+.prep-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:640px){.prep-grid{grid-template-columns:1fr}}
+.prep{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.prep h4{font-family:'Jua',sans-serif;font-size:18px;color:var(--brown-d);margin-bottom:12px}
+.prep ul{list-style:none;display:grid;gap:8px}
+.prep li{font-size:14.5px;padding-left:22px;position:relative}
+.prep li::before{content:"•";position:absolute;left:6px;color:var(--accent);font-weight:900}
+.prep .tip{margin-top:12px;font-size:12.5px;background:var(--sand);border-radius:10px;padding:9px 12px;color:var(--ink-soft)}
+
+/* ---------- 환불 ---------- */
+.refund-table{width:100%;border-collapse:collapse;background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14.5px}
+.refund-table th,.refund-table td{padding:15px 18px;border-bottom:1px solid var(--line);text-align:left}
+.refund-table th{background:var(--sand);color:var(--brown-d);width:38%;font-size:14px}
+.refund-table tr:last-child th,.refund-table tr:last-child td{border-bottom:none}
+.refund-table td b{color:var(--accent-d)}
+
+/* ---------- 신청 ---------- */
+.apply{background:linear-gradient(165deg,#5C3D1F,#8A5A33 70%,#A5713F);color:#fff;text-align:center}
+.apply .sec-title{color:#fff}
+.apply .sec-num{color:#FFD98A}
+.final-check{background:rgba(255,255,255,.10);border:1.5px dashed rgba(255,255,255,.55);border-radius:20px;padding:30px 26px;max-width:560px;margin:0 auto 34px}
+.final-check h4{font-family:'Jua',sans-serif;font-size:20px;margin-bottom:16px;color:#FFD98A}
+.final-check ol{list-style:none;display:grid;gap:10px;text-align:left}
+.final-check li{background:rgba(255,255,255,.10);border-radius:10px;padding:12px 16px;font-size:15px}
+.final-check li b{color:#FFE28A}
+.final-check .yes{margin-top:16px;text-align:center;font-size:14.5px;opacity:.95}
+.apply-btn{display:inline-block;background:#fff;color:var(--brown-d);font-family:'Jua',sans-serif;font-size:22px;text-decoration:none;padding:18px 66px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.28);transition:.2s}
+.apply-btn:hover{transform:translateY(-2px);background:#FFF3DC}
+.apply-steps{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:20px;font-size:13.5px;opacity:.95}
+.apply-steps span{background:rgba(0,0,0,.22);padding:6px 13px;border-radius:999px}
+.apply-info{margin-top:26px;font-size:14px;line-height:1.9;opacity:.95}
+.apply-info b{color:#FFD98A}
+
+/* ---------- 객실 선택 예약 영역 ---------- */
+.booking-area{margin-top:8px}
+.rgroup{margin-top:34px;text-align:left}
+.rgroup-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.rgroup-head h4{font-family:'Jua',sans-serif;font-size:21px;color:#FFD98A}
+.rgroup-head .rg-sub{font-size:13px;opacity:.9}
+.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.room-grid{grid-template-columns:1fr}}
+.rcard{background:#fff;color:var(--ink);border-radius:16px;padding:18px 18px 16px;text-align:left;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.22);display:flex;flex-direction:column;gap:6px}
+.rcard .rname{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
+.rcard .rprice{font-size:15px;font-weight:900;color:var(--accent-d)}
+.rcard .rprice .sale{display:inline-block;background:var(--accent-bg);color:var(--accent-d);font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.rcard .rcond{font-size:12.5px;color:var(--ink-soft);line-height:1.55}
+.rcard .rrate{font-size:13px;color:var(--ink-soft)}
+.rcard .rrate .star{color:#FF8A00;font-weight:900}
+.rcard .naver-btn{margin-top:10px;font-size:14px;padding:11px 8px}
+.rcard.soldout{background:#F1EBE2}
+.rcard.soldout .rname,.rcard.soldout .rprice{color:#9C8F7D}
+.rcard.soldout .rprice .sale{background:#E4DCCE;color:#9C8F7D}
+.rcard.soldout .naver-btn{background:#B9AE9D;box-shadow:none;pointer-events:none}
+.rcard .so-ribbon{display:none;position:absolute;top:14px;right:-38px;transform:rotate(38deg);background:var(--red);color:#fff;font-weight:900;font-size:12px;letter-spacing:.12em;padding:5px 44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.rcard.soldout .so-ribbon{display:block}
+.booking-note{margin-top:20px;font-size:12.5px;line-height:1.8;opacity:.88;text-align:center}
+
+/* ---------- 푸터 ---------- */
+footer{background:#2C2117;color:#C9BBA8;text-align:center;padding:34px 20px 40px;font-size:12.5px;line-height:1.9}
+footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin-bottom:6px}
+
+/* ---------- 리빌 애니메이션 ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <img class="hero-img" src="images/doghouse_hero.jpg" alt="원목 도그하우스 완성 샘플">
+  <div class="hero-veil"></div>
+  <div class="hero-top">
+    <div class="brand">🐾 팜투어 남원누비고 <small>× 반려견 동반 농촌여행</small></div>
+  </div>
+  <div class="hero-body">
+    <div class="hero-badges">
+      <span class="badge hot">선착순 8팀 한정</span>
+      <span class="badge">1박 2일</span>
+      <span class="badge">소형견(7kg 미만) 동반</span>
+      <span class="badge">체험 · 팜파티 · 숙박 올인클루시브</span>
+    </div>
+    <p class="hero-kicker">우리 강아지의 첫 번째 집 만들기</p>
+    <h1 class="hero-title"><span class="qm">「</span>도그하우스 만들기<span class="qm">」</span><br>1박 2일</h1>
+    <p class="hero-date"><span>2026. 7. 31.(금) 12:00 ~ 8. 1.(토) 13:00</span></p>
+    <a class="hero-cta" href="#apply">참가 신청하기</a>
+  </div>
+</header>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<section class="intro">
+  <div class="inner rv">
+    <p class="lead">
+      가족이 함께 만드는 <strong>나무 도그하우스</strong>,<br>
+      애견지도사와의 <strong>산책 교육</strong>, 지리산 자락 <strong>팜파티</strong>와<br>
+      <strong>반려견 동반 시골 민박</strong>, 그리고 한여름 더위를 한 방에 날려버릴<br>
+      <strong>깜짝 이벤트</strong>까지 —
+    </p>
+    <p class="paw-divider">🐾 🐾 🐾</p>
+    <p class="lead" style="margin-top:22px;font-weight:700;color:var(--brown-d)">
+      반려견과 사람이 모두 주인공인<br>남원 농촌체험 여행입니다.
+    </p>
+    <div class="intro-chips">
+      <span class="chip">🔨 원목 도그하우스</span>
+      <span class="chip">🐕 애견지도사 케어</span>
+      <span class="chip">🌿 우드 소품 만들기</span>
+      <span class="chip">💦 깜짝 쿨링 이벤트</span>
+      <span class="chip">🍖 흑돼지 팜파티</span>
+      <span class="chip">🌙 시골 민박 1박</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 프로그램 개요 ═══════════ -->
+<section class="sec overview">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">PROGRAM INFO</span>
+      <h2 class="sec-title">프로그램 개요</h2>
+    </div>
+    <div class="ov-card rv">
+      <div class="ov-row"><div class="ov-th">일정</div><div class="ov-td"><b>2026. 7. 31.(금) 12:00 ~ 8. 1.(토) 13:00</b> (1박 2일)<br><small style="color:var(--ink-soft)">※ 1일차 12시 도착, 점심 도시락 제공</small></div></div>
+      <div class="ov-row"><div class="ov-th">장소</div><div class="ov-td">전북 남원시 일원 (옻칠목공체험관광협동조합 · 들꽃다물농장 · 반려견 동반 민박)</div></div>
+      <div class="ov-row"><div class="ov-th">모집 인원</div><div class="ov-td"><b>반려견 동반 가족 8팀</b> (선착순) — 팀당 2인 이상이면 참여하실 수 있어요</div></div>
+      <div class="ov-row"><div class="ov-th">참가 대상</div><div class="ov-td">소형견(체중 <b>7kg 미만</b>)을 동반한 가족</div></div>
+      <!-- TODO: 참가비 확정 시 아래 금액 교체 -->
+      <div class="ov-row"><div class="ov-th">참가비</div><div class="ov-td">팀당 <span class="tbd">추후 확정 공지</span><br><small style="color:var(--ink-soft)">체험 · 1일차 중식 도시락 · 팜파티 석식 · 숙박 · 2일차 중식 도시락 포함 / 조식은 선택 옵션</small></div></div>
+      <div class="ov-row"><div class="ov-th">주최·주관</div><div class="ov-td">남원시농촌종합지원센터 (팜투어 남원누비고)</div></div>
+      <div class="ov-row"><div class="ov-th">신청 방법</div><div class="ov-td">희망 숙소 <b>네이버 예약 신청</b> → <b>참가 신청서(구글폼) 작성</b> → 운영자 확인 후 <b>예약 확정</b> (숙소별 4팀, 확정 순 마감)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 1. 도그하우스 ═══════════ -->
+<section class="sec">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">EXPERIENCE</span>
+      <h2 class="sec-title">이런 경험을 하게 됩니다</h2>
+    </div>
+
+    <div class="rv">
+      <span class="point-tag">POINT 01 · 메인 체험</span>
+      <h3 class="p-title">🔨 도그하우스 만들기</h3>
+      <p class="p-desc">전문 목공 체험장에서 <b>원목 키트</b>로 우리 강아지만의 집을 직접 조립하고 마감합니다. 세상에 하나뿐인 우리 아이의 첫 번째 집이 완성됩니다.</p>
+    </div>
+    <div class="photo dh-hero rv"><img src="images/doghouse_green.jpg" alt="꾸미기까지 마친 원목 도그하우스 샘플"><span class="cap">직접 만드는 원목 도그하우스 (샘플)</span></div>
+    <div class="gal4 rv">
+      <div class="photo"><img src="images/doghouse_palm.jpg" alt="도그하우스 꾸미기 샘플"></div>
+      <div class="photo"><img src="images/doghouse_kit.jpg" alt="조립 중인 원목 도그하우스"></div>
+      <div class="photo"><img src="images/doghouse_faces.jpg" alt="강아지 얼굴 나무 장식"></div>
+      <div class="photo"><img src="images/workshop_in1.jpg" alt="목공 체험장 내부"></div>
+    </div>
+    <ul class="feature-list rv">
+      <li><b>둘이 오셔도 걱정 없어요</b> — 2인 팀도 완성할 수 있도록 과정을 조정했고, 꾸미기 작업은 둘째 날 이어서 하실 수 있습니다.</li>
+      <li><b>완성한 도그하우스는 집으로 가져가실 수 있습니다.</b> (승용차 트렁크 적재 가능 크기 — 정확한 크기·무게는 하단 안내 참조)</li>
+      <li>전문 목공 강사가 전 과정을 함께하며, 아이들도 안전하게 참여할 수 있습니다.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 2. 반려견 케어 ═══════════ -->
+<section class="sec" style="background:var(--green-bg);padding-top:64px">
+  <div class="inner">
+    <div class="rv">
+      <span class="point-tag">POINT 02</span>
+      <h3 class="p-title">🐾 애견지도사와 함께하는<br>반려견 케어 프로그램</h3>
+      <p class="p-desc">전문 애견지도사가 진행하는 <b>산책 교육</b>과 배변 교육 · 짖음 · 분리불안 등 <b>우리 아이 맞춤 1:1 행동 상담 Q&amp;A</b>가 준비되어 있습니다.</p>
+    </div>
+    <div class="trainer-wrap rv">
+      <div class="trainer-card">
+        <img src="images/trainer_profile.jpg" alt="애견지도사와 반려견들">
+        <div class="tc-body">
+          <h4>전문 애견지도사가 함께합니다</h4>
+          <p>반려견행동지도사 2급(국가자격) 등 반려견 관련 자격 6종을 보유한 전문 지도사가 산책 교육과 개별 상담을 진행합니다.</p>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="tc-body" style="padding-bottom:0">
+          <h4>보유 자격 확인</h4>
+          <p>진행 강사 프로필 · 자격 사항</p>
+        </div>
+        <div class="tc-body" style="padding-top:12px">
+          <div class="cert-grid">
+            <div class="photo"><img src="images/cert1.jpg" alt="반려동물 매개심리상담사 자격증"></div>
+            <div class="photo"><img src="images/cert2.jpg" alt="반려견지도사 자격증"></div>
+            <div class="photo"><img src="images/cert3.jpg" alt="훈련사 자격 인정서"></div>
+          </div>
+          <p class="qual-note">반려동물 매개심리상담사 · 반려견지도사 · 훈련사 자격 등 (현장에서 원본 확인 가능)</p>
+        </div>
+      </div>
+    </div>
+    <div class="map-band rv">
+      <div class="photo"><img src="images/walk_map.jpg" alt="애견 산책코스 지도"><span class="cap">체험장 인근 그늘 산책코스 (약 30분)</span></div>
+      <div class="photo"><img src="images/walk_sunset.jpg" alt="공방 근처 산책로 노을 풍경"><span class="cap">공방 근처 산책로의 노을</span></div>
+    </div>
+    <ul class="feature-list rv" style="margin-top:20px">
+      <li><b>산책 교육</b> — 체험장 인근 그늘 산책코스 약 30분, 산책로 지도는 참가 확정 후 미리 보내드립니다.</li>
+      <li><b>1:1 행동 상담</b> — 배변 교육, 짖음, 분리불안 등 우리 아이 고민을 지도사에게 직접 물어보세요.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 3. 우드 소품 ═══════════ -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv">
+      <span class="point-tag brown">POINT 03</span>
+      <h3 class="p-title">🌿 컵받침 등 우드 소품 만들기</h3>
+      <p class="p-desc">도그하우스 제작과 <b>동시에 진행</b>되는 소품 체험 — 가족이 역할을 나누어 참여합니다. 우리 아이 얼굴을 닮은 컵받침을 만들어 보세요.</p>
+    </div>
+    <div class="grid3 rv">
+      <div class="photo"><img src="images/coaster_dog.jpg" alt="강아지 얼굴 우드 컵받침" style="height:200px"></div>
+      <div class="photo"><img src="images/coaster_cat.jpg" alt="고양이 얼굴 우드 컵받침" style="height:200px"></div>
+      <div class="photo"><img src="images/goods_keyring.jpg" alt="우드 키링과 인형 소품" style="height:200px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 4. 쿨링 이벤트 ═══════════ -->
+<section class="sec cool">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">SURPRISE!</span>
+      <h2 class="sec-title">💦 한여름 깜짝 이벤트</h2>
+    </div>
+    <div class="cool-box rv">
+      <p class="cool-q">마른하늘에 <span class="blank">○○○</span></p>
+      <p>7월의 마지막 오후, 체험장 마당에서 남원누비고가 준비한<br><b>스페셜 쿨링 이벤트</b>가 열립니다. 무엇인지는 현장에서 공개!</p>
+      <div class="cool-hints">
+        <div class="hint"><span class="hn">HINT 1</span>온 가족이 기다리고, 도전하고, 웃음이 터지는</div>
+        <div class="hint"><span class="hn">HINT 2</span>올여름 가장 시원한 <b>3초</b></div>
+        <div class="hint"><span class="hn">HINT 3</span>참여하실 분은 <b>여벌 옷</b> 필수! (우비는 제공됩니다)</div>
+      </div>
+    </div>
+    <p class="cool-foot rv">참여는 자유입니다 · 반려견은 이벤트 구역과 분리된 그늘 쉼터에서 안전하게 대기합니다 🐶</p>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 5. 팜파티 & 숙박 ═══════════ -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv">
+      <span class="point-tag orange">POINT 04</span>
+      <h3 class="p-title">🍖 들꽃다물 팜파티 &amp;<br>시골 민박 하룻밤</h3>
+      <p class="p-desc"><b>남원 흑돼지 삼겹살 팜파티</b>로 즐기는 저녁(반려견 동반 야외 좌석), 그리고 반려견 동반 가능 시골 민박 · 펜션에서의 특별한 하룻밤.</p>
+    </div>
+    <div class="photo party-hero rv"><img src="images/farmparty_drone.jpg" alt="들꽃다물농장 야외 팜파티 전경"><span class="cap">들꽃다물농장 팜파티</span></div>
+    <div class="duo rv">
+      <div class="photo"><img src="images/farmparty_1.jpg" alt="숲속 팜파티 테이블"></div>
+      <div class="photo"><img src="images/bbq.jpg" alt="흑돼지 삼겹살 바비큐"></div>
+    </div>
+    <div class="stay-cards rv" id="stay">
+      <div class="stay-card">
+        <div class="photo"><img src="images/stay_mud_aerial.jpg" alt="지리산 순이네흙집 민박 전경"></div>
+        <div class="sc-body">
+          <h4>지리산 순이네흙집 민박 <small style="font-size:12px;color:var(--accent-d);font-weight:900">4팀</small></h4>
+          <span class="sc-tag">반려견 동반 가능 · 조식 자체 제공(선택)</span>
+          <p>황토로 지은 둥근 흙집에서 보내는 건강한 하룻밤. 시골 할머니 댁에 온 듯 포근합니다.<br>머슴달래 · 도토라지 · 박졸갈래 · 콩덕벅지 4개 객실</p>
+          <a class="naver-btn" href="#apply"><span class="nlogo">N</span>객실 선택 · 예약하기</a>
+        </div>
+      </div>
+      <div class="stay-card">
+        <div class="photo"><img src="images/stay_star_aerial.jpg" alt="지리산 별헤는밤 펜션 전경"></div>
+        <div class="sc-body">
+          <h4>지리산 별헤는밤 펜션 <small style="font-size:12px;color:var(--accent-d);font-weight:900">4팀</small></h4>
+          <span class="sc-tag">반려견 동반 가능 · 인근 식당 조식(선택)</span>
+          <p>지리산 자락의 밤하늘 아래, 원목 인테리어의 아늑한 펜션에서 쉬어 갑니다.<br>오로라 · 별 하나 · 별 둘 · 별 셋 4개 객실</p>
+          <a class="naver-btn" href="#apply"><span class="nlogo">N</span>객실 선택 · 예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="duo rv">
+      <div class="photo"><img src="images/stay_mud_in.jpg" alt="순이네흙집 내부"></div>
+      <div class="photo"><img src="images/stay_star_in.jpg" alt="별헤는밤 펜션 내부"></div>
+    </div>
+    <div class="book-steps rv">
+      <div class="bstep"><span class="bn">1</span><p class="bt">숙소 예약 신청</p><p>원하는 숙소의 네이버 예약 페이지에서 7/31(금) 1박 예약 신청</p></div>
+      <div class="bstep"><span class="bn">2</span><p class="bt">참가 신청서 작성</p><p>예약 안내 메시지의 참가 신청서(구글폼) 24시간 내 제출</p></div>
+      <div class="bstep"><span class="bn">3</span><p class="bt">운영자 확인</p><p>참가 조건(7kg 미만·접종 등) 확인 후 예약 승인</p></div>
+      <div class="bstep"><span class="bn">4</span><p class="bt">예약 확정!</p><p>확정 알림톡 수신 — 준비물·집결 안내를 보내드립니다</p></div>
+    </div>
+    <p style="margin-top:10px;font-size:13px;color:var(--ink-soft)" class="rv">※ 예약은 <b>확인 후 확정</b> 방식으로 운영됩니다. 참가 신청서 미제출 또는 참가 조건 미충족 시 예약이 승인되지 않으며, 결제 금액은 자동 환불됩니다. 숙소별 4팀이 확정되면 마감됩니다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ POINT 6. 도시락 ═══════════ -->
+<section class="sec" style="padding-top:64px">
+  <div class="inner">
+    <div class="rv">
+      <span class="point-tag brown">POINT 05</span>
+      <h3 class="p-title">🍱 남원 로컬 도시락</h3>
+      <p class="p-desc">1일차 점심과 2일차 점심은 <b>남원 로컬 업체의 정성 담긴 도시락</b>으로 준비됩니다. 반려견 곁에서 편하게, 이동 없이 체험 공간에서 함께 드세요.</p>
+    </div>
+    <div class="grid2 rv">
+      <div class="photo"><img src="images/lunch_1.jpg" alt="달토끼 도시락 구성" style="height:330px"></div>
+      <div class="photo"><img src="images/lunch_2.jpg" alt="로컬 도시락 반찬 구성" style="height:330px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 세부 일정 ═══════════ -->
+<section class="sec schedule">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">SCHEDULE</span>
+      <h2 class="sec-title">1박 2일 세부 일정</h2>
+    </div>
+
+    <div class="day-card rv">
+      <div class="day-label"><span class="d">DAY 1</span><span>7. 31. (금)</span></div>
+      <ul class="tl">
+        <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 점심</p><p>참가팀 도착 및 접수, 로컬 도시락 점심 (체험 공간)</p></li>
+        <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정 (마당 그늘막 · 대형 선풍기 운영)</p></li>
+        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램 (3개 섹션 동시 운영)</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램 — 가족 내 역할 분담<br><span class="star">★ 중간에 깜짝 쿨링 이벤트!</span></p></li>
+        <li><span class="t">18:00 – 20:00</span><p class="h">팜파티</p><p>들꽃다물농장 흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p></li>
+        <li><span class="t">20:00 ~</span><p class="h">숙박</p><p>반려견 동반 민박 · 펜션 이동 및 휴식</p></li>
+      </ul>
+    </div>
+
+    <div class="day-card rv">
+      <div class="day-label"><span class="d g">DAY 2</span><span>8. 1. (토)</span></div>
+      <ul class="tl">
+        <li><span class="t">~ 09:30</span><p class="h">조식 (선택)</p><p>숙소 자체 조식 또는 인근 식당 (숙소별 상이 — 신청 시 안내) ※ 식당은 7kg 미만 소형견 동반 가능</p></li>
+        <li><span class="t">10:00 – 12:00</span><p class="h">마무리 체험</p><p>도그하우스 꾸미기 · 마감 작업, 팀별 기념 촬영</p></li>
+        <li><span class="t">12:00 – 13:00</span><p class="h">중식 · 해산</p><p>도시락 점심 후 만족도 조사 및 해산</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 참가 조건 ═══════════ -->
+<section class="sec">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">CHECK LIST</span>
+      <h2 class="sec-title">반려견 참가 조건 <em>(필독)</em></h2>
+      <p class="sec-sub">모든 참가자와 반려견의 안전을 위해 아래 조건을 확인해 주세요.</p>
+    </div>
+    <div class="notice-strip rv">⚠️ 조건에 맞지 않을 경우 참가 신청이 제한되며, 현장에서 확인 시 참여가 거절될 수 있습니다.</div>
+    <div class="cond-grid rv">
+      <div class="cond ok">
+        <h4>✅ 참가 가능한 반려견</h4>
+        <ul>
+          <li>체중 <b>7kg 미만의 소형견</b> (본 프로그램은 소형견 전용으로 운영됩니다)</li>
+          <li>광견병 등 <b>필수 예방접종을 완료</b>한 반려견 (신청 시 접종 이력 기재, 현장에서 증빙 확인 가능)</li>
+          <li><b>동물등록</b>이 완료된 반려견</li>
+          <li>다른 강아지 · 사람과 함께 있어도 <b>안정적으로 지낼 수 있는</b> 반려견</li>
+        </ul>
+      </div>
+      <div class="cond no">
+        <h4>❌ 참가가 제한되는 반려견</h4>
+        <ul>
+          <li>체중 7kg 이상의 중 · 대형견</li>
+          <li>사람이나 다른 반려견에게 공격성을 보인 이력이 있는 반려견</li>
+          <li>다른 반려견과 함께 있을 때 과도하게 짖거나 사교성이 부족한 반려견</li>
+          <li>발정기 · 임신 중이거나 전염성 질환이 있는 반려견</li>
+          <li>예방접종 미완료 반려견</li>
+        </ul>
+        <p class="small">※ 숙소 · 식당 등 프로그램 여건상 이번에는 소형견만 모십니다 — 다음 기회에 꼭 준비할게요 🙏</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 안전 수칙 ═══════════ -->
+<section class="sec" style="background:var(--paper);padding-top:64px">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">SAFETY</span>
+      <h2 class="sec-title">현장 안전 수칙</h2>
+    </div>
+    <ul class="rule-list rv">
+      <li>행사 전 구간에서 <b>목줄(리드줄) 착용은 필수</b>이며, 길이는 <b>2m 이내</b>로 유지해 주세요. (동물보호법 기준)</li>
+      <li>체험 시간 동안 <b>반려견을 전담해서 돌볼 가족 구성원 1명</b>이 반드시 필요합니다. (팀당 2인 이상 참여가 필요한 이유입니다)</li>
+      <li>산책 시 <b>배변 봉투를 지참</b>하시고, 배변은 견주께서 직접 수거해 주세요.</li>
+      <li>팀별 활동 공간을 분리 운영하며, <b>반려견 간 접촉은 최소화</b>합니다.</li>
+      <li>7월 말 무더위에 대비해 <b>그늘막 쉼터 · 대형 선풍기 · 시원한 생수(아이스박스)</b>를 준비합니다. 산책은 더위가 덜한 시간대 · 그늘 코스로 진행합니다.</li>
+      <li>깜짝 쿨링 이벤트 구역에는 반려견이 접근할 수 없으며, <b>물 · 소음에 예민한 아이는 미리 알려주시면</b> 거리를 두고 배려해 드립니다.</li>
+      <li>팜파티 음식(양념육 등)은 반려견에게 위험할 수 있으니 <b>절대 급여하지 말아 주세요.</b> 반려견 간식은 별도 지참을 권장합니다.</li>
+      <li><b>차량 내 반려견 단독 대기(방치)는 금지</b>됩니다.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ 동의 사항 ═══════════ -->
+<section class="sec">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">AGREEMENT</span>
+      <h2 class="sec-title">참가 신청 전 동의 사항</h2>
+      <p class="sec-sub">아래 내용에 모두 동의하시는 경우에만 참가 신청이 가능합니다.<br>신청 절차에서 각 항목에 대한 동의 여부를 체크하게 됩니다.</p>
+    </div>
+    <ul class="agree-list rv">
+      <li><span class="at">반려견 참가 조건 확인</span>우리 반려견이 위 참가 가능 조건(7kg 미만 소형견 포함)에 해당함을 확인했으며, 사실과 다를 경우 현장에서 참여가 제한될 수 있고 이 경우 환불 규정이 적용됨에 동의합니다.</li>
+      <li><span class="at">안전 수칙 준수</span>현장 안전 수칙을 확인했으며, 이를 준수할 것에 동의합니다. 반복적인 미준수 시 운영진의 안내에 따라 프로그램 참여가 중단될 수 있습니다.</li>
+      <li><span class="at">반려견 관련 사고 책임</span>반려견이 다른 사람 · 반려견 · 시설물에 입힌 피해에 대한 1차적 책임은 견주에게 있음을 확인합니다. (민법 제759조) 주최 측은 행사 배상책임보험에 가입하여 운영합니다.</li>
+      <li><span class="at">시설 이용</span>숙소 · 체험장 시설의 파손 또는 오염(배변 등) 발생 시 복구 비용이 청구될 수 있음에 동의합니다.</li>
+      <li><span class="at">사진 · 영상 촬영 및 활용</span>본 프로그램은 언론(문화일보) 취재 및 홍보 콘텐츠 촬영(드론 포함)이 함께 진행됩니다. 참가자와 반려견이 포함된 사진 · 영상이 언론 보도 및 남원누비고 홍보에 활용되는 것에 동의합니다.</li>
+      <li><span class="at">개인정보 수집 · 이용</span>참가자 정보 및 반려견 정보(견종 · 나이 · 체중 · 성향 · 접종 이력)를 프로그램 운영과 안전관리 목적으로 수집 · 이용하는 것에 동의합니다. 수집된 정보는 행사 종료 후 관련 법령에 따라 파기됩니다.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ 준비물 ═══════════ -->
+<section class="sec" style="background:var(--green-bg);padding-top:64px">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">PACKING LIST</span>
+      <h2 class="sec-title">준비물 안내</h2>
+    </div>
+    <div class="prep-grid rv">
+      <div class="prep">
+        <h4>🐶 반려견 용품</h4>
+        <ul>
+          <li>목줄(2m 이내) · 하네스</li>
+          <li>배변 봉투</li>
+          <li>사료 · 간식</li>
+          <li>평소 쓰는 담요나 방석 (숙소용)</li>
+          <li>이동장(켄넬) — 차량 이동 및 숙소 휴식 시 권장</li>
+        </ul>
+        <p class="tip">💧 시원한 생수와 물그릇(종이컵)은 현장에 준비되어 있습니다.</p>
+      </div>
+      <div class="prep">
+        <h4>🧑 사람 준비물</h4>
+        <ul>
+          <li>편한 복장과 운동화 (목공 체험)</li>
+          <li>모자 · 선크림 등 여름 야외활동 용품</li>
+          <li>세면도구</li>
+          <li>야외용 돗자리 · 방석 (마당 체험 공간용)</li>
+          <li><b>여벌 옷 · 수건</b> — 깜짝 쿨링 이벤트에 참여하실 분은 꼭!</li>
+        </ul>
+        <p class="tip">💦 이벤트 참여 시 우비는 현장에서 제공됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 환불 규정 ═══════════ -->
+<section class="sec">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">REFUND</span>
+      <h2 class="sec-title">취소 · 환불 규정</h2>
+    </div>
+    <table class="refund-table rv">
+      <tr><th>행사 7일 전까지</th><td><b>참가비 전액 환불</b></td></tr>
+      <tr><th>행사 3~6일 전</th><td>참가비의 <b>50% 환불</b></td></tr>
+      <tr><th>행사 2일 전 ~ 당일</th><td>환불 불가</td></tr>
+      <tr><th>주최 측 사유 취소</th><td>천재지변 · 최소 인원 미달 등으로 행사가 취소될 경우 <b>전액 환불</b></td></tr>
+      <!-- TODO: 반려견 사유 환불 기준 확정 시 교체 -->
+      <tr><th>반려견 사유 취소</th><td>반려견의 질병 · 발정 등 사유 발생 시 진료 확인서 제출 — <span class="tbd">환불 기준 추후 안내</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ 신청 ═══════════ -->
+<section class="sec apply" id="apply">
+  <div class="inner">
+    <div class="sec-head rv">
+      <span class="sec-num">JOIN US</span>
+      <h2 class="sec-title">잠깐, 신청 전 마지막 확인! 🐕</h2>
+    </div>
+    <div class="final-check rv">
+      <h4>세 가지만 체크해 주세요</h4>
+      <ol>
+        <li><b>①</b> 우리 아이는 7kg 미만 소형견인가요?</li>
+        <li><b>②</b> 필수 예방접종을 모두 마쳤나요?</li>
+        <li><b>③</b> 체험 중 반려견을 전담할 가족이 있나요? (2인 이상이면 OK!)</li>
+      </ol>
+      <p class="yes">세 가지 모두 '네'라면, 남원에서 만나요!<br>마른하늘의 깜짝 이벤트도 함께 기다리고 있을게요 💦</p>
+    </div>
+    <div style="text-align:center" class="rv booking-area">
+      <p class="disp" style="font-size:26px;color:#fff">🐾 숙소를 선택하고 신청하세요</p>
+      <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실</p>
+
+      <div class="rgroup">
+        <div class="rgroup-head"><h4>지리산 순이네흙집 민박</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
+        <div class="room-grid">
+          <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
+          <div class="rcard" data-room="sooni-1">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">머슴달래</span>
+            <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-2">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">도토라지</span>
+            <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-3">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">박졸갈래</span>
+            <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-4">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">콩덕벅지</span>
+            <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rgroup">
+        <div class="rgroup-head"><h4>지리산 별헤는밤 펜션</h4><span class="rg-sub">원목 인테리어 · 인근 식당 조식(선택) · 4팀</span></div>
+        <div class="room-grid">
+          <!-- TODO: 별헤는밤 펜션 네이버 예약 URL 확정 시 아래 4개 링크 교체 -->
+          <div class="rcard" data-room="star-1">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">오로라</span>
+            <span class="rprice">200,000 ~ 350,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 5인(최대 7인) · 일반객실(침실1, 이불세트5, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 11</span>
+            <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="star-2">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">별 하나</span>
+            <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 27</span>
+            <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="star-3">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">별 둘</span>
+            <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 4.75</span> · 리뷰 17</span>
+            <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="star-4">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="rname">별 셋</span>
+            <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
+            <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대2, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 30</span>
+            <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="booking-note">예약 신청 후 안내 메시지의 <b>참가 신청서(구글폼)</b>를 24시간 내 작성해 주세요. 운영자 확인 후 예약이 확정되며,<br>참가 조건 미충족 시 승인되지 않고 결제 금액은 자동 환불됩니다. 예약이 완료된 객실은 <b>SOLD OUT</b>으로 표시됩니다.</p>
+      <div class="apply-steps">
+        <span>① 숙소 네이버 예약 신청</span><span>② 참가 신청서(구글폼) 작성</span><span>③ 운영자 확인</span><span>④ 예약 확정 · 알림톡</span>
+      </div>
+      <!-- TODO: 문의 전화번호 확정 시 교체 -->
+      <p class="apply-info">
+        문의 전화 : <b>남원시농촌종합지원센터 (연락처 추후 안내)</b><br>
+        운영 시간 : 평일 09:00 ~ 18:00
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-brand">🐾 팜투어 남원누비고</p>
+  <p>주최 · 주관 : 남원시농촌종합지원센터 (팜투어 남원누비고)<br>
+  협력 : 옻칠목공체험관광협동조합 · 들꽃다물농장 · 순이네흙집 · 별헤는밤 펜션 · 달토끼 도시락</p>
+</footer>
+
+</div>
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ═══════════ 객실 솔드아웃 관리 ═══════════
+ * 1) 기본값: 아래 SOLD_OUT 목록에 적힌 객실이 SOLD OUT으로 표시됩니다.
+ *    객실 ID = sooni-1(머슴달래) sooni-2(도토라지) sooni-3(박졸갈래) sooni-4(콩덕벅지)
+ *              star-1(오로라) star-2(별 하나) star-3(별 둘) star-4(별 셋)
+ * 2) 관리페이지(구글시트) 연동: 시트에 room_id,status 두 열을 만들고
+ *    (status는 open 또는 soldout), 파일 > 공유 > 웹에 게시 > CSV 링크를
+ *    아래 STATUS_CSV_URL에 넣으면 페이지를 열 때마다 시트 상태를 읽어
+ *    자동으로 갱신합니다. (비워두면 SOLD_OUT 기본값만 사용)
+ */
+const SOLD_OUT = ['sooni-2','sooni-4','star-2','star-4'];   // ← 수동 관리 시 여기만 수정
+const STATUS_CSV_URL = '';                                   // ← TODO: 관리 시트 CSV 게시 URL
+
+function setRoomState(id, sold){
+  const card = document.querySelector(`.rcard[data-room="${id}"]`);
+  if(!card) return;
+  card.classList.toggle('soldout', sold);
+  const btn = card.querySelector('.naver-btn');
+  if(sold){
+    btn.innerHTML = '예약 마감';
+    btn.removeAttribute('href');
+    btn.onclick = e => e.preventDefault();
+  }
+}
+SOLD_OUT.forEach(id => setRoomState(id, true));
+
+if(STATUS_CSV_URL){
+  fetch(STATUS_CSV_URL)
+    .then(r => r.text())
+    .then(csv => {
+      csv.trim().split(/\r?\n/).forEach(line => {
+        const [id, status] = line.split(',').map(s => s && s.trim().toLowerCase());
+        if(id && /^(sooni|star)-\d$/.test(id)) setRoomState(id, status === 'soldout');
+      });
+    })
+    .catch(() => {/* 시트를 못 읽으면 기본값 유지 */});
+}
+</script>
+</body>
+</html>
