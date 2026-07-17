@@ -156,6 +156,14 @@ section[id]{scroll-margin-top:62px}
 .hint{background:rgba(255,255,255,.16);border-radius:14px;padding:18px 14px;font-size:14px}
 .hint .hn{font-family:'Jua',sans-serif;display:block;font-size:15px;color:#FFE28A;margin-bottom:6px}
 .cool-foot{position:relative;z-index:1;margin-top:22px;text-align:center;font-size:13.5px;opacity:.9}
+.cool .sec-sub{color:#EAF6FD;opacity:.95}
+.video-wrap{position:relative;z-index:1;padding-top:56.25%;border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.35);margin-bottom:24px;background:#000}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cool-slogan{position:relative;z-index:1;text-align:center;font-family:'Jua',sans-serif;font-size:24px;color:#FFE28A;margin:0 0 18px}
+.cool-guide{position:relative;z-index:1;list-style:none;margin-top:22px;display:grid;gap:10px}
+.cool-guide li{background:rgba(255,255,255,.14);border-radius:12px;padding:13px 16px 13px 44px;font-size:14px;position:relative;backdrop-filter:blur(2px)}
+.cool-guide li::before{content:"💧";position:absolute;left:14px;top:12px}
+.cool-guide b{color:#FFE28A}
 
 /* ---------- 팜파티/숙박/도시락 ---------- */
 .party-hero img{height:340px}
@@ -349,7 +357,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <span class="chip">🔨 원목 도그하우스</span>
       <span class="chip">🐕 애견지도사 케어</span>
       <span class="chip">🌿 우드 소품 만들기</span>
-      <span class="chip">💦 깜짝 쿨링 이벤트</span>
+      <span class="chip">💦 물벼락 쿨링 이벤트</span>
       <span class="chip">🍖 흑돼지 팜파티</span>
       <span class="chip">🌙 시골 민박 1박</span>
     </div>
@@ -462,23 +470,38 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
   </div>
 </section>
 
-<!-- ═══════════ POINT 4. 쿨링 이벤트 ═══════════ -->
+<!-- ═══════════ POINT 4. 물벼락 쿨링 이벤트 ═══════════ -->
 <section class="sec cool">
   <div class="inner">
     <div class="sec-head rv">
-      <span class="sec-num">SURPRISE!</span>
-      <h2 class="sec-title">💦 한여름 깜짝 이벤트</h2>
+      <span class="sec-num">SPECIAL EVENT</span>
+      <h2 class="sec-title">💦 마른하늘에 물벼락, 적셔버러!</h2>
+      <p class="sec-sub">비 소식은 없어도, 물벼락은 쏟아집니다 — <b>올여름 가장 시원한 3초</b></p>
     </div>
+
+    <p class="cool-slogan rv">기다림 → 긴장 → 폭발 → 웃음!</p>
+
+    <div class="video-wrap rv">
+      <iframe src="https://www.youtube.com/embed/DYtj7tbjVU8" title="마른하늘에 물벼락 적셔버러 시연 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
     <div class="cool-box rv">
-      <p class="cool-q">마른하늘에 <span class="blank">○○○</span></p>
-      <p>7월의 마지막 오후, 체험장 마당에서 남원누비고가 준비한<br><b>스페셜 쿨링 이벤트</b>가 열립니다. 무엇인지는 현장에서 공개!</p>
+      <p class="cool-q" style="font-size:30px">공을 던져 표적에 <span style="color:#FFE28A">명중</span>하면…</p>
+      <p>머리 위 물통이 기울며 <b>시원한 물벼락</b>이 쏟아집니다!<br>수조가 없어 안전하고, 우비만 걸치면 수영복 없이도 참여할 수 있어요.<br>7월의 마지막 오후, 도그하우스 체험 중간(15~16시경) 카운트다운 공연으로 진행됩니다.</p>
       <div class="cool-hints">
-        <div class="hint"><span class="hn">HINT 1</span>온 가족이 기다리고, 도전하고, 웃음이 터지는</div>
-        <div class="hint"><span class="hn">HINT 2</span>올여름 가장 시원한 <b>3초</b></div>
-        <div class="hint"><span class="hn">HINT 3</span>참여하실 분은 <b>여벌 옷</b> 필수! (우비는 제공됩니다)</div>
+        <div class="hint"><span class="hn">🎯 던지는 사람</span>명중의 짜릿함! 빗나가면 "한 번만 더!" — 재도전의 재미</div>
+        <div class="hint"><span class="hn">💦 맞는 사람</span>언제 쏟아질지 모르는 두근두근, 그리고 3초 만에 더위 종료!</div>
+        <div class="hint"><span class="hn">📸 구경하는 가족</span>다 함께 "5, 4, 3, 2, 1!" — 슬로모션 물보라 인생샷 찬스</div>
       </div>
     </div>
-    <p class="cool-foot rv">참여는 자유입니다 · 반려견은 이벤트 구역과 분리된 그늘 쉼터에서 안전하게 대기합니다 🐶</p>
+
+    <ul class="cool-guide rv">
+      <li><b>참여는 자유!</b> 가위바위보 복불복, 가족 대항전 등 게임으로 진행되며, 구경만 해도 충분히 재밌습니다.</li>
+      <li><b>우비는 현장에서 제공</b>됩니다. 참여하실 분은 <b>여벌 옷·수건</b>만 꼭 챙겨오세요.</li>
+      <li>부드러운 <b>스펀지볼</b>을 사용하고, 투척 라인과 착석 구역을 분리하며, 안전요원이 배치됩니다.</li>
+      <li>반려견은 이벤트 구역과 분리된 <b>그늘 쉼터에서 안전하게 대기</b>합니다. 물·소음에 예민한 아이는 미리 알려주세요. 🐶</li>
+    </ul>
+    <p class="cool-foot rv">"아이보다 아빠가 더 신나는 물놀이" — 올여름 가장 시원하게 젖을 준비 되셨나요? 💦</p>
   </div>
 </section>
 
@@ -557,7 +580,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <ul class="tl">
         <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 점심</p><p>참가팀 도착 및 접수, 로컬 도시락 점심 (체험 공간)</p></li>
         <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정 (마당 그늘막 · 대형 선풍기 운영)</p></li>
-        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램 (3개 섹션 동시 운영)</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램 — 가족 내 역할 분담<br><span class="star">★ 중간에 깜짝 쿨링 이벤트!</span></p></li>
+        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램 (3개 섹션 동시 운영)</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램 — 가족 내 역할 분담<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span></p></li>
         <li><span class="t">18:00 – 20:00</span><p class="h">팜파티</p><p>들꽃다물농장 흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p></li>
         <li><span class="t">20:00 ~</span><p class="h">숙박</p><p>반려견 동반 민박 · 펜션 이동 및 휴식</p></li>
       </ul>
@@ -621,7 +644,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <li>산책 시 <b>배변 봉투를 지참</b>하시고, 배변은 견주께서 직접 수거해 주세요.</li>
       <li>팀별 활동 공간을 분리 운영하며, <b>반려견 간 접촉은 최소화</b>합니다.</li>
       <li>7월 말 무더위에 대비해 <b>그늘막 쉼터 · 대형 선풍기 · 시원한 생수(아이스박스)</b>를 준비합니다. 산책은 더위가 덜한 시간대 · 그늘 코스로 진행합니다.</li>
-      <li>깜짝 쿨링 이벤트 구역에는 반려견이 접근할 수 없으며, <b>물 · 소음에 예민한 아이는 미리 알려주시면</b> 거리를 두고 배려해 드립니다.</li>
+      <li>물벼락 쿨링 이벤트 구역에는 반려견이 접근할 수 없으며, <b>물 · 소음에 예민한 아이는 미리 알려주시면</b> 거리를 두고 배려해 드립니다.</li>
       <li>팜파티 음식(양념육 등)은 반려견에게 위험할 수 있으니 <b>절대 급여하지 말아 주세요.</b> 반려견 간식은 별도 지참을 권장합니다.</li>
       <li><b>차량 내 반려견 단독 대기(방치)는 금지</b>됩니다.</li>
     </ul>
@@ -673,7 +696,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
           <li>모자 · 선크림 등 여름 야외활동 용품</li>
           <li>세면도구</li>
           <li>야외용 돗자리 · 방석 (마당 체험 공간용)</li>
-          <li><b>여벌 옷 · 수건</b> — 깜짝 쿨링 이벤트에 참여하실 분은 꼭!</li>
+          <li><b>여벌 옷 · 수건</b> — 물벼락 이벤트에 참여하실 분은 꼭!</li>
         </ul>
         <p class="tip">💦 이벤트 참여 시 우비는 현장에서 제공됩니다.</p>
       </div>
@@ -713,7 +736,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <li><b>②</b> 필수 예방접종을 모두 마쳤나요?</li>
         <li><b>③</b> 체험 중 반려견을 전담할 가족이 있나요? (2인 이상이면 OK!)</li>
       </ol>
-      <p class="yes">세 가지 모두 '네'라면, 남원에서 만나요!<br>마른하늘의 깜짝 이벤트도 함께 기다리고 있을게요 💦</p>
+      <p class="yes">세 가지 모두 '네'라면, 남원에서 만나요!<br>마른하늘의 물벼락도 장전 완료하고 기다리고 있을게요 💦</p>
     </div>
     <div style="text-align:center" class="rv booking-area">
       <p class="disp" style="font-size:26px;color:#fff">🐾 숙소를 선택하고 신청하세요</p>
