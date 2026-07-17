@@ -292,6 +292,9 @@ section[id]{scroll-margin-top:62px}
 .rcard.soldout .naver-btn{background:#B9AE9D;box-shadow:none;pointer-events:none}
 .rcard .so-ribbon{display:none;position:absolute;top:14px;right:-38px;transform:rotate(38deg);background:var(--red);color:#fff;font-weight:900;font-size:12px;letter-spacing:.12em;padding:5px 44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .rcard.soldout .so-ribbon{display:block}
+.st-chip{align-self:flex-start;font-size:11.5px;font-weight:900;color:#1B7A3D;background:#E4F7EB;border:1px solid #BEE7CC;border-radius:6px;padding:2px 9px}
+.st-chip::before{content:"●";font-size:8px;margin-right:5px;vertical-align:1px}
+.rcard.soldout .st-chip{color:#C4472F;background:#FBEEEA;border-color:#EBC9BE}
 .booking-note{margin-top:20px;font-size:12.5px;line-height:1.8;opacity:.88;text-align:center}
 
 /* ---------- 푸터 ---------- */
@@ -746,32 +749,36 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <div class="rgroup-head"><h4>지리산 순이네흙집 민박</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
         <div class="room-grid">
           <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
-          <div class="rcard" data-room="sooni-1">
+          <div class="rcard" data-room="sooni-1" data-name="머슴달래" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">머슴달래</span>
             <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-2">
+          <div class="rcard" data-room="sooni-2" data-name="도토라지" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">도토라지</span>
             <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-3">
+          <div class="rcard" data-room="sooni-3" data-name="박졸갈래" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">박졸갈래</span>
             <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-4">
+          <div class="rcard" data-room="sooni-4" data-name="콩덕벅지" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">콩덕벅지</span>
             <span class="rprice">150,000 ~ 280,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
@@ -785,32 +792,36 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <div class="rgroup-head"><h4>지리산 별헤는밤 펜션</h4><span class="rg-sub">원목 인테리어 · 인근 식당 조식(선택) · 4팀</span></div>
         <div class="room-grid">
           <!-- TODO: 별헤는밤 펜션 네이버 예약 URL 확정 시 아래 4개 링크 교체 -->
-          <div class="rcard" data-room="star-1">
+          <div class="rcard" data-room="star-1" data-name="오로라" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">오로라</span>
             <span class="rprice">200,000 ~ 350,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 5인(최대 7인) · 일반객실(침실1, 이불세트5, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 11</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-2">
+          <div class="rcard" data-room="star-2" data-name="별 하나" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">별 하나</span>
             <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 27</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-3">
+          <div class="rcard" data-room="star-3" data-name="별 둘" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">별 둘</span>
             <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 4.75</span> · 리뷰 17</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-4">
+          <div class="rcard" data-room="star-4" data-name="별 셋" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
             <span class="rname">별 셋</span>
             <span class="rprice">100,000 ~ 200,000원<span class="sale">연박할인</span></span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대2, 욕실1)</span>
@@ -879,41 +890,60 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
   const el=document.getElementById(id); if(el) spy.observe(el);
 });
 
-/* ═══════════ 객실 솔드아웃 관리 ═══════════
- * 1) 기본값: 아래 SOLD_OUT 목록에 적힌 객실이 SOLD OUT으로 표시됩니다.
- *    객실 ID = sooni-1(머슴달래) sooni-2(도토라지) sooni-3(박졸갈래) sooni-4(콩덕벅지)
- *              star-1(오로라) star-2(별 하나) star-3(별 둘) star-4(별 셋)
- * 2) 관리페이지(구글시트) 연동: 시트에 room_id,status 두 열을 만들고
- *    (status는 open 또는 soldout), 파일 > 공유 > 웹에 게시 > CSV 링크를
- *    아래 STATUS_CSV_URL에 넣으면 페이지를 열 때마다 시트 상태를 읽어
- *    자동으로 갱신합니다. (비워두면 SOLD_OUT 기본값만 사용)
+/* ═══════════ 객실 판매 상태 관리 (방이름 기준) ═══════════
+ * 관리 흐름 : 구글 앱스크립트(객실판매관리.gs)로 만든 '도그하우스 객실
+ * 판매관리' 시트에서 방이름별 판매상태(판매중/판매완료)를 바꾸면,
+ * 방문자가 페이지를 열 때마다 아래 웹 API를 호출해 자동 반영됩니다.
+ *
+ * 1) ROOM_STATUS_API : 앱스크립트를 웹 앱으로 배포한 URL(…/exec)을 넣으세요.
+ * 2) API가 비어 있거나 응답이 없으면 SOLD_OUT_ROOMS 기본값을 사용합니다.
+ *    (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
  */
-const SOLD_OUT = ['sooni-2','sooni-4','star-2','star-4'];   // ← 수동 관리 시 여기만 수정
-const STATUS_CSV_URL = '';                                   // ← TODO: 관리 시트 CSV 게시 URL
+const ROOM_STATUS_API = '';   // ← TODO: 앱스크립트 웹 앱 배포 URL (…/exec)
+const SOLD_OUT_ROOMS  = ['도토라지','콩덕벅지','별 하나','별 셋'];  // ← 수동 관리 시 여기만 수정
 
-function setRoomState(id, sold){
-  const card = document.querySelector(`.rcard[data-room="${id}"]`);
+function applyRoomState(name, sold){
+  const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
   if(!card) return;
   card.classList.toggle('soldout', sold);
-  const btn = card.querySelector('.naver-btn');
+  const chip = card.querySelector('.st-chip');
+  if(chip) chip.textContent = sold ? '판매완료' : '예약 가능';
+  const btn  = card.querySelector('.naver-btn');
+  const link = card.getAttribute('data-book');
   if(sold){
-    btn.innerHTML = '예약 마감';
+    btn.textContent = '판매완료';
     btn.removeAttribute('href');
+    btn.removeAttribute('target');
     btn.onclick = e => e.preventDefault();
+  } else {
+    btn.innerHTML = '<span class="nlogo">N</span>예약하기';
+    if(link){
+      btn.setAttribute('href', link);
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'noopener');
+      btn.onclick = null;
+    } else {
+      btn.setAttribute('href', '#');
+      btn.onclick = e => { e.preventDefault(); alert('예약 링크는 곧 연결됩니다!'); };
+    }
   }
 }
-SOLD_OUT.forEach(id => setRoomState(id, true));
 
-if(STATUS_CSV_URL){
-  fetch(STATUS_CSV_URL)
-    .then(r => r.text())
-    .then(csv => {
-      csv.trim().split(/\r?\n/).forEach(line => {
-        const [id, status] = line.split(',').map(s => s && s.trim().toLowerCase());
-        if(id && /^(sooni|star)-\d$/.test(id)) setRoomState(id, status === 'soldout');
-      });
+// 1차: 기본값 적용
+document.querySelectorAll('.rcard[data-name]').forEach(card => {
+  const name = card.getAttribute('data-name');
+  applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
+});
+
+// 2차: 관리 시트 웹 API에서 최신 상태 반영
+if(ROOM_STATUS_API){
+  fetch(ROOM_STATUS_API)
+    .then(r => r.json())
+    .then(data => {
+      if(!data || !data.ok || !Array.isArray(data.rooms)) return;
+      data.rooms.forEach(it => applyRoomState(it.room, /판매완료|soldout/i.test(it.status)));
     })
-    .catch(() => {/* 시트를 못 읽으면 기본값 유지 */});
+    .catch(() => {/* API를 못 읽으면 기본값 유지 */});
 }
 </script>
 </body>
