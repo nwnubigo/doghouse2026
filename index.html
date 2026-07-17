@@ -37,6 +37,15 @@ img{display:block;max-width:100%}
 .sec-sub{margin-top:12px;font-size:15.5px;color:var(--ink-soft)}
 @media(max-width:560px){.sec-title{font-size:27px}.sec{padding:56px 0 60px}}
 
+/* ---------- 상단 고정 메뉴 ---------- */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(251,247,239,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{flex:0 0 auto;font-size:13px;font-weight:700;color:var(--brown-d);text-decoration:none;padding:7px 13px;border-radius:999px;white-space:nowrap;transition:.15s}
+.topnav a:hover{background:var(--sand)}
+.topnav a.act{background:var(--brown);color:#fff}
+.topnav a.book{background:#03C75A;color:#fff}
+section[id]{scroll-margin-top:62px}
+
 /* ---------- 히어로 ---------- */
 .hero{position:relative;overflow:hidden;color:#fff}
 .hero-img{width:100%;height:640px;object-fit:cover;object-position:center 62%}
@@ -278,6 +287,19 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 <body>
 <div class="page">
 
+<!-- ═══════════ 상단 메뉴 ═══════════ -->
+<nav class="topnav">
+  <a href="#overview">프로그램 개요</a>
+  <a href="#experience">체험 소개</a>
+  <a href="#schedule">세부 일정</a>
+  <a href="#conditions">참가 조건</a>
+  <a href="#safety">안전 수칙</a>
+  <a href="#agreement">동의 사항</a>
+  <a href="#packing">준비물</a>
+  <a href="#refund">환불 규정</a>
+  <a href="#apply" class="book">숙소 예약</a>
+</nav>
+
 <!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
   <img class="hero-img" src="images/doghouse_hero.jpg" alt="원목 도그하우스 완성 샘플">
@@ -324,7 +346,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 프로그램 개요 ═══════════ -->
-<section class="sec overview">
+<section class="sec overview" id="overview">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">PROGRAM INFO</span>
@@ -344,7 +366,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ POINT 1. 도그하우스 ═══════════ -->
-<section class="sec">
+<section class="sec" id="experience">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">EXPERIENCE</span>
@@ -512,7 +534,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 세부 일정 ═══════════ -->
-<section class="sec schedule">
+<section class="sec schedule" id="schedule">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">SCHEDULE</span>
@@ -542,7 +564,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 참가 조건 ═══════════ -->
-<section class="sec">
+<section class="sec" id="conditions">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">CHECK LIST</span>
@@ -576,7 +598,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 안전 수칙 ═══════════ -->
-<section class="sec" style="background:var(--paper);padding-top:64px">
+<section class="sec" id="safety" style="background:var(--paper);padding-top:64px">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">SAFETY</span>
@@ -596,7 +618,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 동의 사항 ═══════════ -->
-<section class="sec">
+<section class="sec" id="agreement">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">AGREEMENT</span>
@@ -615,7 +637,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 준비물 ═══════════ -->
-<section class="sec" style="background:var(--green-bg);padding-top:64px">
+<section class="sec" id="packing" style="background:var(--green-bg);padding-top:64px">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">PACKING LIST</span>
@@ -649,7 +671,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ 환불 규정 ═══════════ -->
-<section class="sec">
+<section class="sec" id="refund">
   <div class="inner">
     <div class="sec-head rv">
       <span class="sec-num">REFUND</span>
@@ -768,9 +790,8 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <div class="apply-steps">
         <span>① 숙소 네이버 예약 신청</span><span>② 참가 신청서(구글폼) 작성</span><span>③ 운영자 확인</span><span>④ 예약 확정 · 알림톡</span>
       </div>
-      <!-- TODO: 문의 전화번호 확정 시 교체 -->
       <p class="apply-info">
-        문의 전화 : <b>남원시농촌종합지원센터 (연락처 추후 안내)</b><br>
+        문의 전화 : <b>남원시농촌종합지원센터 농촌관광팀 <a href="tel:010-8366-8536" style="color:#FFD98A;text-decoration:none">010-8366-8536</a></b><br>
         운영 시간 : 평일 09:00 ~ 18:00
       </p>
     </div>
@@ -787,6 +808,19 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 <script>
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* 상단 메뉴 스크롤스파이 — 현재 보고 있는 섹션 강조 */
+const navLinks=document.querySelectorAll('.topnav a');
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{
+  if(e.isIntersecting){
+    navLinks.forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+e.target.id));
+    const act=document.querySelector('.topnav a.act');
+    if(act) act.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  }
+})},{rootMargin:'-15% 0px -75% 0px'});
+['overview','experience','schedule','conditions','safety','agreement','packing','refund','apply'].forEach(id=>{
+  const el=document.getElementById(id); if(el) spy.observe(el);
+});
 
 /* ═══════════ 객실 솔드아웃 관리 ═══════════
  * 1) 기본값: 아래 SOLD_OUT 목록에 적힌 객실이 SOLD OUT으로 표시됩니다.
