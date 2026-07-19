@@ -881,16 +881,18 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
 });
 
 /* ═══════════ 객실 판매 상태 관리 (방이름 기준) ═══════════
- * 관리 흐름 : 구글 앱스크립트(객실판매관리.gs)로 만든 '도그하우스 객실
- * 판매관리' 시트에서 방이름별 판매상태(판매중/판매완료)를 바꾸면,
- * 방문자가 페이지를 열 때마다 아래 웹 API를 호출해 자동 반영됩니다.
+ * 관리 : 구글시트 「도그하우스 숙박예약상황」에서 방이름별 판매상태
+ * (판매중/판매완료)를 바꾸면, 방문자가 페이지를 열 때마다 자동 반영됩니다.
  *
- * 1) ROOM_STATUS_API : 앱스크립트를 웹 앱으로 배포한 URL(…/exec)을 넣으세요.
- * 2) API가 비어 있거나 응답이 없으면 SOLD_OUT_ROOMS 기본값을 사용합니다.
- *    (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
+ * ROOM_STATUS_URL 에는 둘 중 하나를 넣을 수 있습니다.
+ *  ① 구글시트 [파일→공유→웹에 게시→CSV] 게시 링크 (…/pub?output=csv)
+ *  ② 앱스크립트(객실판매관리.gs) 웹 앱 배포 URL (…/exec)
+ * 응답이 JSON이든 CSV든 자동 인식합니다. 비어 있거나 읽기 실패 시
+ * SOLD_OUT_ROOMS 기본값을 사용합니다.
+ * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
  */
-const ROOM_STATUS_API = '';   // ← TODO: 앱스크립트 웹 앱 배포 URL (…/exec)
-const SOLD_OUT_ROOMS  = ['도토라지','콩덕벅지','별 하나','별 셋'];  // ← 수동 관리 시 여기만 수정
+const ROOM_STATUS_URL = '';   // ← TODO: 시트 CSV 게시 링크 또는 앱스크립트 URL
+const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
 function applyRoomState(name, sold){
   const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
@@ -925,15 +927,30 @@ document.querySelectorAll('.rcard[data-name]').forEach(card => {
   applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
 });
 
-// 2차: 관리 시트 웹 API에서 최신 상태 반영
-if(ROOM_STATUS_API){
-  fetch(ROOM_STATUS_API)
-    .then(r => r.json())
-    .then(data => {
-      if(!data || !data.ok || !Array.isArray(data.rooms)) return;
-      data.rooms.forEach(it => applyRoomState(it.room, /판매완료|soldout/i.test(it.status)));
+// 2차: 관리 시트(CSV 게시 또는 앱스크립트 API)에서 최신 상태 반영
+if(ROOM_STATUS_URL){
+  const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => c.getAttribute('data-name'));
+  fetch(ROOM_STATUS_URL)
+    .then(r => r.text())
+    .then(txt => {
+      txt = txt.trim();
+      // ① 앱스크립트 JSON 응답 {ok:true, rooms:[{room,status}...]}
+      if(txt.startsWith('{') || txt.startsWith('[')){
+        try{
+          const data = JSON.parse(txt);
+          const rooms = Array.isArray(data) ? data : (data.rooms || []);
+          rooms.forEach(it => applyRoomState(String(it.room).trim(), /판매완료|soldout/i.test(it.status)));
+          return;
+        }catch(e){/* JSON이 아니면 CSV로 처리 */}
+      }
+      // ② 구글시트 CSV 게시 응답 (숙소명,방이름,판매상태)
+      txt.split(/\r?\n/).forEach(line => {
+        const cols = line.split(',').map(s => s.replace(/^"|"$/g, '').trim());
+        const name = ROOM_NAMES.find(n => cols.includes(n));
+        if(name) applyRoomState(name, cols.some(c => /판매완료|soldout/i.test(c)));
+      });
     })
-    .catch(() => {/* API를 못 읽으면 기본값 유지 */});
+    .catch(() => {/* 시트를 못 읽으면 기본값 유지 */});
 }
 </script>
 </body>
