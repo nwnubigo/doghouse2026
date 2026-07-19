@@ -51,9 +51,33 @@ header p{font-size:12.5px;opacity:.85}
 .foot{font-size:11.5px;color:var(--soft);text-align:center;margin-top:18px}
 .stamp{font-size:12px;color:var(--soft);text-align:center;margin-bottom:12px}
 .badge-off{display:inline-block;font-size:11px;background:var(--red-bg);color:var(--red);border-radius:5px;padding:1px 7px;font-weight:900}
+/* ── 비밀번호 잠금 화면 ── */
+.lock{position:fixed;inset:0;background:linear-gradient(160deg,#5C3D1F,#8A5A33 70%,#A5713F);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px}
+.lock-box{background:#fff;border-radius:20px;padding:34px 28px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.lock-box img{height:52px;margin:0 auto 14px;display:block}
+.lock-box h2{font-family:'Jua',sans-serif;font-size:20px;color:var(--brown-d);margin-bottom:6px}
+.lock-box p{font-size:13px;color:var(--soft);margin-bottom:18px}
+.lock-box input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;text-align:center;letter-spacing:.2em;margin-bottom:10px;font-family:inherit}
+.lock-box input:focus{outline:none;border-color:var(--brown)}
+.lock-box .btn{width:100%}
+.lock-err{display:none;background:var(--red-bg);color:var(--red);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;margin-bottom:10px}
+.role-bar{display:flex;align-items:center;justify-content:space-between;background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-size:12.5px;color:var(--brown-d);font-weight:700;margin-bottom:14px}
+.role-bar button{border:none;background:none;color:var(--red);font-weight:900;font-size:12px;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
+
+<!-- ═══ 비밀번호 잠금 화면 ═══ -->
+<div class="lock" id="lock">
+  <div class="lock-box">
+    <img src="images/logo_nubigo.png" alt="남원누비GO">
+    <h2>관리자 확인</h2>
+    <p>객실 예약상태 관리 페이지입니다.<br>발급받은 비밀번호를 입력하세요.</p>
+    <div class="lock-err" id="lockErr"></div>
+    <input type="password" id="lockPw" placeholder="비밀번호" autocomplete="off" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="btn re" onclick="checkPw()">확인</button>
+  </div>
+</div>
 
 <header>
   <div class="wrap">
@@ -67,6 +91,7 @@ header p{font-size:12.5px;opacity:.85}
 
 <div class="wrap">
 
+  <div class="role-bar" id="roleBar" style="display:none"><span id="roleName"></span><button onclick="logout()">로그아웃</button></div>
   <div class="msg" id="msg"></div>
   <p class="stamp" id="stamp">상태를 불러오는 중…</p>
 
@@ -104,6 +129,49 @@ const conf = {
   get key(){ return localStorage.getItem('nubigo_api_key') || ''; }
 };
 
+/* ═══ 접근 비밀번호 (SHA-256 해시로만 저장) ═══
+ * 별헤는밤 전용 / 순이네흙집 전용 / 통합 관리자 3종 */
+const AUTH_ROLES = {
+  '0992c291bc06df951a966bfc9a37cfb711e525f873874e4d946dffed1b34f6de': { name:'별헤는밤 펜션 관리자',  lodges:['지리산 별헤는밤 펜션'] },
+  '4bfd76c762250b2dc3a0d4fff2bdead6d935e87e7c0211994150c35a09724e67': { name:'순이네흙집 관리자',     lodges:['지리산 순이네흙집 민박'] },
+  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'] }
+};
+let ROLE = null;
+
+async function sha256(t){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+async function checkPw(){
+  const pw = $('lockPw').value.trim();
+  if(!pw) return;
+  let h = '';
+  try{ h = await sha256(pw); }catch(e){}
+  const role = AUTH_ROLES[h];
+  if(role){
+    sessionStorage.setItem('nubigo_role_hash', h);
+    enter(role);
+  }else{
+    const er = $('lockErr');
+    er.style.display = 'block';
+    er.textContent = '❌ 비밀번호가 올바르지 않습니다. 상세페이지로 이동합니다…';
+    $('lockPw').value = '';
+    setTimeout(() => location.href = './', 1800);
+  }
+}
+function enter(role){
+  ROLE = role;
+  $('lock').style.display = 'none';
+  $('roleBar').style.display = 'flex';
+  $('roleName').textContent = '🔑 ' + role.name;
+  loadStatus();
+}
+function logout(){
+  sessionStorage.removeItem('nubigo_role_hash');
+  location.reload();
+}
+const canEdit = lodgeName => !!conf.url && !!ROLE && ROLE.lodges.includes(lodgeName);
+
 function showMsg(text, ok){
   const m = $('msg');
   m.textContent = text;
@@ -114,23 +182,28 @@ function showMsg(text, ok){
 
 function render(states){
   // states: { 방이름: true(판매완료) | false(판매중) }
-  const writable = !!conf.url;
-  $('rooms').innerHTML = LODGES.map(l => `
+  $('rooms').innerHTML = LODGES.map(l => {
+    const editable = canEdit(l.name);
+    let hint = '';
+    if(!conf.url) hint = '<p class="hintrow">조회 전용 <span class="badge-off">API 미연결</span> — 아래 연결 설정을 완료하면 토글로 변경할 수 있어요</p>';
+    else if(!editable) hint = '<p class="hintrow"><span class="badge-off">권한 없음</span> 이 숙소는 조회만 가능합니다</p>';
+    return `
     <div class="card">
       <div class="lodge-head"><h2>${l.name}</h2><span>${l.sub}</span></div>
-      ${writable ? '' : '<p class="hintrow">조회 전용 <span class="badge-off">API 미연결</span> — 아래 연결 설정을 완료하면 토글로 변경할 수 있어요</p>'}
+      ${hint}
       ${l.rooms.map(r => {
         const sold = !!states[r];
         return `
         <div class="room">
           <div><span class="nm">${r}</span><span class="st ${sold?'off':'on'}">${sold?'판매완료':'예약 가능'}</span></div>
           <label class="tgl" title="${sold?'판매중으로 되돌리기':'판매완료로 변경'}">
-            <input type="checkbox" ${sold?'checked':''} ${writable?'':'disabled'} onchange="toggleRoom('${r.replace(/'/g,"\\'")}', this)">
+            <input type="checkbox" ${sold?'checked':''} ${editable?'':'disabled'} onchange="toggleRoom('${r.replace(/'/g,"\\'")}', this)">
             <span class="tr"></span>
           </label>
         </div>`;
       }).join('')}
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 async function loadStatus(){
@@ -165,6 +238,12 @@ async function loadStatus(){
 }
 
 async function toggleRoom(room, el){
+  const lodge = LODGES.find(l => l.rooms.includes(room));
+  if(!lodge || !canEdit(lodge.name)){
+    el.checked = !el.checked;
+    showMsg('이 숙소를 변경할 권한이 없습니다', false);
+    return;
+  }
   const sold = el.checked;               // checked = 판매완료
   el.disabled = true;
   try{
@@ -205,7 +284,12 @@ function initSetup(){
   }
 }
 initSetup();
-loadStatus();
+// 세션에 유효한 로그인 기록이 있으면 잠금 해제, 없으면 비밀번호 입력 대기
+(function(){
+  const h = sessionStorage.getItem('nubigo_role_hash');
+  if(h && AUTH_ROLES[h]){ enter(AUTH_ROLES[h]); }
+  else { $('lockPw').focus(); }
+})();
 </script>
 </body>
 </html>
