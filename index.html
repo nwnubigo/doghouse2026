@@ -891,7 +891,7 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
  * SOLD_OUT_ROOMS 기본값을 사용합니다.
  * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
  */
-const ROOM_STATUS_URL = '';   // ← TODO: 시트 CSV 게시 링크 또는 앱스크립트 URL
+const ROOM_STATUS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 숙박예약상황 시트 (CSV 게시)
 const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
 function applyRoomState(name, sold){
