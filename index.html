@@ -891,7 +891,8 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
  * SOLD_OUT_ROOMS 기본값을 사용합니다.
  * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
  */
-const ROOM_STATUS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 숙박예약상황 시트 (CSV 게시)
+const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbzSmwOKCYtPDxp81YI1dWvEOta0Y_62uRqA_IZdaHJuQ5AaQZy_Oa9XhP69ZO-K2yR2/exec';   // 예약상태API (실시간)
+const ROOM_STATUS_FALLBACK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 시트 CSV 게시본 (예비)
 const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
 function applyRoomState(name, sold){
@@ -927,31 +928,32 @@ document.querySelectorAll('.rcard[data-name]').forEach(card => {
   applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
 });
 
-// 2차: 관리 시트(CSV 게시 또는 앱스크립트 API)에서 최신 상태 반영
-if(ROOM_STATUS_URL){
+// 2차: 예약상태API(실시간) → 실패 시 시트 CSV 게시본(예비)에서 상태 반영
+(function(){
   const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => c.getAttribute('data-name'));
-  fetch(ROOM_STATUS_URL)
-    .then(r => r.text())
-    .then(txt => {
-      txt = txt.trim();
-      // ① 앱스크립트 JSON 응답 {ok:true, rooms:[{room,status}...]}
-      if(txt.startsWith('{') || txt.startsWith('[')){
-        try{
-          const data = JSON.parse(txt);
-          const rooms = Array.isArray(data) ? data : (data.rooms || []);
-          rooms.forEach(it => applyRoomState(String(it.room).trim(), /판매완료|soldout/i.test(it.status)));
-          return;
-        }catch(e){/* JSON이 아니면 CSV로 처리 */}
-      }
-      // ② 구글시트 CSV 게시 응답 (숙소명,방이름,판매상태)
+  function applyText(txt){
+    txt = txt.trim();
+    if(txt.startsWith('{') || txt.startsWith('[')){
+      const data = JSON.parse(txt);
+      const rooms = Array.isArray(data) ? data : (data.rooms || []);
+      rooms.forEach(it => applyRoomState(String(it.room).trim(), /판매완료|soldout/i.test(it.status)));
+    } else {
       txt.split(/\r?\n/).forEach(line => {
         const cols = line.split(',').map(s => s.replace(/^"|"$/g, '').trim());
         const name = ROOM_NAMES.find(n => cols.includes(n));
         if(name) applyRoomState(name, cols.some(c => /판매완료|soldout/i.test(c)));
       });
-    })
-    .catch(() => {/* 시트를 못 읽으면 기본값 유지 */});
-}
+    }
+  }
+  if(!ROOM_STATUS_URL) return;
+  fetch(ROOM_STATUS_URL + '?t=' + Date.now())
+    .then(r => r.text()).then(applyText)
+    .catch(() => {
+      fetch(ROOM_STATUS_FALLBACK + '&t=' + Date.now())
+        .then(r => r.text()).then(applyText)
+        .catch(() => {/* 모두 실패 시 기본값 유지 */});
+    });
+})();
 </script>
 </body>
 </html>
