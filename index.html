@@ -539,7 +539,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <div class="sc-body">
           <h4>지리산 별헤는밤 펜션 <small style="font-size:12px;color:var(--accent-d);font-weight:900">4팀</small></h4>
           <span class="sc-tag">반려견 동반 가능 · 인근 식당 조식(선택)</span>
-          <p>지리산 자락의 밤하늘 아래, 원목 인테리어의 아늑한 펜션에서 쉬어 갑니다.<br>오로라 · 별 하나 · 별 둘 · 별 셋 4개 객실</p>
+          <p>지리산 자락의 밤하늘 아래, 원목 인테리어의 아늑한 펜션에서 쉬어 갑니다.<br>오로라 · 별 넷 · 별 여섯 · 별 일곱 4개 객실</p>
           <a class="naver-btn" href="#apply"><span class="nlogo">N</span>객실 선택 · 예약하기</a>
         </div>
       </div>
@@ -789,28 +789,28 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 11</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-2" data-name="별 하나" data-book="">
+          <div class="rcard" data-room="star-2" data-name="별 넷" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 하나</span>
+            <span class="rname">별 넷</span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 27</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-3" data-name="별 둘" data-book="">
+          <div class="rcard" data-room="star-3" data-name="별 여섯" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 둘</span>
+            <span class="rname">별 여섯</span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대1, 이불세트2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 4.75</span> · 리뷰 17</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-4" data-name="별 셋" data-book="">
+          <div class="rcard" data-room="star-4" data-name="별 일곱" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 셋</span>
+            <span class="rname">별 일곱</span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실2, 침대2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 30</span>
@@ -887,7 +887,7 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
  *  ② 앱스크립트(객실판매관리.gs) 웹 앱 배포 URL (…/exec)
  * 응답이 JSON이든 CSV든 자동 인식합니다. 비어 있거나 읽기 실패 시
  * SOLD_OUT_ROOMS 기본값을 사용합니다.
- * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 하나 별 둘 별 셋)
+ * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 넷 별 여섯 별 일곱)
  */
 const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbzSmwOKCYtPDxp81YI1dWvEOta0Y_62uRqA_IZdaHJuQ5AaQZy_Oa9XhP69ZO-K2yR2/exec';   // 예약상태API (실시간)
 const ROOM_STATUS_FALLBACK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 시트 CSV 게시본 (예비)
