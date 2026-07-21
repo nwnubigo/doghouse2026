@@ -985,13 +985,18 @@ function applyRoomInfo(name, price, link){
     }
   }
   if(!ROOM_STATUS_URL) return;
-  fetch(ROOM_STATUS_URL + '?t=' + Date.now())
-    .then(r => r.text()).then(applyText)
-    .catch(() => {
-      fetch(ROOM_STATUS_FALLBACK + '&t=' + Date.now())
-        .then(r => r.text()).then(applyText)
-        .catch(() => {/* 모두 실패 시 기본값 유지 */});
-    });
+  // 시트 CSV(가격·링크 포함)와 API(실시간 상태)를 모두 조회해 순서대로 적용
+  //  ① CSV 먼저 → 가격·링크·상태 반영   ② API 나중 → 최신 상태로 덮어씀
+  //  (API가 구버전이라 가격 정보가 없어도 CSV 값이 유지됩니다)
+  (async () => {
+    const get = u => fetch(u).then(r => r.text()).catch(() => null);
+    const [csvTxt, apiTxt] = await Promise.all([
+      get(ROOM_STATUS_FALLBACK + '&t=' + Date.now()),
+      get(ROOM_STATUS_URL + '?t=' + Date.now())
+    ]);
+    if(csvTxt){ try{ applyText(csvTxt); }catch(e){} }
+    if(apiTxt){ try{ applyText(apiTxt); }catch(e){} }
+  })();
 })();
 </script>
 </body>
