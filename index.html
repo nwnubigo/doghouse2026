@@ -928,20 +928,70 @@ document.querySelectorAll('.rcard[data-name]').forEach(card => {
   applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
 });
 
-// 2차: 예약상태API(실시간) → 실패 시 시트 CSV 게시본(예비)에서 상태 반영
+/* 시트에서 가격 문구·예약링크 반영 (시트 열 구성: 숙소명|방이름|판매상태|가격|예약링크) */
+function applyRoomInfo(name, price, link){
+  const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
+  if(!card) return;
+  if(price){
+    const el = card.querySelector('.rprice');
+    if(el){
+      const hasSale = /연박할인/.test(price);
+      const base = price.replace(/연박할인/g, '').trim();
+      el.textContent = base;
+      if(hasSale){
+        const s = document.createElement('span');
+        s.className = 'sale'; s.textContent = '연박할인';
+        el.appendChild(s);
+      }
+    }
+  }
+  if(link !== undefined && link !== null && String(link).trim() !== ''){
+    const v = String(link).trim();
+    if(/^https:\/\//.test(v)) card.setAttribute('data-book', v);
+  }
+}
+
+// 2차: 예약상태API(실시간) → 실패 시 시트 CSV 게시본(예비)에서 상태·가격·링크 반영
 (function(){
   const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => c.getAttribute('data-name'));
+
+  // 따옴표·쉼표(가격의 150,000원 등)를 처리하는 CSV 한 줄 파서
+  function parseCsvLine(line){
+    const out = []; let cur = '', q = false;
+    for(let i = 0; i < line.length; i++){
+      const ch = line[i];
+      if(q){
+        if(ch === '"'){ if(line[i+1] === '"'){ cur += '"'; i++; } else q = false; }
+        else cur += ch;
+      } else {
+        if(ch === '"') q = true;
+        else if(ch === ','){ out.push(cur); cur = ''; }
+        else cur += ch;
+      }
+    }
+    out.push(cur);
+    return out.map(s => s.trim());
+  }
+
+  function applyRoom(name, status, price, link){
+    applyRoomInfo(name, price, link);                       // 가격·링크 먼저
+    applyRoomState(name, /판매완료|soldout/i.test(status||'')); // 상태(버튼·링크 적용)
+  }
+
   function applyText(txt){
     txt = txt.trim();
     if(txt.startsWith('{') || txt.startsWith('[')){
       const data = JSON.parse(txt);
       const rooms = Array.isArray(data) ? data : (data.rooms || []);
-      rooms.forEach(it => applyRoomState(String(it.room).trim(), /판매완료|soldout/i.test(it.status)));
+      rooms.forEach(it => {
+        const name = String(it.room || '').trim();
+        if(ROOM_NAMES.includes(name)) applyRoom(name, it.status, it.price, it.link);
+      });
     } else {
       txt.split(/\r?\n/).forEach(line => {
-        const cols = line.split(',').map(s => s.replace(/^"|"$/g, '').trim());
-        const name = ROOM_NAMES.find(n => cols.includes(n));
-        if(name) applyRoomState(name, cols.some(c => /판매완료|soldout/i.test(c)));
+        const cols = parseCsvLine(line);        // [숙소명, 방이름, 판매상태, 가격, 예약링크]
+        const name = (cols[1] || '').trim();
+        if(ROOM_NAMES.includes(name)) applyRoom(name, cols[2], cols[3], cols[4]);
       });
     }
   }
