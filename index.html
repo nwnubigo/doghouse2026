@@ -284,6 +284,10 @@ section[id]{scroll-margin-top:62px}
 @media(max-width:640px){.room-grid{grid-template-columns:1fr}}
 .rcard{background:#fff;color:var(--ink);border-radius:16px;padding:18px 18px 16px;text-align:left;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.22);display:flex;flex-direction:column;gap:6px}
 .rcard .rname{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
+.rcard .rorig-line{font-size:12.5px;color:#9C8F7D;line-height:1}
+.rcard .rorig-line s{text-decoration:line-through}
+.rcard .rdc{display:inline-block;background:var(--accent-bg);color:var(--accent-d);font-size:11px;font-weight:900;border-radius:5px;padding:1px 7px;margin-left:6px;text-decoration:none;vertical-align:1px}
+.rcard.soldout .rdc{background:#E4DCCE;color:#9C8F7D}
 .rcard .rprice{font-size:15px;font-weight:900;color:var(--accent-d)}
 .rcard .rcond{font-size:12.5px;color:var(--ink-soft);line-height:1.55}
 .rcard .rrate{font-size:13px;color:var(--ink-soft)}
@@ -382,8 +386,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <div class="ov-row"><div class="ov-th">장소</div><div class="ov-td">전북 남원시 일원 (옻칠목공체험관광협동조합 · 들꽃다물농장 · 반려견 동반 민박)</div></div>
       <div class="ov-row"><div class="ov-th">모집 인원</div><div class="ov-td"><b>반려견 동반 가족 8팀</b> (선착순) — 팀당 2인 이상이면 참여하실 수 있어요</div></div>
       <div class="ov-row"><div class="ov-th">참가 대상</div><div class="ov-td">소형견(체중 <b>7kg 미만</b>)을 동반한 가족</div></div>
-      <!-- TODO: 참가비 확정 시 아래 금액 교체 -->
-      <div class="ov-row"><div class="ov-th">참가비</div><div class="ov-td">팀당 <span class="tbd">추후 확정 공지</span><br><small style="color:var(--ink-soft)">체험 · 팜파티 석식 · 숙박 포함 / 조식은 선택 옵션</small></div></div>
+      <div class="ov-row"><div class="ov-th">참가비</div><div class="ov-td"><b>체험 · 팜파티 석식 · 숙박 포함(조식은 선택 옵션) 가격</b><br><small style="color:var(--ink-soft)">모든 상품의 가격은 지역단위 농촌관광 <b>남원누비고 사업</b>으로 <b style="color:var(--accent-d)">30% 할인된 가격</b>에 제공됩니다</small></div></div>
       <div class="ov-row"><div class="ov-th">주최·주관</div><div class="ov-td">남원시농촌종합지원센터 (팜투어 남원누비고)</div></div>
       <div class="ov-row"><div class="ov-th">신청 방법</div><div class="ov-td">희망 숙소 <b>네이버 예약 신청</b> → <b>참가 신청서(구글폼) 작성</b> → 운영자 확인 후 <b>예약 확정</b> (숙소별 4팀, 확정 순 마감)</div></div>
     </div>
@@ -731,7 +734,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     </div>
     <div style="text-align:center" class="rv booking-area">
       <p class="disp" style="font-size:26px;color:#fff">🐾 숙소를 선택하고 신청하세요</p>
-      <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실</p>
+      <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실<br>모든 가격은 지역단위 농촌관광 남원누비고 사업 지원으로 <b style="color:#FFD98A">정가 대비 30% 할인</b>된 가격입니다</p>
 
       <div class="rgroup">
         <div class="rgroup-head"><h4>지리산 순이네흙집 민박</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
@@ -932,7 +935,29 @@ function applyRoomInfo(name, price, link){
   if(!card) return;
   if(price){
     const el = card.querySelector('.rprice');
-    if(el) el.textContent = price.replace(/연박할인/g, '').trim();  // 시트에 남아 있어도 표시하지 않음
+    if(el){
+      const clean = price.replace(/연박할인/g, '').trim();  // 시트에 남아 있어도 표시하지 않음
+      el.textContent = clean;
+      // 정가 자동 계산·표시 : 시트의 가격은 30% 할인가 → 정가 = 할인가 ÷ 0.7 (백원 단위 반올림)
+      const m = clean.replace(/,/g, '').match(/(\d{4,})/);
+      let line = card.querySelector('.rorig-line');
+      if(m){
+        const origVal = Math.round(parseInt(m[1], 10) / 0.7 / 100) * 100;
+        if(!line){
+          line = document.createElement('span');
+          line.className = 'rorig-line';
+          el.parentNode.insertBefore(line, el);
+        }
+        line.innerHTML = '';
+        const s = document.createElement('s');
+        s.textContent = '정가 ' + origVal.toLocaleString('ko-KR') + '원';
+        const b = document.createElement('span');
+        b.className = 'rdc'; b.textContent = '30% 할인';
+        line.appendChild(s); line.appendChild(b);
+      } else if(line){
+        line.remove();
+      }
+    }
   }
   if(link !== undefined && link !== null && String(link).trim() !== ''){
     const v = String(link).trim();
