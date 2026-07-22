@@ -71,6 +71,25 @@ section[id]{scroll-margin-top:62px}
 .hero-cta{display:inline-block;margin-top:22px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Jua',sans-serif;font-size:19px;padding:15px 46px;border-radius:999px;box-shadow:0 8px 22px rgba(233,104,60,.45);transition:.2s}
 .hero-cta:hover{background:var(--accent-d);transform:translateY(-2px)}
 
+/* ── 모바일 히어로 : 겹침 방지를 위해 흐름 배치로 전환 ── */
+@media(max-width:560px){
+  .hero{display:flex;flex-direction:column;min-height:640px;height:auto}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+  .hero-veil{background:linear-gradient(180deg,rgba(38,26,14,.60) 0%,rgba(38,26,14,.25) 40%,rgba(38,26,14,.82) 100%)}
+  .hero-top{position:relative;top:auto;left:auto;right:auto;padding:14px 16px;align-items:flex-start;gap:8px}
+  .hero-top .brand{font-size:13px;line-height:1.5}
+  .hero-top .brand small{display:block;margin-left:0;font-size:11.5px}
+  .hero-logo img{height:34px}
+  .hero-body{position:relative;left:auto;right:auto;bottom:auto;margin-top:auto;padding:24px 16px 34px}
+  .hero-badges{gap:6px;margin-bottom:14px}
+  .badge{font-size:11.5px;padding:6px 11px}
+  .hero-kicker{font-size:13.5px}
+  .hero-title{font-size:30px;line-height:1.22}
+  .hero-date{margin-top:12px;font-size:12.5px}
+  .hero-date span{padding:6px 12px;white-space:nowrap}
+  .hero-cta{margin-top:16px;font-size:17px;padding:13px 38px}
+}
+
 /* ---------- 인트로 ---------- */
 .intro{background:var(--paper);text-align:center;padding:64px 0}
 .intro p.lead{font-size:19px;line-height:1.95;color:var(--ink)}
