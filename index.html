@@ -344,6 +344,23 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 @keyframes refRing{0%{transform:scale(1);opacity:.65}100%{transform:scale(1.4);opacity:0}}
 @media(max-width:560px){.ref-title{font-size:26px}.ref-badge{font-size:12.5px;padding:8px 16px}}
 
+/* ── 추천인 랭킹 (공개) ── */
+.ref-rank{position:relative;margin:40px auto 0;max-width:640px;background:rgba(255,255,255,.97);border-radius:22px;padding:26px 20px 22px;box-shadow:0 14px 34px rgba(0,0,0,.2);text-align:left}
+.ref-rank-title{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d);text-align:center;margin-bottom:16px}
+.ref-rank-tabs{display:flex;gap:8px;margin-bottom:16px}
+.rrtab{flex:1;border:1.5px solid var(--sand-d);background:#fff;color:var(--ink-soft);border-radius:12px;padding:10px 6px;font-family:'Jua',sans-serif;font-size:13.5px;cursor:pointer;transition:.15s}
+.rrtab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ref-rank-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.ref-rank-table th{background:var(--sand);color:var(--brown-d);font-size:11px;padding:8px 4px;text-align:center;border-bottom:1px solid var(--sand-d)}
+.ref-rank-table td{padding:9px 4px;text-align:center;border-bottom:1px dashed var(--sand-d);color:var(--brown-d)}
+.ref-rank-table td.nm{font-weight:800}
+.ref-rank-table tr.rank1 td{background:#FFF4D6}
+.ref-rank-table tr.rank2 td{background:#FBF0E4}
+.ref-rank-table tr.rank3 td{background:#FAF5EC}
+.ref-rank-empty{font-size:13px;color:var(--ink-soft);text-align:center;padding:20px 0}
+.ref-rank-note{margin-top:16px;background:var(--accent-bg);border:1px dashed var(--accent);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--accent-d);line-height:1.7;text-align:center}
+@media(max-width:480px){.ref-rank{padding:20px 12px}.ref-rank-table{font-size:11px}}
+
 .ref-banner{position:fixed;top:14px;left:50%;transform:translate(-50%,-140%);background:var(--brown-d);color:#fff;font-size:14px;padding:12px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:300;transition:transform .4s ease;max-width:90vw;text-align:center}
 .ref-banner.show{transform:translate(-50%,0)}
 
@@ -902,6 +919,20 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <h2 class="ref-title rv">이런 좋은 프로그램은<br><span class="ref-hl">알려 보시개~</span> <span class="ref-emoji">🐾</span></h2>
     <p class="ref-sub rv">내 추천 링크로 예약이 확정되면, 예약 <b class="ref-sub-hl">1건당 편의점 상품권 2만원</b>을 드려요!</p>
     <button class="refbtn ref-pulse rv" style="margin-top:30px" onclick="openReferModal()">📣 추천하기</button>
+
+    <div class="ref-rank rv" id="refRankBox">
+      <h3 class="ref-rank-title">🏆 추천인 랭킹</h3>
+      <div class="ref-rank-tabs">
+        <button class="rrtab active" id="rrTabClicks" onclick="showRefRank('clicks')">접속자순 보기</button>
+        <button class="rrtab" id="rrTabConfirmed" onclick="showRefRank('confirmed')">예약확정순으로 보기</button>
+      </div>
+      <div id="refRankTableWrap"><p class="ref-rank-empty">랭킹을 불러오는 중…</p></div>
+      <p class="ref-rank-note">
+        🎁 접속수 랭킹 <b>TOP 5</b>에게는 1인당 편의점 상품권 <b>2만원</b>을 드려요.<br>
+        추천으로 예약이 확정되면, 확정 <b>1건당</b> 편의점 상품권 <b>2만원</b>을 드려요.<br>
+        두 경우 모두 <b>8월 5일</b>에 문자로 보내드립니다!
+      </p>
+    </div>
   </div>
 </section>
 
@@ -1242,6 +1273,62 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       try{ document.execCommand('copy'); done(); }catch(e){}
     }
   };
+
+  /* ═══ 추천인 랭킹 (공개) ═══ */
+  let refRankList = null;
+  let refRankMode = 'clicks';
+
+  function renderRefRank(){
+    const wrap = document.getElementById('refRankTableWrap');
+    if(!wrap) return;
+    if(!refRankList){
+      wrap.innerHTML = '<p class="ref-rank-empty">랭킹을 불러오지 못했습니다.</p>';
+      return;
+    }
+    if(!refRankList.length){
+      wrap.innerHTML = '<p class="ref-rank-empty">아직 추천인이 없어요. 첫 번째 추천인이 되어보세요! 🐾</p>';
+      return;
+    }
+    const sorted = refRankList.slice().sort((a, b) => {
+      return refRankMode === 'confirmed'
+        ? (b.confirmed - a.confirmed) || (b.clicks - a.clicks)
+        : (b.clicks - a.clicks) || (b.confirmed - a.confirmed);
+    });
+    const rankClass = n => n === 1 ? 'rank1' : n === 2 ? 'rank2' : n === 3 ? 'rank3' : '';
+    const rows = sorted.map((x, i) => `
+      <tr class="${rankClass(i + 1)}">
+        <td>${i + 1}</td>
+        <td class="nm">${x.name || ''}</td>
+        <td>${x.phoneMasked || ''}</td>
+        <td>${x.code}</td>
+        <td>${x.clicks}</td>
+        <td>${x.confirmed}</td>
+      </tr>`).join('');
+    wrap.innerHTML = `<div style="overflow-x:auto"><table class="ref-rank-table">
+      <thead><tr><th>순위</th><th>추천인</th><th>연락처</th><th>추천코드</th><th>접속수</th><th>예약확정수</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
+  }
+
+  window.showRefRank = function(mode){
+    refRankMode = mode;
+    document.getElementById('rrTabClicks').classList.toggle('active', mode === 'clicks');
+    document.getElementById('rrTabConfirmed').classList.toggle('active', mode === 'confirmed');
+    renderRefRank();
+  };
+
+  function loadRefRank(){
+    const wrap = document.getElementById('refRankTableWrap');
+    fetch(REF_API_URL + '?action=refRanking&t=' + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        refRankList = (d && d.ok && d.list) ? d.list : [];
+        renderRefRank();
+      })
+      .catch(() => {
+        if(wrap) wrap.innerHTML = '<p class="ref-rank-empty">랭킹을 불러오지 못했습니다. 새로고침 해보세요.</p>';
+      });
+  }
+  loadRefRank();
 })();
 </script>
 </body>
