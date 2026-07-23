@@ -62,6 +62,20 @@ header p{font-size:12.5px;opacity:.85}
 .lock-box .btn{width:100%}
 .lock-err{display:none;background:var(--red-bg);color:var(--red);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;margin-bottom:10px}
 .role-bar{display:flex;align-items:center;justify-content:space-between;background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-size:12.5px;color:var(--brown-d);font-weight:700;margin-bottom:14px}
+/* ── 추천인 코드 관리자 화면 (통합 관리자 전용) ── */
+.ref-admin h2{font-family:'Jua',sans-serif;font-size:17px;color:var(--brown-d);margin-bottom:2px}
+.ref-admin .sub{font-size:12px;color:var(--soft);margin-bottom:12px}
+.ref-summary{display:flex;gap:8px;margin-bottom:12px}
+.ref-summary .box{flex:1;background:var(--sand);border-radius:10px;padding:10px 6px;text-align:center}
+.ref-summary .box b{display:block;font-family:'Jua',sans-serif;font-size:18px;color:var(--brown-d)}
+.ref-summary .box span{font-size:11px;color:var(--soft)}
+.ref-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.ref-table th{background:var(--sand);color:var(--brown-d);font-size:11.5px;padding:7px 5px;text-align:center;border-bottom:1px solid var(--line)}
+.ref-table td{padding:8px 5px;text-align:center;border-bottom:1px dashed var(--line)}
+.ref-table td.nm{text-align:left;font-weight:700}
+.ref-table tr.top td{background:var(--green-bg)}
+.ref-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:16px 0}
+.ref-warn{font-size:11.5px;color:var(--red);background:var(--red-bg);border-radius:8px;padding:8px 10px;margin-top:10px}
 .role-bar button{border:none;background:none;color:var(--red);font-weight:900;font-size:12px;cursor:pointer;font-family:inherit}
 </style>
 </head>
@@ -103,6 +117,22 @@ header p{font-size:12.5px;opacity:.85}
 
   <div id="rooms"></div>
 
+  <!-- ═══ 추천인 코드 관리자 화면 (통합 관리자 전용, 다른 관리자에게는 표시되지 않음) ═══ -->
+  <div class="card ref-admin" id="refAdminCard" style="display:none">
+    <h2>🎁 추천인 코드 현황</h2>
+    <p class="sub">추천 링크 접속수 · 예약 확정 건수 · 지급할 편의점 상품권 금액</p>
+    <div class="bar">
+      <button class="btn re" onclick="loadReferralList()">🔄 새로고침</button>
+      <a class="btn lk" href="https://docs.google.com/spreadsheets/d/1NJdmg1Ce1CHmpH9JxG6VRBR3kqBOW0NR4UZ-NEAyFZE/edit" target="_blank" rel="noopener">📊 추천인코드 시트</a>
+    </div>
+    <div class="ref-summary" id="refSummary" style="display:none">
+      <div class="box"><b id="refSumClicks">0</b><span>총 접속수</span></div>
+      <div class="box"><b id="refSumConfirmed">0</b><span>확정 건수</span></div>
+      <div class="box"><b id="refSumPayout">0</b><span>지급 예정(원)</span></div>
+    </div>
+    <div id="refListWrap"><p class="ref-empty">불러오는 중…</p></div>
+  </div>
+
   <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지 토글을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
@@ -133,7 +163,7 @@ const conf = {
 const AUTH_ROLES = {
   '0992c291bc06df951a966bfc9a37cfb711e525f873874e4d946dffed1b34f6de': { name:'별헤는밤 펜션 관리자',  lodges:['지리산 별헤는밤 펜션'], encKey:'RB9N2vCfOF0navrHxyj+QGoEbxpfZEj11c7bH7iaSw4sUHkVoU8=' },
   '4bfd76c762250b2dc3a0d4fff2bdead6d935e87e7c0211994150c35a09724e67': { name:'순이네흙집 관리자',     lodges:['지리산 순이네흙집 민박'], encKey:'GAO75l8Wucztx1hjmdadrWgx/JWRKGm8OyboChC0l0P122ysOJs=' },
-  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=' }
+  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', refAdmin:true }
 };
 let ROLE = null;
 
@@ -176,6 +206,10 @@ function enter(role){
   $('lock').style.display = 'none';
   $('roleBar').style.display = 'flex';
   $('roleName').textContent = '🔑 ' + role.name;
+  if(role.refAdmin){
+    $('refAdminCard').style.display = 'block';
+    loadReferralList();
+  }
   loadStatus();
 }
 function logout(){
@@ -245,6 +279,51 @@ async function loadStatus(){
     }
   }
   render(states);
+}
+
+async function loadReferralList(){
+  if(!ROLE || !ROLE.refAdmin) return;
+  const wrap = $('refListWrap');
+  wrap.innerHTML = '<p class="ref-empty">불러오는 중…</p>';
+  if(!conf.url || !conf.key){
+    wrap.innerHTML = '<p class="ref-empty">API 연결 또는 관리키가 필요합니다.</p>';
+    return;
+  }
+  try{
+    const url = conf.url + '?action=refList&key=' + encodeURIComponent(conf.key) + '&t=' + Date.now();
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(!data.ok){
+      wrap.innerHTML = '<p class="ref-empty">불러오기 실패: ' + (data.error || '알 수 없는 오류') + '</p>';
+      return;
+    }
+    $('refSummary').style.display = 'flex';
+    $('refSumClicks').textContent = data.totalClicks || 0;
+    $('refSumConfirmed').textContent = data.totalConfirmed || 0;
+    $('refSumPayout').textContent = (data.totalPayout || 0).toLocaleString();
+
+    if(!data.list || !data.list.length){
+      wrap.innerHTML = '<p class="ref-empty">아직 발급된 추천인 코드가 없습니다.</p>';
+      return;
+    }
+    const rows = data.list.map(x => `
+      <tr class="${x.confirmed > 0 ? 'top' : ''}">
+        <td class="nm">${x.name || ''}</td>
+        <td>${x.code}</td>
+        <td>${x.phoneMasked || ''}</td>
+        <td>${x.clicks}</td>
+        <td>${x.confirmed}</td>
+        <td>${x.payout.toLocaleString()}</td>
+      </tr>`).join('');
+    let html = `<div style="overflow-x:auto"><table class="ref-table">
+      <thead><tr><th>추천인</th><th>코드</th><th>전화</th><th>접속수</th><th>확정</th><th>지급액(원)</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
+    if(data.unmatched){
+      html += `<p class="ref-warn">⚠ 참가신청서에서 "확정"으로 표시됐지만 등록된 추천인 코드와 일치하지 않는 건이 ${data.unmatched}건 있어요 — 오탈자 등을 확인해 주세요.</p>`;
+    }
+    wrap.innerHTML = html;
+  }catch(e){
+    wrap.innerHTML = '<p class="ref-empty">불러오기 실패: API에 연결할 수 없습니다.</p>';
+  }
 }
 
 async function toggleRoom(room, el){
