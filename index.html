@@ -1130,6 +1130,9 @@ function applyRoomInfo(name, price, link){
  */
 const APPLY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform';
 const APPLY_FORM_PREFILL_TEMPLATE = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform?usp=pp_url&entry.1397953627=__REF__';
+// 네이버 QR/단축주소(포스터·카드뉴스에 쓰는 그 링크) — 추천 링크로 들어온 방문도
+// 이 주소의 접속통계에 함께 반영되도록, 화면에 보이지 않는 iframe으로 한 번 "핑"만 보냅니다.
+const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
 
 (function(){
   const REF_API_URL = ROOM_STATUS_URL; // 같은 앱스크립트 배포를 재사용합니다
@@ -1154,6 +1157,20 @@ const APPLY_FORM_PREFILL_TEMPLATE = 'https://docs.google.com/forms/d/e/1FAIpQLSf
     if(!localStorage.getItem(hitKey)){
       fetch(REF_API_URL + '?action=refHit&code=' + encodeURIComponent(refCode) + '&t=' + Date.now()).catch(()=>{});
       localStorage.setItem(hitKey, '1');
+    }
+
+    // 네이버 QR/단축주소 접속통계에도 반영 — 같은 브라우저에서는 코드당 최초 1회만, 화면엔 보이지 않게
+    const naverPingKey = 'nubigo_naver_ping_' + refCode;
+    if(!localStorage.getItem(naverPingKey)){
+      try{
+        const npf = document.createElement('iframe');
+        npf.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;top:-9999px';
+        npf.setAttribute('aria-hidden', 'true');
+        npf.tabIndex = -1;
+        npf.src = NAVER_SHORT_URL;
+        document.body.appendChild(npf);
+        localStorage.setItem(naverPingKey, '1');
+      }catch(e){}
     }
   }
   document.querySelectorAll('.js-apply-form-link').forEach(a => a.href = applyLink);
