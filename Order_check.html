@@ -121,7 +121,7 @@ const $ = id => document.getElementById(id);
  * 로그인에 성공하면 아래 웹 앱 URL로 자동 연결됩니다.
  * 관리키는 소스에 노출되지 않도록 각 비밀번호로 암호화(AES-GCM)해 두었고,
  * 올바른 비밀번호로 로그인할 때만 복호화되어 사용됩니다. */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzSmwOKCYtPDxp81YI1dWvEOta0Y_62uRqA_IZdaHJuQ5AaQZy_Oa9XhP69ZO-K2yR2/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwIxDVMif4-0Ml9I0NCTtXIC6IKVbojtr0ZS_uKEzW8evvVs0AqYKKNve8BeZIdSEzv/exec';
 const conf = {
   get url(){ return API_URL; },
   get key(){ return sessionStorage.getItem('nubigo_admin_key') || ''; }

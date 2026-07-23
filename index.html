@@ -873,7 +873,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <div class="apply-steps">
         <span>① 숙소 네이버 예약 신청</span><span>② 참가 신청서(구글폼) 작성</span><span>③ 운영자 확인</span><span>④ 예약 확정 · 알림톡</span>
       </div>
-      <a class="apply-form-btn js-apply-form-link" id="applyFormBtn" href="https://docs.google.com/forms/d/1VcgCAqe2tAi39VDFZp9MqBV5shBrZULGoiY464KWZLo/viewform" target="_blank" rel="noopener">📝 참가 신청서 바로 작성하기</a>
+      <a class="apply-form-btn js-apply-form-link" id="applyFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform" target="_blank" rel="noopener">📝 참가 신청서 바로 작성하기</a>
       <p class="apply-info">
         문의 전화 : <b>남원시농촌종합지원센터 농촌관광팀 <a href="tel:010-8366-8536" style="color:#FFD98A;text-decoration:none">010-8366-8536</a></b><br>
         운영 시간 : 평일 09:00 ~ 18:00
@@ -974,7 +974,7 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
  * SOLD_OUT_ROOMS 기본값을 사용합니다.
  * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 넷 별 여섯 별 일곱)
  */
-const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbzSmwOKCYtPDxp81YI1dWvEOta0Y_62uRqA_IZdaHJuQ5AaQZy_Oa9XhP69ZO-K2yR2/exec';   // 예약상태API (실시간)
+const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbwIxDVMif4-0Ml9I0NCTtXIC6IKVbojtr0ZS_uKEzW8evvVs0AqYKKNve8BeZIdSEzv/exec';   // 예약상태API (실시간)
 const ROOM_STATUS_FALLBACK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 시트 CSV 게시본 (예비)
 const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
@@ -1115,8 +1115,8 @@ function applyRoomInfo(name, price, link){
  * setupReferralEvent() 실행 후 아래 두 값을 '설정' 탭의 값으로 바꿔주면
  * 참가 신청서에 추천코드가 자동으로 채워집니다 (안 바꿔도 폼 자체는 정상 동작).
  */
-const APPLY_FORM_URL = 'https://docs.google.com/forms/d/1VcgCAqe2tAi39VDFZp9MqBV5shBrZULGoiY464KWZLo/viewform';
-const APPLY_FORM_PREFILL_TEMPLATE = ''; // 예) 'https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123456=__REF__'
+const APPLY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform';
+const APPLY_FORM_PREFILL_TEMPLATE = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform?usp=pp_url&entry.1397953627=__REF__';
 
 (function(){
   const REF_API_URL = ROOM_STATUS_URL; // 같은 앱스크립트 배포를 재사용합니다
