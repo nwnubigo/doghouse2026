@@ -1276,11 +1276,16 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
 
   /* ═══ 추천인 랭킹 (공개) ═══ */
   let refRankList = null;
+  let refRankError = '';
   let refRankMode = 'clicks';
 
   function renderRefRank(){
     const wrap = document.getElementById('refRankTableWrap');
     if(!wrap) return;
+    if(refRankError){
+      wrap.innerHTML = '<p class="ref-rank-empty">⚠ 랭킹을 불러오지 못했습니다: ' + refRankError.replace(/</g,'&lt;') + '<br>(운영자: 앱스크립트가 최신 코드로 재배포되었는지 확인해 주세요)</p>';
+      return;
+    }
     if(!refRankList){
       wrap.innerHTML = '<p class="ref-rank-empty">랭킹을 불러오지 못했습니다.</p>';
       return;
@@ -1321,11 +1326,18 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
     fetch(REF_API_URL + '?action=refRanking&t=' + Date.now())
       .then(r => r.json())
       .then(d => {
-        refRankList = (d && d.ok && d.list) ? d.list : [];
+        if(d && d.ok){
+          refRankError = '';
+          refRankList = d.list || [];
+        } else {
+          refRankError = (d && d.error) ? d.error : '알 수 없는 오류';
+          refRankList = [];
+        }
         renderRefRank();
       })
       .catch(() => {
-        if(wrap) wrap.innerHTML = '<p class="ref-rank-empty">랭킹을 불러오지 못했습니다. 새로고침 해보세요.</p>';
+        refRankError = '네트워크 오류';
+        renderRefRank();
       });
   }
   loadRefRank();
