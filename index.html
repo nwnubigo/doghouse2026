@@ -1121,7 +1121,8 @@ const APPLY_FORM_PREFILL_TEMPLATE = ''; // 예) 'https://docs.google.com/forms/d
 (function(){
   const REF_API_URL = ROOM_STATUS_URL; // 같은 앱스크립트 배포를 재사용합니다
   const params = new URLSearchParams(location.search);
-  const refCode = (params.get('ref') || '').trim().toUpperCase();
+  let refCode = (params.get('ref') || '').trim().toUpperCase();
+  if(refCode === 'UNDEFINED' || refCode === 'NULL') refCode = ''; // 과거 버그로 생성된 잘못된 링크 방어
 
   let applyLink = APPLY_FORM_URL;
   if(refCode){
@@ -1186,7 +1187,10 @@ const APPLY_FORM_PREFILL_TEMPLATE = ''; // 예) 'https://docs.google.com/forms/d
       .then(r => r.json())
       .then(d => {
         refBusy = false;
-        if(!d || !d.ok){ msg.textContent = (d && d.error) || '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'; return; }
+        if(!d || !d.ok || !d.code){
+          msg.textContent = (d && d.error) || '코드 발급에 실패했습니다. 앱스크립트가 아직 최신 버전으로 배포되지 않았을 수 있어요. 잠시 후 다시 시도해 주세요.';
+          return;
+        }
         msg.textContent = '';
         const link = location.origin + location.pathname + '?ref=' + d.code;
         document.getElementById('refCodeOut').textContent = d.code;
