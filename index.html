@@ -326,6 +326,34 @@ section[id]{scroll-margin-top:62px}
 footer{background:#2C2117;color:#C9BBA8;text-align:center;padding:34px 20px 40px;font-size:12.5px;line-height:1.9}
 footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin-bottom:6px}
 
+/* ---------- 추천인 이벤트 ---------- */
+.refsec{background:var(--sand);padding:70px 20px;text-align:center}
+.refbtn{display:inline-block;background:var(--accent);color:#fff;font-family:'Jua',sans-serif;font-size:19px;padding:16px 42px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 8px 22px rgba(233,104,60,.35);transition:.2s}
+.refbtn:hover{background:var(--accent-d);transform:translateY(-2px)}
+
+.ref-banner{position:fixed;top:14px;left:50%;transform:translate(-50%,-140%);background:var(--brown-d);color:#fff;font-size:14px;padding:12px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:300;transition:transform .4s ease;max-width:90vw;text-align:center}
+.ref-banner.show{transform:translate(-50%,0)}
+
+.refmodal{display:none;position:fixed;inset:0;background:rgba(20,13,7,.6);z-index:400;align-items:center;justify-content:center;padding:20px}
+.refmodal.open{display:flex}
+.refmodal-card{background:#fff;border-radius:20px;max-width:420px;width:100%;padding:30px 26px;position:relative;max-height:90vh;overflow-y:auto;text-align:left}
+.refmodal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:var(--ink-soft);cursor:pointer}
+.refmodal-card h3{font-family:'Jua',sans-serif;color:var(--brown-d);font-size:21px;margin-bottom:10px}
+.refmodal-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+.refmodal-form{display:flex;flex-direction:column;gap:10px}
+.refmodal-form input{border:1px solid var(--sand-d);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;width:100%}
+.refmodal-form input:focus{outline:none;border-color:var(--accent)}
+.refmodal-form button{margin-top:4px}
+.refmodal-msg{margin-top:12px;font-size:13px;color:var(--accent-d);min-height:18px}
+.refresult{margin-top:18px;background:var(--sand);border-radius:14px;padding:18px}
+.refresult-code{font-weight:900;color:var(--brown-d);font-size:16px}
+.reflink-row{display:flex;gap:8px;margin-top:10px}
+.reflink-row input{flex:1;border:1px solid var(--sand-d);border-radius:8px;padding:9px 10px;font-size:12.5px;background:#fff;color:var(--ink)}
+.reflink-row button{flex:0 0 auto;background:var(--brown);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer}
+.refresult-clicks{margin-top:12px;font-size:14px;color:var(--brown-d)}
+.refresult-note{margin-top:10px;font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+.apply-form-btn{display:inline-block;margin-bottom:16px;background:#fff;color:var(--brown-d);font-weight:700;font-size:15px;padding:12px 28px;border-radius:999px;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+
 /* ---------- 리빌 애니메이션 ---------- */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .rv.on{opacity:1;transform:none}
@@ -845,11 +873,22 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <div class="apply-steps">
         <span>① 숙소 네이버 예약 신청</span><span>② 참가 신청서(구글폼) 작성</span><span>③ 운영자 확인</span><span>④ 예약 확정 · 알림톡</span>
       </div>
+      <a class="apply-form-btn js-apply-form-link" id="applyFormBtn" href="https://docs.google.com/forms/d/1VcgCAqe2tAi39VDFZp9MqBV5shBrZULGoiY464KWZLo/viewform" target="_blank" rel="noopener">📝 참가 신청서 바로 작성하기</a>
       <p class="apply-info">
         문의 전화 : <b>남원시농촌종합지원센터 농촌관광팀 <a href="tel:010-8366-8536" style="color:#FFD98A;text-decoration:none">010-8366-8536</a></b><br>
         운영 시간 : 평일 09:00 ~ 18:00
       </p>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ 추천인 이벤트 ═══════════ -->
+<section class="sec refsec" id="refer">
+  <div class="inner">
+    <p class="disp" style="font-size:15px;color:var(--accent-d);letter-spacing:.08em;margin-bottom:10px">FRIEND REFERRAL</p>
+    <h2 class="sec-title rv">이런 좋은 프로그램은<br>알려야 돼~ 🐾</h2>
+    <p class="sec-sub rv">내 추천 링크로 예약이 확정되면, 예약 <b style="color:var(--accent-d)">1건당 편의점 상품권 2만원</b>을 드려요!</p>
+    <button class="refbtn rv" style="margin-top:26px" onclick="openReferModal()">📣 추천하기</button>
   </div>
 </section>
 
@@ -867,6 +906,30 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
   <img id="lb-img" src="" alt="">
   <p class="lb-cap" id="lb-cap"></p>
   <p class="lb-hint">화면을 누르면 닫힙니다</p>
+</div>
+
+<!-- ═══════════ 추천인 코드 모달 ═══════════ -->
+<div class="refmodal" id="refModal" onclick="if(event.target===this)closeReferModal()">
+  <div class="refmodal-card">
+    <button class="refmodal-close" onclick="closeReferModal()" aria-label="닫기">✕</button>
+    <h3>📣 추천인 코드 만들기 · 조회</h3>
+    <p class="refmodal-desc">이름과 전화번호를 입력하시면 나만의 추천 링크가 만들어져요.<br>이미 만든 적이 있다면 같은 번호로 입력 시 기존 코드와 접속수를 보여드려요.</p>
+    <div class="refmodal-form">
+      <input type="text" id="refName" placeholder="이름" maxlength="20">
+      <input type="tel" id="refPhone" placeholder="휴대폰 번호 (예: 010-1234-5678)" maxlength="13">
+      <button class="refbtn" onclick="submitRefer()">추천코드 확인 · 발급받기</button>
+    </div>
+    <p class="refmodal-msg" id="refMsg"></p>
+    <div class="refresult" id="refResult" style="display:none">
+      <p class="refresult-code">내 추천코드 : <b id="refCodeOut"></b></p>
+      <div class="reflink-row">
+        <input type="text" id="refLinkOut" readonly>
+        <button onclick="copyReferLink()" id="refCopyBtn">복사</button>
+      </div>
+      <p class="refresult-clicks"><b id="refClicksOut">0</b>명이 이 링크로 들어왔어요</p>
+      <p class="refresult-note">🎁 이 링크로 오신 분이 예약을 완료하시면 예약 1건당 편의점 상품권 2만원을 드려요! 참가 신청서(구글폼)에 추천코드가 자동으로 채워집니다.</p>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1041,6 +1104,110 @@ function applyRoomInfo(name, price, link){
     if(csvTxt){ try{ applyText(csvTxt); }catch(e){} }
     if(apiTxt){ try{ applyText(apiTxt); }catch(e){} }
   })();
+})();
+
+/* ═══════════ 추천인 이벤트 ═══════════
+ * 관리 : 구글시트 「도그하우스 숙박예약상황」의 '추천인코드' 탭에서
+ * 발급된 코드·이름·접속수를 확인할 수 있습니다.
+ * 예약 확정 시 참가 신청서(구글폼)의 '추천인 코드' 칸을 함께 확인해
+ * 상품권 지급 대상을 판단하세요 (예약 1건당 2만원).
+ *
+ * setupReferralEvent() 실행 후 아래 두 값을 '설정' 탭의 값으로 바꿔주면
+ * 참가 신청서에 추천코드가 자동으로 채워집니다 (안 바꿔도 폼 자체는 정상 동작).
+ */
+const APPLY_FORM_URL = 'https://docs.google.com/forms/d/1VcgCAqe2tAi39VDFZp9MqBV5shBrZULGoiY464KWZLo/viewform';
+const APPLY_FORM_PREFILL_TEMPLATE = ''; // 예) 'https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123456=__REF__'
+
+(function(){
+  const REF_API_URL = ROOM_STATUS_URL; // 같은 앱스크립트 배포를 재사용합니다
+  const params = new URLSearchParams(location.search);
+  const refCode = (params.get('ref') || '').trim().toUpperCase();
+
+  let applyLink = APPLY_FORM_URL;
+  if(refCode){
+    applyLink = APPLY_FORM_PREFILL_TEMPLATE
+      ? APPLY_FORM_PREFILL_TEMPLATE.replace('__REF__', encodeURIComponent(refCode))
+      : APPLY_FORM_URL;
+    sessionStorage.setItem('nubigo_ref', refCode);
+
+    // 배너에 쓸 추천인 이름 조회
+    fetch(REF_API_URL + '?action=refName&code=' + encodeURIComponent(refCode) + '&t=' + Date.now())
+      .then(r => r.json()).then(d => { if(d && d.ok && d.name) showRefBanner(d.name); })
+      .catch(()=>{});
+
+    // 접속수 카운트 — 같은 브라우저에서는 코드당 최초 1회만 전송
+    const hitKey = 'nubigo_ref_hit_' + refCode;
+    if(!localStorage.getItem(hitKey)){
+      fetch(REF_API_URL + '?action=refHit&code=' + encodeURIComponent(refCode) + '&t=' + Date.now()).catch(()=>{});
+      localStorage.setItem(hitKey, '1');
+    }
+  }
+  document.querySelectorAll('.js-apply-form-link').forEach(a => a.href = applyLink);
+
+  window.showRefBanner = function(name){
+    const b = document.createElement('div');
+    b.className = 'ref-banner';
+    b.innerHTML = '🐾 <b>' + name.replace(/</g,'&lt;') + '</b>님의 초대로 오셨네요! 참가 신청서에 추천코드가 자동으로 입력돼요.';
+    document.body.appendChild(b);
+    requestAnimationFrame(()=> setTimeout(()=>b.classList.add('show'), 30));
+    setTimeout(()=>{ b.classList.remove('show'); setTimeout(()=>b.remove(), 500); }, 6000);
+  };
+
+  window.openReferModal = function(){
+    document.getElementById('refModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeReferModal = function(){
+    document.getElementById('refModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  const phoneInput = document.getElementById('refPhone');
+  if(phoneInput){
+    phoneInput.addEventListener('input', () => {
+      let v = phoneInput.value.replace(/[^0-9]/g,'').slice(0,11);
+      if(v.length > 7) v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+      else if(v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+      phoneInput.value = v;
+    });
+  }
+
+  let refBusy = false;
+  window.submitRefer = function(){
+    const name = document.getElementById('refName').value.trim();
+    const phone = document.getElementById('refPhone').value.trim();
+    const msg = document.getElementById('refMsg');
+    if(!name){ msg.textContent = '이름을 입력해 주세요.'; return; }
+    if(!/^01[0-9]-?\d{3,4}-?\d{4}$/.test(phone)){ msg.textContent = '휴대폰 번호 형식을 확인해 주세요.'; return; }
+    if(refBusy) return;
+    refBusy = true;
+    msg.textContent = '확인 중...';
+    fetch(REF_API_URL + '?action=refCreate&name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(phone) + '&t=' + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        refBusy = false;
+        if(!d || !d.ok){ msg.textContent = (d && d.error) || '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'; return; }
+        msg.textContent = '';
+        const link = location.origin + location.pathname + '?ref=' + d.code;
+        document.getElementById('refCodeOut').textContent = d.code;
+        document.getElementById('refLinkOut').value = link;
+        document.getElementById('refClicksOut').textContent = d.clicks;
+        document.getElementById('refResult').style.display = 'block';
+      })
+      .catch(() => { refBusy = false; msg.textContent = '네트워크 오류입니다. 잠시 후 다시 시도해 주세요.'; });
+  };
+
+  window.copyReferLink = function(){
+    const el = document.getElementById('refLinkOut');
+    el.select(); el.setSelectionRange(0, 99999);
+    const btn = document.getElementById('refCopyBtn');
+    const done = () => { const old = btn.textContent; btn.textContent = '복사됨!'; setTimeout(()=>btn.textContent = old, 1500); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(el.value).then(done).catch(() => { try{ document.execCommand('copy'); done(); }catch(e){} });
+    } else {
+      try{ document.execCommand('copy'); done(); }catch(e){}
+    }
+  };
 })();
 </script>
 </body>
