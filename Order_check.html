@@ -81,6 +81,41 @@ header p{font-size:12.5px;opacity:.85}
 .ref-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:16px 0}
 .ref-warn{font-size:11.5px;color:var(--red);background:var(--red-bg);border-radius:8px;padding:8px 10px;margin-top:10px}
 .role-bar button{border:none;background:none;color:var(--red);font-weight:900;font-size:12px;cursor:pointer;font-family:inherit}
+/* ── 예약 현황 요약 (판매완료 객실 + 무박2일 체험자 = 8팀 대비 진행률) ── */
+.sumcard{padding:16px 18px}
+.sum-title{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
+.sum-title b{font-family:'Jua',sans-serif;font-size:16px;color:var(--brown-d);font-weight:400}
+.sum-title small{font-size:11px;color:var(--soft)}
+.sum-grid{display:flex;gap:7px;margin-bottom:13px}
+.sum-grid .box{flex:1;background:var(--sand);border-radius:10px;padding:9px 4px;text-align:center}
+.sum-grid .box b{display:block;font-family:'Jua',sans-serif;font-size:20px;color:var(--brown-d);line-height:1.25}
+.sum-grid .box span{font-size:10.5px;color:var(--soft);line-height:1.35;display:block}
+.sum-total{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px}
+.sum-total .big{font-family:'Jua',sans-serif;font-size:21px;color:var(--brown-d)}
+.sum-total .big em{font-style:normal;color:var(--red);font-size:26px}
+.sum-total .rest{font-size:12.5px;font-weight:900;color:var(--green)}
+.sum-total .rest.full{color:var(--red)}
+.gauge{height:11px;border-radius:99px;background:var(--sand);overflow:hidden}
+.gauge i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#8A5A33,#C4472F);width:0;transition:width .45s}
+.sum-note{font-size:11px;color:var(--soft);margin-top:9px;line-height:1.55}
+/* ── 무박2일 체험자 관리 ── */
+.day-head{font-family:'Jua',sans-serif;font-size:16px;color:var(--brown-d);margin-bottom:3px;font-weight:400}
+.day-sub{font-size:12px;color:var(--soft);margin-bottom:12px}
+.day-form{display:flex;gap:7px;margin-bottom:6px}
+.day-form input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font-size:14px;font-family:inherit}
+.day-form input:focus{outline:none;border-color:var(--brown)}
+.day-form button{flex:0 0 auto;border:none;border-radius:10px;padding:11px 17px;background:var(--brown);color:#fff;font-family:'Jua',sans-serif;font-size:14px;cursor:pointer;white-space:nowrap}
+.day-form button:disabled{opacity:.45;cursor:not-allowed}
+.day-cnt{font-size:11.5px;color:var(--soft);text-align:right;margin-bottom:6px}
+.day-list{list-style:none}
+.day-list li{display:flex;align-items:center;gap:8px;padding:10px 2px;border-bottom:1px dashed var(--line)}
+.day-list li:last-child{border-bottom:none}
+.day-list .idx{flex:0 0 20px;font-size:11.5px;color:var(--soft);font-weight:900}
+.day-list .nm{flex:1;font-weight:700;font-size:14.5px}
+.day-list .meta{font-size:10.5px;color:var(--soft)}
+.day-list .del{border:1px solid var(--line);background:#fff;color:var(--red);border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.day-list .del.confirm{background:var(--red);color:#fff;border-color:var(--red)}
+.day-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:16px 0}
 </style>
 </head>
 <body>
@@ -101,8 +136,8 @@ header p{font-size:12.5px;opacity:.85}
   <div class="wrap">
     <img src="images/logo_nubigo.png" alt="남원누비GO">
     <div>
-      <h1>객실 예약상태 관리</h1>
-      <p>도그하우스 만들기 1박2일 · 버튼으로 예약가능/판매완료/일반판매완료를 선택하세요</p>
+      <h1>예약 현황 · 객실상태 관리</h1>
+      <p>도그하우스 만들기 · 판매완료 객실과 무박2일 체험자를 합쳐 8팀 정원을 관리합니다</p>
     </div>
   </div>
 </header>
@@ -119,10 +154,39 @@ header p{font-size:12.5px;opacity:.85}
   </div>
 
   <div id="roomsPane">
+
+    <!-- ═══ 예약 현황 요약 — 판매완료 객실 + 무박2일 체험자를 8팀 정원과 비교 ═══ -->
+    <div class="card sumcard" id="sumCard" style="display:none">
+      <div class="sum-title"><b>📋 예약 현황</b><small id="sumStamp"></small></div>
+      <div class="sum-grid">
+        <div class="box"><b id="sumSooni">0</b><span>순이네흙집<br>판매완료</span></div>
+        <div class="box"><b id="sumStar">0</b><span>별헤는밤<br>판매완료</span></div>
+        <div class="box"><b id="sumDay">0</b><span>무박2일<br>체험자</span></div>
+      </div>
+      <div class="sum-total">
+        <span class="big"><em id="sumBooked">0</em> / <span id="sumCap">8</span>팀 예약</span>
+        <span class="rest" id="sumRest">잔여 8팀</span>
+      </div>
+      <div class="gauge"><i id="sumGauge"></i></div>
+      <p class="sum-note" id="sumNote"></p>
+    </div>
+
+    <!-- ═══ 무박2일 체험자 관리 (옻칠목공체험관광협동조합 · 통합 관리자 전용) ═══ -->
+    <div class="card" id="dayCard" style="display:none">
+      <h2 class="day-head">🪵 무박2일 체험자 관리</h2>
+      <p class="day-sub">숙박 없이 목공체험만 참여하는 팀을 등록하세요 · 등록한 인원은 위 예약 현황에 자동으로 합산됩니다</p>
+      <div class="day-form">
+        <input type="text" id="dayName" placeholder="체험자 이름 (예: 홍길동)" maxlength="20" autocomplete="off" onkeydown="if(event.key==='Enter')addDayGuest()">
+        <button type="button" id="dayAddBtn" onclick="addDayGuest()">+ 추가</button>
+      </div>
+      <p class="day-cnt" id="dayCnt"></p>
+      <div id="dayListWrap"><p class="day-empty">불러오는 중…</p></div>
+    </div>
+
     <p class="stamp" id="stamp">상태를 불러오는 중…</p>
 
     <div class="bar">
-      <button class="btn re" onclick="loadStatus()">🔄 새로고침</button>
+      <button class="btn re" onclick="refreshAll()">🔄 새로고침</button>
       <a class="btn lk" href="https://docs.google.com/spreadsheets/d/1NJdmg1Ce1CHmpH9JxG6VRBR3kqBOW0NR4UZ-NEAyFZE/edit" target="_blank" rel="noopener">📊 시트 열기</a>
       <a class="btn lk" href="./" target="_blank" rel="noopener">🐾 상세페이지</a>
     </div>
@@ -145,7 +209,7 @@ header p{font-size:12.5px;opacity:.85}
     <div id="refListWrap"><p class="ref-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「판매완료」는 온라인 예약을 통한 마감, 「일반판매완료」는 현장·전화 등 다른 경로를 통한 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시됩니다).<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「판매완료」는 이번 행사의 온라인 예약 마감, 「일반판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「판매완료」만 반영됩니다).<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
@@ -170,14 +234,22 @@ const conf = {
 };
 
 /* ═══ 접근 비밀번호 (SHA-256 해시로만 저장) ═══
- * 별헤는밤 전용 / 순이네흙집 전용 / 통합 관리자 3종
- * encKey = 해당 비밀번호로 암호화된 관리키 */
+ * 별헤는밤 전용 / 순이네흙집 전용 / 옻칠목공체험관광협동조합 / 통합 관리자 4종
+ * encKey   = 해당 비밀번호로 암호화된 관리키
+ * lodges   = 객실 상태를 변경할 수 있는 숙소 (빈 배열이면 객실은 조회만 가능)
+ * dayAdmin = 무박2일 체험자 명단을 등록·삭제할 수 있는 권한 */
 const AUTH_ROLES = {
   '0992c291bc06df951a966bfc9a37cfb711e525f873874e4d946dffed1b34f6de': { name:'별헤는밤 펜션 관리자',  lodges:['지리산 별헤는밤 펜션'], encKey:'RB9N2vCfOF0navrHxyj+QGoEbxpfZEj11c7bH7iaSw4sUHkVoU8=' },
   '4bfd76c762250b2dc3a0d4fff2bdead6d935e87e7c0211994150c35a09724e67': { name:'순이네흙집 관리자',     lodges:['지리산 순이네흙집 민박'], encKey:'GAO75l8Wucztx1hjmdadrWgx/JWRKGm8OyboChC0l0P122ysOJs=' },
-  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', refAdmin:true }
+  '7a8c35db4e0bc38feb2d256a38954959f4d57a212ddca9892cda32d474b8d033': { name:'옻칠목공체험관광협동조합', lodges:[], encKey:'1udiP7TMqpNNd7X8R7UkBYC+sQil+5HBdwqdAMuGHEXptLgUP6k=', dayAdmin:true },
+  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', refAdmin:true, dayAdmin:true }
 };
 let ROLE = null;
+
+/* 이번 행사 총 모집 팀 수 — 판매완료 객실 + 무박2일 체험자의 합계와 비교합니다 */
+const TEAM_CAPACITY = 8;
+let ROOM_STATES = {};   // { 방이름: 상태 }
+let DAY_GUESTS  = [];   // [{ id, name, created, by }]
 
 async function sha256bytes(t){
   return new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)));
@@ -223,7 +295,10 @@ function enter(role){
     showAdminTab('rooms');
     loadReferralList();
   }
+  $('sumCard').style.display = 'block';
+  if(role.dayAdmin) $('dayCard').style.display = 'block';
   loadStatus();
+  loadDayList();
 }
 
 function showAdminTab(tab){
@@ -318,7 +393,167 @@ async function loadStatus(){
       $('stamp').textContent = '⚠ 상태를 불러오지 못했습니다 — 네트워크를 확인하세요';
     }
   }
+  ROOM_STATES = states;
   render(states);
+  updateSummary();
+}
+
+/* ═══ 예약 현황 요약 ═══
+ * 「판매완료」  = 이번 행사 온라인 예약으로 마감된 객실 → 팀 수에 포함
+ * 「일반판매완료」= 행사와 무관한 현장·전화 손님으로 마감된 객실 → 팀 수에서 제외
+ * 무박2일 체험자 = 숙박 없이 체험만 참여하는 팀 → 팀 수에 포함 */
+function updateSummary(){
+  const cnt = {};
+  LODGES.forEach(l => { cnt[l.name] = { sold:0, general:0, avail:0 }; });
+  LODGES.forEach(l => l.rooms.forEach(r => {
+    const st = ROOM_STATES[r] || '예약가능';
+    if(st === '판매완료')          cnt[l.name].sold++;
+    else if(st === '일반판매완료') cnt[l.name].general++;
+    else                           cnt[l.name].avail++;
+  }));
+
+  const sooni = cnt['지리산 순이네흙집 민박'] || {sold:0,general:0,avail:0};
+  const star  = cnt['지리산 별헤는밤 펜션']   || {sold:0,general:0,avail:0};
+  const day   = DAY_GUESTS.length;
+  const booked = sooni.sold + star.sold + day;
+  const rest = TEAM_CAPACITY - booked;
+  const general = sooni.general + star.general;
+  const roomsLeft = sooni.avail + star.avail;
+
+  $('sumSooni').textContent = sooni.sold;
+  $('sumStar').textContent  = star.sold;
+  $('sumDay').textContent   = day;
+  $('sumBooked').textContent = booked;
+  $('sumCap').textContent = TEAM_CAPACITY;
+
+  const restEl = $('sumRest');
+  if(rest > 0){
+    restEl.textContent = '잔여 ' + rest + '팀';
+    restEl.className = 'rest';
+  }else if(rest === 0){
+    restEl.textContent = '🎉 마감 (정원 도달)';
+    restEl.className = 'rest full';
+  }else{
+    restEl.textContent = '⚠ 정원 ' + (-rest) + '팀 초과';
+    restEl.className = 'rest full';
+  }
+  $('sumGauge').style.width = Math.min(100, Math.round(booked / TEAM_CAPACITY * 100)) + '%';
+
+  let note = `숙박 ${sooni.sold + star.sold}팀(순이네흙집 ${sooni.sold} · 별헤는밤 ${star.sold}) + 무박2일 ${day}팀 = <b>${booked}팀</b> · 예약가능 객실 ${roomsLeft}실`;
+  if(general) note += `<br>※ 「일반판매완료」 ${general}실은 행사와 무관한 일반 손님 예약이라 팀 수에 넣지 않았어요.`;
+  $('sumNote').innerHTML = note;
+  $('sumStamp').textContent = new Date().toLocaleTimeString('ko-KR');
+}
+
+/* ═══ 무박2일 체험자 관리 ═══ */
+async function loadDayList(){
+  const wrap = $('dayListWrap');
+  if(!conf.url || !conf.key){
+    if(wrap) wrap.innerHTML = '<p class="day-empty">API 연결 또는 관리키가 필요합니다.</p>';
+    return;
+  }
+  try{
+    const url = conf.url + '?action=dayList&key=' + encodeURIComponent(conf.key) + '&t=' + Date.now();
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      DAY_GUESTS = data.list || [];
+    }else{
+      DAY_GUESTS = [];
+      if(wrap) wrap.innerHTML = '<p class="day-empty">불러오기 실패: ' + (data.error || '알 수 없는 오류') + '</p>';
+    }
+  }catch(e){
+    DAY_GUESTS = [];
+    if(wrap) wrap.innerHTML = '<p class="day-empty">불러오기 실패: API에 연결할 수 없습니다.</p>';
+  }
+  renderDayList();
+  updateSummary();
+}
+
+function renderDayList(){
+  const wrap = $('dayListWrap');
+  if(!wrap) return;
+  const editable = !!(ROLE && ROLE.dayAdmin);
+  $('dayCnt').textContent = DAY_GUESTS.length ? `등록 ${DAY_GUESTS.length}팀` : '';
+  if(!DAY_GUESTS.length){
+    wrap.innerHTML = '<p class="day-empty">아직 등록된 무박2일 체험자가 없습니다.</p>';
+    return;
+  }
+  wrap.innerHTML = '<ul class="day-list">' + DAY_GUESTS.map((g, i) => {
+    let when = '';
+    if(g.created){ const d = new Date(g.created); if(!isNaN(d)) when = (d.getMonth()+1) + '/' + d.getDate(); }
+    const meta = [when, g.by].filter(Boolean).join(' · ');
+    return `<li>
+      <span class="idx">${i+1}</span>
+      <span class="nm">${esc(g.name)}</span>
+      <span class="meta">${esc(meta)}</span>
+      ${editable ? `<button type="button" class="del" onclick="delDayGuest('${esc(g.id)}', this)">삭제</button>` : ''}
+    </li>`;
+  }).join('') + '</ul>';
+}
+
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function addDayGuest(){
+  if(!ROLE || !ROLE.dayAdmin){ showMsg('무박2일 체험자를 등록할 권한이 없습니다', false); return; }
+  const input = $('dayName');
+  const name = input.value.trim();
+  if(!name){ showMsg('체험자 이름을 입력해 주세요', false); input.focus(); return; }
+
+  const btn = $('dayAddBtn');
+  btn.disabled = true; input.disabled = true;
+  try{
+    const url = conf.url + '?action=dayAdd&name=' + encodeURIComponent(name)
+              + '&by=' + encodeURIComponent(ROLE.name)
+              + '&key=' + encodeURIComponent(conf.key);
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      DAY_GUESTS = data.list || [];
+      input.value = '';
+      showMsg(`「${name}」 무박2일 체험자로 등록했어요`, true);
+      renderDayList();
+      updateSummary();
+    }else{
+      showMsg('등록 실패: ' + (data.error || '알 수 없는 오류'), false);
+    }
+  }catch(e){
+    showMsg('등록 실패: API에 연결할 수 없습니다', false);
+  }
+  btn.disabled = false; input.disabled = false;
+  input.focus();
+}
+
+/* 삭제는 실수 방지를 위해 두 번 눌러야 실행됩니다 (한 번 누르면 '정말 삭제?'로 바뀜) */
+async function delDayGuest(id, btnEl){
+  if(!ROLE || !ROLE.dayAdmin){ showMsg('삭제 권한이 없습니다', false); return; }
+  if(btnEl && !btnEl.classList.contains('confirm')){
+    btnEl.classList.add('confirm');
+    btnEl.textContent = '정말 삭제?';
+    clearTimeout(btnEl._t);
+    btnEl._t = setTimeout(() => { btnEl.classList.remove('confirm'); btnEl.textContent = '삭제'; }, 4000);
+    return;
+  }
+  if(btnEl){ btnEl.disabled = true; btnEl.textContent = '삭제 중…'; }
+  try{
+    const url = conf.url + '?action=dayDelete&id=' + encodeURIComponent(id)
+              + '&key=' + encodeURIComponent(conf.key);
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      DAY_GUESTS = data.list || [];
+      showMsg(`「${data.removed || ''}」 삭제했어요`, true);
+    }else{
+      showMsg('삭제 실패: ' + (data.error || '알 수 없는 오류'), false);
+    }
+  }catch(e){
+    showMsg('삭제 실패: API에 연결할 수 없습니다', false);
+  }
+  renderDayList();
+  updateSummary();
+}
+
+/* 새로고침 — 객실 상태와 무박2일 명단을 함께 다시 불러옵니다 */
+function refreshAll(){
+  loadStatus();
+  loadDayList();
 }
 
 async function loadReferralList(){
