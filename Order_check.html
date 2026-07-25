@@ -28,9 +28,9 @@ header p{font-size:12.5px;opacity:.85}
 .room .st{font-size:12px;font-weight:700;border-radius:6px;padding:2px 9px;margin-left:8px}
 .room .st.on{color:var(--green);background:var(--green-bg)}
 .room .st.off{color:var(--red);background:var(--red-bg)}
-/* 상태 3단 선택 버튼 (예약가능 · 판매완료 · 일반판매완료) */
+/* 상태 3단 선택 버튼 (예약가능 · 체험 판매완료 · 객실 판매완료) */
 .stgroup{display:flex;gap:6px}
-.stbtn{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--soft);border-radius:9px;padding:9px 4px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;text-align:center;font-family:inherit}
+.stbtn{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--soft);border-radius:9px;padding:9px 3px;font-size:11.5px;font-weight:700;cursor:pointer;transition:.15s;text-align:center;font-family:inherit;white-space:nowrap;letter-spacing:-.3px}
 .stbtn:disabled{opacity:.45;cursor:not-allowed}
 .stbtn.active.avail{background:var(--green-bg);color:var(--green);border-color:#BEE7CC}
 .stbtn.active.sold{background:var(--red-bg);color:var(--red);border-color:#EBC9BE}
@@ -81,7 +81,7 @@ header p{font-size:12.5px;opacity:.85}
 .ref-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:16px 0}
 .ref-warn{font-size:11.5px;color:var(--red);background:var(--red-bg);border-radius:8px;padding:8px 10px;margin-top:10px}
 .role-bar button{border:none;background:none;color:var(--red);font-weight:900;font-size:12px;cursor:pointer;font-family:inherit}
-/* ── 예약 현황 요약 (판매완료 객실 + 무박2일 체험자 = 8팀 대비 진행률) ── */
+/* ── 예약 현황 요약 (체험 판매완료 객실 + 무박2일 체험자 = 8팀 대비 진행률) ── */
 .sumcard{padding:16px 18px}
 .sum-title{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
 .sum-title b{font-family:'Jua',sans-serif;font-size:16px;color:var(--brown-d);font-weight:400}
@@ -137,7 +137,7 @@ header p{font-size:12.5px;opacity:.85}
     <img src="images/logo_nubigo.png" alt="남원누비GO">
     <div>
       <h1>예약 현황 · 객실상태 관리</h1>
-      <p>도그하우스 만들기 · 판매완료 객실과 무박2일 체험자를 합쳐 8팀 정원을 관리합니다</p>
+      <p>도그하우스 만들기 · 체험 판매완료 객실과 무박2일 체험자를 합쳐 8팀 정원을 관리합니다</p>
     </div>
   </div>
 </header>
@@ -155,12 +155,12 @@ header p{font-size:12.5px;opacity:.85}
 
   <div id="roomsPane">
 
-    <!-- ═══ 예약 현황 요약 — 판매완료 객실 + 무박2일 체험자를 8팀 정원과 비교 ═══ -->
+    <!-- ═══ 예약 현황 요약 — 체험 판매완료 객실 + 무박2일 체험자를 8팀 정원과 비교 ═══ -->
     <div class="card sumcard" id="sumCard" style="display:none">
       <div class="sum-title"><b>📋 예약 현황</b><small id="sumStamp"></small></div>
       <div class="sum-grid">
-        <div class="box"><b id="sumSooni">0</b><span>순이네흙집<br>판매완료</span></div>
-        <div class="box"><b id="sumStar">0</b><span>별헤는밤<br>판매완료</span></div>
+        <div class="box"><b id="sumSooni">0</b><span>순이네흙집<br>체험 판매완료</span></div>
+        <div class="box"><b id="sumStar">0</b><span>별헤는밤<br>체험 판매완료</span></div>
         <div class="box"><b id="sumDay">0</b><span>무박2일<br>체험자</span></div>
       </div>
       <div class="sum-total">
@@ -209,7 +209,7 @@ header p{font-size:12.5px;opacity:.85}
     <div id="refListWrap"><p class="ref-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「판매완료」는 이번 행사의 온라인 예약 마감, 「일반판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「판매완료」만 반영됩니다).<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
@@ -246,7 +246,7 @@ const AUTH_ROLES = {
 };
 let ROLE = null;
 
-/* 이번 행사 총 모집 팀 수 — 판매완료 객실 + 무박2일 체험자의 합계와 비교합니다 */
+/* 이번 행사 총 모집 팀 수 — 체험 판매완료 객실 + 무박2일 체험자의 합계와 비교합니다 */
 const TEAM_CAPACITY = 8;
 let ROOM_STATES = {};   // { 방이름: 상태 }
 let DAY_GUESTS  = [];   // [{ id, name, created, by }]
@@ -323,13 +323,15 @@ function showMsg(text, ok){
   m._t = setTimeout(() => { m.className = 'msg'; }, 4000);
 }
 
-/* 상태 3종 정의 — 값은 시트·API에 그대로 저장되는 문자열입니다 */
-const STATUS_LIST  = ['예약가능', '판매완료', '일반판매완료'];
-const STATUS_CLASS = { '예약가능':'avail', '판매완료':'sold', '일반판매완료':'general' };
-const STATUS_SHORT = { '예약가능':'예약가능', '판매완료':'판매완료', '일반판매완료':'일반판매완료' };
+/* 상태 3종 정의 — 값은 시트·API에 그대로 저장되는 문자열입니다
+ * 「체험 판매완료」(옛 이름: 판매완료)     = 이번 행사 체험 예약으로 마감 → 8팀 수에 포함
+ * 「객실 판매완료」(옛 이름: 일반판매완료) = 행사와 무관한 현장·전화 손님 → 8팀 수에서 제외 */
+const STATUS_LIST  = ['예약가능', '체험 판매완료', '객실 판매완료'];
+const STATUS_CLASS = { '예약가능':'avail', '체험 판매완료':'sold', '객실 판매완료':'general' };
+const STATUS_SHORT = { '예약가능':'예약가능', '체험 판매완료':'체험 판매완료', '객실 판매완료':'객실 판매완료' };
 
 function render(states){
-  // states: { 방이름: '예약가능' | '판매완료' | '일반판매완료' }
+  // states: { 방이름: '예약가능' | '체험 판매완료' | '객실 판매완료' }
   $('rooms').innerHTML = LODGES.map(l => {
     const editable = canEdit(l.name);
     let hint = '';
@@ -359,12 +361,15 @@ function render(states){
   }).join('');
 }
 
-/* 시트/CSV에 적힌 임의의 문자열을 3종 상태값 중 하나로 정규화 — '일반판매완료'가
-   '판매완료' 문자열을 포함하므로 반드시 먼저 검사해야 합니다 */
+/* 시트/CSV에 적힌 임의의 문자열을 3종 상태값 중 하나로 정규화합니다.
+   ※ 검사 순서가 중요합니다 — '체험 판매완료'·'객실 판매완료'·'일반판매완료'가
+      모두 '판매완료'를 포함하므로, 구체적인 쪽을 먼저 확인해야 합니다.
+   ※ 예전 이름('판매완료' / '일반판매완료')으로 적힌 시트 값도 그대로 인식합니다. */
 function normalizeStatus(raw){
   const s = String(raw || '').trim();
-  if (/일반판매완료/.test(s)) return '일반판매완료';
-  if (/판매완료|soldout/i.test(s)) return '판매완료';
+  if (/객실\s*판매완료|일반\s*판매완료/.test(s)) return '객실 판매완료';   // 옛 이름: 일반판매완료
+  if (/체험\s*판매완료/.test(s))                 return '체험 판매완료';
+  if (/판매완료|soldout/i.test(s))               return '체험 판매완료';   // 옛 이름: 판매완료
   return '예약가능';
 }
 
@@ -399,17 +404,17 @@ async function loadStatus(){
 }
 
 /* ═══ 예약 현황 요약 ═══
- * 「판매완료」  = 이번 행사 온라인 예약으로 마감된 객실 → 팀 수에 포함
- * 「일반판매완료」= 행사와 무관한 현장·전화 손님으로 마감된 객실 → 팀 수에서 제외
- * 무박2일 체험자 = 숙박 없이 체험만 참여하는 팀 → 팀 수에 포함 */
+ * 「체험 판매완료」= 이번 행사 체험 예약으로 마감된 객실 → 팀 수에 포함
+ * 「객실 판매완료」= 행사와 무관한 현장·전화 손님으로 마감된 객실 → 팀 수에서 제외
+ * 무박2일 체험자  = 숙박 없이 체험만 참여하는 팀 → 팀 수에 포함 */
 function updateSummary(){
   const cnt = {};
   LODGES.forEach(l => { cnt[l.name] = { sold:0, general:0, avail:0 }; });
   LODGES.forEach(l => l.rooms.forEach(r => {
     const st = ROOM_STATES[r] || '예약가능';
-    if(st === '판매완료')          cnt[l.name].sold++;
-    else if(st === '일반판매완료') cnt[l.name].general++;
-    else                           cnt[l.name].avail++;
+    if(st === '체험 판매완료')      cnt[l.name].sold++;
+    else if(st === '객실 판매완료') cnt[l.name].general++;
+    else                            cnt[l.name].avail++;
   }));
 
   const sooni = cnt['지리산 순이네흙집 민박'] || {sold:0,general:0,avail:0};
@@ -440,7 +445,7 @@ function updateSummary(){
   $('sumGauge').style.width = Math.min(100, Math.round(booked / TEAM_CAPACITY * 100)) + '%';
 
   let note = `숙박 ${sooni.sold + star.sold}팀(순이네흙집 ${sooni.sold} · 별헤는밤 ${star.sold}) + 무박2일 ${day}팀 = <b>${booked}팀</b> · 예약가능 객실 ${roomsLeft}실`;
-  if(general) note += `<br>※ 「일반판매완료」 ${general}실은 행사와 무관한 일반 손님 예약이라 팀 수에 넣지 않았어요.`;
+  if(general) note += `<br>※ 「객실 판매완료」 ${general}실은 행사와 무관한 일반 손님 예약이라 팀 수에 넣지 않았어요.`;
   $('sumNote').innerHTML = note;
   $('sumStamp').textContent = new Date().toLocaleTimeString('ko-KR');
 }
