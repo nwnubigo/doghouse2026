@@ -21,20 +21,20 @@ header p{font-size:12.5px;opacity:.85}
 .lodge-head{display:flex;align-items:baseline;gap:8px;margin:6px 2px 10px}
 .lodge-head h2{font-family:'Jua',sans-serif;font-size:17px;color:var(--brown-d)}
 .lodge-head span{font-size:12px;color:var(--soft)}
-.room{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 4px;border-bottom:1px dashed var(--line)}
+.room{display:flex;flex-direction:column;gap:9px;padding:13px 4px;border-bottom:1px dashed var(--line)}
 .room:last-child{border-bottom:none}
+.room-top{display:flex;align-items:center;justify-content:space-between}
 .room .nm{font-weight:900;font-size:15.5px}
 .room .st{font-size:12px;font-weight:700;border-radius:6px;padding:2px 9px;margin-left:8px}
 .room .st.on{color:var(--green);background:var(--green-bg)}
 .room .st.off{color:var(--red);background:var(--red-bg)}
-/* 토글 스위치 */
-.tgl{position:relative;width:74px;height:34px;flex:0 0 auto;cursor:pointer}
-.tgl input{opacity:0;width:0;height:0}
-.tgl .tr{position:absolute;inset:0;background:var(--naver);border-radius:999px;transition:.25s}
-.tgl .tr::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-.tgl input:checked + .tr{background:#B9AE9D}
-.tgl input:checked + .tr::after{left:44px}
-.tgl input:disabled + .tr{opacity:.45}
+/* 상태 3단 선택 버튼 (예약가능 · 판매완료 · 일반판매완료) */
+.stgroup{display:flex;gap:6px}
+.stbtn{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--soft);border-radius:9px;padding:9px 4px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;text-align:center;font-family:inherit}
+.stbtn:disabled{opacity:.45;cursor:not-allowed}
+.stbtn.active.avail{background:var(--green-bg);color:var(--green);border-color:#BEE7CC}
+.stbtn.active.sold{background:var(--red-bg);color:var(--red);border-color:#EBC9BE}
+.stbtn.active.general{background:#FDEEE6;color:#C94F26;border-color:#F2C9B4}
 .hintrow{font-size:11.5px;color:var(--soft);text-align:right;margin:-6px 2px 8px}
 .bar{display:flex;gap:8px;margin-bottom:14px}
 .btn{flex:1;border:none;border-radius:12px;padding:12px;font-family:'Jua',sans-serif;font-size:15px;cursor:pointer;transition:.15s}
@@ -102,7 +102,7 @@ header p{font-size:12.5px;opacity:.85}
     <img src="images/logo_nubigo.png" alt="남원누비GO">
     <div>
       <h1>객실 예약상태 관리</h1>
-      <p>도그하우스 만들기 1박2일 · 토글로 판매상태를 변경하세요</p>
+      <p>도그하우스 만들기 1박2일 · 버튼으로 예약가능/판매완료/일반판매완료를 선택하세요</p>
     </div>
   </div>
 </header>
@@ -145,7 +145,7 @@ header p{font-size:12.5px;opacity:.85}
     <div id="refListWrap"><p class="ref-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지 토글을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「판매완료」는 온라인 예약을 통한 마감, 「일반판매완료」는 현장·전화 등 다른 경로를 통한 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시됩니다).<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
@@ -248,41 +248,60 @@ function showMsg(text, ok){
   m._t = setTimeout(() => { m.className = 'msg'; }, 4000);
 }
 
+/* 상태 3종 정의 — 값은 시트·API에 그대로 저장되는 문자열입니다 */
+const STATUS_LIST  = ['예약가능', '판매완료', '일반판매완료'];
+const STATUS_CLASS = { '예약가능':'avail', '판매완료':'sold', '일반판매완료':'general' };
+const STATUS_SHORT = { '예약가능':'예약가능', '판매완료':'판매완료', '일반판매완료':'일반판매완료' };
+
 function render(states){
-  // states: { 방이름: true(판매완료) | false(판매중) }
+  // states: { 방이름: '예약가능' | '판매완료' | '일반판매완료' }
   $('rooms').innerHTML = LODGES.map(l => {
     const editable = canEdit(l.name);
     let hint = '';
-    if(!conf.url) hint = '<p class="hintrow">조회 전용 <span class="badge-off">API 미연결</span> — 아래 연결 설정을 완료하면 토글로 변경할 수 있어요</p>';
+    if(!conf.url) hint = '<p class="hintrow">조회 전용 <span class="badge-off">API 미연결</span> — 아래 연결 설정을 완료하면 상태를 변경할 수 있어요</p>';
     else if(!editable) hint = '<p class="hintrow"><span class="badge-off">권한 없음</span> 이 숙소는 조회만 가능합니다</p>';
     return `
     <div class="card">
       <div class="lodge-head"><h2>${l.name}</h2><span>${l.sub}</span></div>
       ${hint}
       ${l.rooms.map(r => {
-        const sold = !!states[r];
+        const st = states[r] || '예약가능';
+        const badgeCls = st === '예약가능' ? 'on' : 'off';
         return `
         <div class="room">
-          <div><span class="nm">${r}</span><span class="st ${sold?'off':'on'}">${sold?'판매완료':'예약 가능'}</span></div>
-          <label class="tgl" title="${sold?'판매중으로 되돌리기':'판매완료로 변경'}">
-            <input type="checkbox" ${sold?'checked':''} ${editable?'':'disabled'} onchange="toggleRoom('${r.replace(/'/g,"\\'")}', this)">
-            <span class="tr"></span>
-          </label>
+          <div class="room-top">
+            <span class="nm">${r}</span>
+            <span class="st ${badgeCls}">${st}</span>
+          </div>
+          <div class="stgroup">
+            ${STATUS_LIST.map(s => `
+              <button type="button" class="stbtn ${STATUS_CLASS[s]} ${s===st?'active':''}" ${editable?'':'disabled'} onclick="setRoomStatus('${r.replace(/'/g,"\\'")}','${s}', this)">${STATUS_SHORT[s]}</button>
+            `).join('')}
+          </div>
         </div>`;
       }).join('')}
     </div>`;
   }).join('');
 }
 
+/* 시트/CSV에 적힌 임의의 문자열을 3종 상태값 중 하나로 정규화 — '일반판매완료'가
+   '판매완료' 문자열을 포함하므로 반드시 먼저 검사해야 합니다 */
+function normalizeStatus(raw){
+  const s = String(raw || '').trim();
+  if (/일반판매완료/.test(s)) return '일반판매완료';
+  if (/판매완료|soldout/i.test(s)) return '판매완료';
+  return '예약가능';
+}
+
 async function loadStatus(){
   $('stamp').textContent = '상태를 불러오는 중…';
   const states = {};
-  LODGES.forEach(l => l.rooms.forEach(r => states[r] = false));
+  LODGES.forEach(l => l.rooms.forEach(r => states[r] = '예약가능'));
   try{
     // 1차: 앱스크립트 API (실시간)
     const txt = (await (await fetch(conf.url + '?t=' + Date.now())).text()).trim();
     const data = JSON.parse(txt);
-    (data.rooms || []).forEach(it => { if(it.room in states) states[it.room] = /판매완료/.test(it.status); });
+    (data.rooms || []).forEach(it => { if(it.room in states) states[it.room] = normalizeStatus(it.status); });
     $('stamp').textContent = '✅ 실시간 조회 (앱스크립트 API) · ' + new Date().toLocaleTimeString('ko-KR');
   }catch(e){
     // 2차: 시트 CSV 게시본 (최대 5분 지연)
@@ -292,7 +311,7 @@ async function loadStatus(){
       txt.split(/\r?\n/).forEach(line => {
         const cols = line.split(',').map(s => s.replace(/^"|"$/g,'').trim());
         const nm = names.find(n => cols.includes(n));
-        if(nm) states[nm] = cols.some(c => /판매완료/.test(c));
+        if(nm) states[nm] = normalizeStatus(cols.find(c => /판매완료|예약가능/.test(c)) || '');
       });
       $('stamp').textContent = '📄 시트 게시본 조회 (최대 5분 지연) · ' + new Date().toLocaleTimeString('ko-KR');
     }catch(e2){
@@ -347,31 +366,28 @@ async function loadReferralList(){
   }
 }
 
-async function toggleRoom(room, el){
+async function setRoomStatus(room, status, btnEl){
   const lodge = LODGES.find(l => l.rooms.includes(room));
   if(!lodge || !canEdit(lodge.name)){
-    el.checked = !el.checked;
     showMsg('이 숙소를 변경할 권한이 없습니다', false);
     return;
   }
-  const sold = el.checked;               // checked = 판매완료
-  el.disabled = true;
+  const group = btnEl && btnEl.closest ? btnEl.closest('.stgroup') : null;
+  const buttons = group ? [...group.querySelectorAll('button')] : [];
+  buttons.forEach(b => b.disabled = true);
   try{
     const url = conf.url + '?room=' + encodeURIComponent(room)
-              + '&status=' + encodeURIComponent(sold ? '판매완료' : '판매중')
+              + '&status=' + encodeURIComponent(status)
               + '&key=' + encodeURIComponent(conf.key);
     const data = JSON.parse(await (await fetch(url)).text());
     if(data.ok){
       showMsg(`「${room}」 → ${data.status} 저장 완료`, true);
     }else{
-      el.checked = !sold;
       showMsg('저장 실패: ' + (data.error || '알 수 없는 오류'), false);
     }
   }catch(e){
-    el.checked = !sold;
     showMsg('저장 실패: API에 연결할 수 없습니다', false);
   }
-  el.disabled = false;
   loadStatus();
 }
 
