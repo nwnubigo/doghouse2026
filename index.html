@@ -348,6 +348,8 @@ section[id]{scroll-margin-top:62px}
 /* 무박2일은 카드가 1개뿐이지만, 다른 숙소 카드와 같은 가로폭(2열 중 1칸)을 유지합니다 */
 .room-grid.one{grid-template-columns:1fr 1fr}
 .rg-addr{font-size:13px;color:#F4E3C8;margin:-8px 0 13px;opacity:.92;text-align:left}
+.rg-note{font-size:12.5px;color:#F4E3C8;margin:-8px 0 14px;opacity:.9;line-height:1.65;text-align:left}
+.rg-note b{color:#FFE3B8}
 .rcard .rnote{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:2px}
 .rcard .rnote b{color:var(--brown-d)}
 .rcard.day2 .rname::after{content:"숙박 없음";display:inline-block;vertical-align:3px;margin-left:8px;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:900;color:var(--accent-d);background:var(--accent-bg);border-radius:5px;padding:2px 8px}
@@ -968,8 +970,9 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <p class="price-hl">💰 모든 가격은 지역단위 농촌관광 <b>남원누비고 사업</b> 지원으로 <b>정가 대비 30% 할인</b>된 가격입니다</p>
 
       <div class="rgroup">
-        <div class="rgroup-head"><h4>지리산 순이네흙집 민박 1박 2일</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
+        <div class="rgroup-head"><h4>지리산 순이네흙집 민박 1박 2일</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 객실 4곳 · 4팀</span></div>
         <p class="rg-addr">📍 주소 : 전북 남원시 산내면 중황길 173</p>
+        <p class="rg-note">같은 객실이라도 <b>체험 종류(원목도그하우스제작 · 자게목걸이제작)</b>에 따라 상품이 나뉘어요. 원하시는 체험이 붙은 객실을 선택해 주세요.</p>
         <div class="room-grid">
           <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
           <div class="rcard" data-room="sooni-1" data-name="머슴달래-원목도그하우스제작" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
@@ -1007,6 +1010,42 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="rcond">기준 6인(최대 6인) · 독채(침실1, 이불세트6, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-5" data-name="머슴달래-자게목걸이제작" data-book="https://booking.naver.com/booking/3/bizes/1489084/items/7906567">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
+            <span class="rname">머슴달래<span class="rsuf">-자게목걸이제작</span></span>
+            <span class="rprice">245,000원 ~</span>
+            <span class="rcond">기준 2인(최대 2인) · 독채(침실1, 이불세트2, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/1489084/items/7906567" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-6" data-name="도토라지-자게목걸이제작" data-book="https://booking.naver.com/booking/3/bizes/1489084/items/7906568">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
+            <span class="rname">도토라지<span class="rsuf">-자게목걸이제작</span></span>
+            <span class="rprice">357,700원 ~</span>
+            <span class="rcond">기준 8인(최대 8인) · 독채(침실2, 이불세트8, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/1489084/items/7906568" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-7" data-name="박졸갈래-자게목걸이제작" data-book="https://booking.naver.com/booking/3/bizes/1489084/items/7906569">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
+            <span class="rname">박졸갈래<span class="rsuf">-자게목걸이제작</span></span>
+            <span class="rprice">325,500원 ~</span>
+            <span class="rcond">기준 4인(최대 4인) · 독채(침실1, 이불세트4, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/1489084/items/7906569" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
+          </div>
+          <div class="rcard" data-room="sooni-8" data-name="콩덕벅지-자게목걸이제작" data-book="https://booking.naver.com/booking/3/bizes/1489084/items/7906570">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
+            <span class="rname">콩덕벅지<span class="rsuf">-자게목걸이제작</span></span>
+            <span class="rprice">341,600원 ~</span>
+            <span class="rcond">기준 6인(최대 6인) · 독채(침실1, 이불세트6, 욕실1)</span>
+            <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
+            <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/1489084/items/7906570" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
         </div>
       </div>
@@ -1244,18 +1283,30 @@ const APPLY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqM
  *  ② 앱스크립트(객실판매관리.gs) 웹 앱 배포 URL (…/exec)
  * 응답이 JSON이든 CSV든 자동 인식합니다. 비어 있거나 읽기 실패 시
  * SOLD_OUT_ROOMS 기본값을 사용합니다.
- * (방이름: 머슴달래 도토라지 박졸갈래 콩덕벅지 오로라 별 넷 별 여섯 별 일곱)
+ * (방이름은 시트와 동일하게 「객실명-체험명」 형태입니다. 예: 머슴달래-원목도그하우스제작)
  */
 const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbwIxDVMif4-0Ml9I0NCTtXIC6IKVbojtr0ZS_uKEzW8evvVs0AqYKKNve8BeZIdSEzv/exec';   // 예약상태API (실시간)
 const ROOM_STATUS_FALLBACK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 시트 CSV 게시본 (예비)
 const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
-/* 시트의 방이름에 「-원목도그하우스제작」이 붙어 있어도 같은 객실로 인식합니다 */
-const normRoom = v => String(v == null ? '' : v).replace(/\s+/g, '').replace(/[-\u2013\u2014]?원목도그하우스제작$/, '');
+/* 방이름 매칭
+ * 시트에는 같은 객실이 체험별로 나뉘어 들어옵니다.
+ *   머슴달래-원목도그하우스제작 / 머슴달래-자게목걸이제작
+ * 그래서 ① 공백만 지운 「완전일치」를 먼저 찾고,
+ *        ② 그래도 없을 때만 「-원목도그하우스제작」을 떼고 다시 찾습니다.
+ * (②는 카드에 접미사가 없는 무박2일을 위한 예비 경로입니다.
+ *  완전일치를 먼저 보므로 두 체험 상품이 서로 섞이지 않습니다.) */
+const tightRoom = v => String(v == null ? '' : v).replace(/\s+/g, '');
+const normRoom  = v => tightRoom(v).replace(/[-\u2013\u2014]?원목도그하우스제작$/, '');
 function findCard(name){
+  const list = document.querySelectorAll('.rcard[data-name]');
+  const exact = tightRoom(name);
+  if(!exact) return null;
+  for(let i = 0; i < list.length; i++){
+    if(tightRoom(list[i].getAttribute('data-name')) === exact) return list[i];
+  }
   const key = normRoom(name);
   if(!key) return null;
-  const list = document.querySelectorAll('.rcard[data-name]');
   for(let i = 0; i < list.length; i++){
     if(normRoom(list[i].getAttribute('data-name')) === key) return list[i];
   }
@@ -1343,7 +1394,6 @@ function applyRoomInfo(name, price, link){
 
 // 2차: 예약상태API(실시간) → 실패 시 시트 CSV 게시본(예비)에서 상태·가격·링크 반영
 (function(){
-  const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => normRoom(c.getAttribute('data-name')));
 
   // 따옴표·쉼표(가격의 150,000원 등)를 처리하는 CSV 한 줄 파서
   function parseCsvLine(line){
@@ -1390,13 +1440,13 @@ function applyRoomInfo(name, price, link){
       const rooms = Array.isArray(data) ? data : (data.rooms || []);
       rooms.forEach(it => {
         const name = String(it.room || '').trim();
-        if(ROOM_NAMES.includes(normRoom(name))) applyRoom(name, it.status, it.price, it.link);
+        if(findCard(name)) applyRoom(name, it.status, it.price, it.link);
       });
     } else {
       txt.split(/\r?\n/).forEach(line => {
         const cols = parseCsvLine(line);        // [숙소명, 방이름, 판매상태, 가격, 예약링크]
         const name = (cols[1] || '').trim();
-        if(ROOM_NAMES.includes(normRoom(name))) applyRoom(name, cols[2], cols[3], cols[4]);
+        if(findCard(name)) applyRoom(name, cols[2], cols[3], cols[4]);
       });
     }
   }
@@ -1424,8 +1474,12 @@ function applyRoomInfo(name, price, link){
 const TEAM_CAPACITY = 8;
 
 function countSoldRoomsOnPage(){
+  /* 이 페이지의 8팀 정원은 「원목도그하우스제작」 체험 기준입니다.
+     같은 객실이라도 「자게목걸이제작」 상품은 다른 프로그램이므로 팀 수에 넣지 않습니다. */
   return [...document.querySelectorAll('.rcard[data-name]')]
-    .filter(c => !c.classList.contains('day2') && c.dataset.status === '체험 판매완료').length;
+    .filter(c => !c.classList.contains('day2')
+              && !/자게목걸이제작$/.test(String(c.getAttribute('data-name') || '').replace(/\s+/g, ''))
+              && c.dataset.status === '체험 판매완료').length;
 }
 
 function renderTeamSummary(booked, day, partial){
