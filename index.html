@@ -273,6 +273,13 @@ section[id]{scroll-margin-top:62px}
 .tl li.same::before{background:var(--green);border-color:var(--green)}
 .tl .same-tag{display:inline-block;margin-left:6px;font-size:11.5px;font-weight:900;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px;vertical-align:2px}
 
+/* 최종 확인 항목의 단서 표기 */
+.ck-only{display:inline-block;margin-left:6px;font-size:12px;font-weight:800;color:var(--accent-d);background:#fff;border:1px solid #EFC3AB;border-radius:999px;padding:2px 9px;vertical-align:2px;white-space:nowrap}
+/* 30% 할인 안내 — 눈에 잘 띄도록 강조 */
+.price-hl{display:inline-block;margin-top:12px;font-size:15px;font-weight:900;line-height:1.6;color:#7A3B00;background:linear-gradient(180deg,#FFE9A8,#FFD466);border:2px solid #FFC02E;border-radius:999px;padding:10px 20px;box-shadow:0 4px 14px rgba(0,0,0,.16);opacity:1}
+.price-hl b{color:#B3200E}
+@media(max-width:640px){.price-hl{font-size:13.5px;border-radius:16px;padding:10px 16px}}
+
 /* ---------- 참가 조건 ---------- */
 .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:640px){.cond-grid{grid-template-columns:1fr}}
@@ -924,7 +931,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <div class="final-check rv">
       <h4>세 가지만 체크해 주세요</h4>
       <ol>
-        <li><b>①</b> 우리 아이는 7kg 미만 소형견인가요?</li>
+        <li><b>①</b> 우리 아이는 7kg 미만 소형견인가요?<span class="ck-only">별헤는밤펜션 이용자에 한함</span></li>
         <li><b>②</b> 필수 예방접종을 모두 마쳤나요?</li>
         <li><b>③</b> 체험 중 반려견을 전담할 가족이 있나요? (2인 이상이면 OK!)</li>
       </ol>
@@ -932,7 +939,8 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     </div>
     <div style="text-align:center" class="rv booking-area">
       <p class="disp" style="font-size:26px;color:#fff">🐾 숙소를 선택하고 신청하세요</p>
-      <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실<br>모든 가격은 지역단위 농촌관광 남원누비고 사업 지원으로 <b style="color:#FFD98A">정가 대비 30% 할인</b>된 가격입니다</p>
+      <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실</p>
+      <p class="price-hl">💰 모든 가격은 지역단위 농촌관광 <b>남원누비고 사업</b> 지원으로 <b>정가 대비 30% 할인</b>된 가격입니다</p>
 
       <div class="rgroup">
         <div class="rgroup-head"><h4>지리산 순이네흙집 민박 1박 2일</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
@@ -1032,7 +1040,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="st-chip">예약 가능</span>
             <span class="rname">무박2일 체험</span>
             <span class="rprice">가격 준비 중</span>
-            <span class="rnote">1일차 팜파티 석식 후 <b>귀가</b>했다가, 2일차 <b>오전 10시</b>에 다시 모여 숙박 팀과 <b>동일한 마무리 일정</b>을 함께합니다.<br>숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 써요.</span>
+            <span class="rnote">1일차 팜파티 석식 후 <b>귀가</b>했다가, 2일차 <b>오전 9시 30분</b>에 다시 모여 숙박 팀과 <b>동일한 마무리 일정</b>을 함께합니다.<br>숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 써요.</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
         </div>
