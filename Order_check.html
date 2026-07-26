@@ -25,6 +25,9 @@ header p{font-size:12.5px;opacity:.85}
 .room:last-child{border-bottom:none}
 .room-top{display:flex;align-items:center;justify-content:space-between}
 .room .nm{font-weight:900;font-size:15.5px}
+.room .nm .suf{font-weight:800;font-size:12.5px;color:var(--soft);letter-spacing:-.3px}
+.room.grp-first{border-top:2px solid var(--line);padding-top:15px}
+.room .pairnote{font-size:11px;color:var(--soft);margin:-3px 0 0}
 .room .st{font-size:12px;font-weight:700;border-radius:6px;padding:2px 9px;margin-left:8px}
 .room .st.on{color:var(--green);background:var(--green-bg)}
 .room .st.off{color:var(--red);background:var(--red-bg)}
@@ -257,15 +260,39 @@ header p{font-size:12.5px;opacity:.85}
     <div id="waitListWrap"><p class="wait-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에, 다음회차 안내 문자 요청은 「다음회차요청」 탭에 저장됩니다.<br>「다음회차 안내 문자 요청」은 모든 관리자가 볼 수 있지만, 내용 수정·삭제는 통합 관리자만 할 수 있습니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>객실은 <b>체험 종류별로 상품이 나뉘어</b> 있고(원목도그하우스제작 · 자개목걸이제작), <b>방이름 순</b>으로 정렬해 두었습니다. 같은 객실의 상품은 <b>버튼 한 번으로 함께 변경</b>됩니다. 8팀 정원 계산에는 <b>원목도그하우스제작 상품만</b> 반영됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에, 다음회차 안내 문자 요청은 「다음회차요청」 탭에 저장됩니다.<br>「다음회차 안내 문자 요청」은 모든 관리자가 볼 수 있지만, 내용 수정·삭제는 통합 관리자만 할 수 있습니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
-/* 객실 정의 (숙소별) — 상세페이지·시트와 방이름이 정확히 일치해야 합니다 */
+/* 객실 정의 (숙소별)
+ * 같은 객실이 체험 종류별로 상품이 나뉘어 있습니다.
+ *   머슴달래-원목도그하우스제작 / 머슴달래-자개목걸이제작
+ * baseRooms(객실명) × EXPERIENCES(체험명) 로 상품 목록을 만들고, 방이름 순으로 정렬합니다. */
+const EXPERIENCES = ['원목도그하우스제작', '자개목걸이제작'];
 const LODGES = [
-  { name:'지리산 순이네흙집 민박', sub:'황토 흙집 · 4팀', rooms:['머슴달래','도토라지','박졸갈래','콩덕벅지'] },
-  { name:'지리산 별헤는밤 펜션',   sub:'원목 펜션 · 4팀', rooms:['오로라','별 넷','별 여섯','별 일곱'] }
+  { name:'지리산 순이네흙집 민박', sub:'황토 흙집 · 객실 4곳 · 4팀', baseRooms:['머슴달래','도토라지','박졸갈래','콩덕벅지'] },
+  { name:'지리산 별헤는밤 펜션',   sub:'원목 펜션 · 객실 4곳 · 4팀', baseRooms:['오로라','별 넷','별 여섯','별 일곱'] }
 ];
+/* 각 숙소의 상품 목록(방이름)을 만들고 방이름 순으로 정렬합니다 */
+LODGES.forEach(l => {
+  l.rooms = [];
+  l.baseRooms.forEach(b => EXPERIENCES.forEach(x => l.rooms.push(b + '-' + x)));
+  l.rooms.sort((a, b) => a.localeCompare(b, 'ko'));
+});
+
+/* 방이름 정규화 — 시트 표기와 이 페이지의 표기가 달라도 같은 상품으로 봅니다
+ *  · 공백 무시                       (「별 넷-…」 = 「별넷-…」)
+ *  · 「자게목걸이」 = 「자개목걸이」   (시트에 오타로 자게라고 적혀 있어도 인식)
+ *  · 「무박2일 체험-…」 = 「무박2일-…」 */
+const roomKey = v => String(v == null ? '' : v)
+  .replace(/\s+/g, '')
+  .replace(/자게목걸이/g, '자개목걸이')
+  .replace(/^무박2일체험/, '무박2일');
+/* 체험 접미사를 뗀 「객실명」 — 같은 객실의 상품끼리 상태를 함께 바꿀 때 씁니다 */
+const baseRoomOf = v => String(v == null ? '' : v)
+  .replace(/[-\u2013\u2014]\s*(원목도그하우스제작|자[게개]목걸이제작)\s*$/, '').trim();
+/* 시트에 실제로 적힌 방이름 (roomKey → 원문). 저장할 때 이 값을 그대로 보냅니다. */
+let SHEET_ROOM_NAMES = {};
 /* 읽기 전용 폴백: 시트 CSV 게시 링크 (API 미설정 시 조회만 가능) */
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';
 
@@ -403,13 +430,17 @@ function render(states){
     <div class="card">
       <div class="lodge-head"><h2>${l.name}</h2><span>${l.sub}</span></div>
       ${hint}
-      ${l.rooms.map(r => {
-        const st = states[r] || '예약가능';
+      ${l.rooms.map((r, i) => {
+        const st = states[roomKey(r)] || '예약가능';
         const badgeCls = st === '예약가능' ? 'on' : 'off';
+        const base = baseRoomOf(r);
+        const suf  = r.slice(base.length);            // 「-원목도그하우스제작」 등
+        const first = i === 0 || baseRoomOf(l.rooms[i-1]) !== base;   // 같은 객실의 첫 상품
+        const mates = l.rooms.filter(x => baseRoomOf(x) === base && x !== r);
         return `
-        <div class="room">
+        <div class="room${first && i > 0 ? ' grp-first' : ''}">
           <div class="room-top">
-            <span class="nm">${r}</span>
+            <span class="nm">${base}<span class="suf">${suf}</span></span>
             <span class="st ${badgeCls}">${st}</span>
           </div>
           <div class="stgroup">
@@ -417,6 +448,7 @@ function render(states){
               <button type="button" class="stbtn ${STATUS_CLASS[s]} ${s===st?'active':''}" ${editable?'':'disabled'} onclick="setRoomStatus('${r.replace(/'/g,"\\'")}','${s}', this)">${STATUS_SHORT[s]}</button>
             `).join('')}
           </div>
+          ${mates.length ? `<p class="pairnote">🔗 누르면 <b>${base}</b>의 다른 체험 상품(${mates.map(m => m.slice(base.length).replace(/^-/,'')).join(' · ')})도 함께 바뀝니다</p>` : ''}
         </div>`;
       }).join('')}
     </div>`;
@@ -438,22 +470,29 @@ function normalizeStatus(raw){
 async function loadStatus(){
   $('stamp').textContent = '상태를 불러오는 중…';
   const states = {};
-  LODGES.forEach(l => l.rooms.forEach(r => states[r] = '예약가능'));
+  LODGES.forEach(l => l.rooms.forEach(r => states[roomKey(r)] = '예약가능'));
   try{
     // 1차: 앱스크립트 API (실시간)
     const txt = (await (await fetch(conf.url + '?t=' + Date.now())).text()).trim();
     const data = JSON.parse(txt);
-    (data.rooms || []).forEach(it => { if(it.room in states) states[it.room] = normalizeStatus(it.status); });
+    (data.rooms || []).forEach(it => {
+      const k = roomKey(it.room);
+      SHEET_ROOM_NAMES[k] = String(it.room || '').trim();   // 저장할 때 쓸 시트 원문 이름
+      if(k in states) states[k] = normalizeStatus(it.status);
+    });
     $('stamp').textContent = '✅ 실시간 조회 (앱스크립트 API) · ' + new Date().toLocaleTimeString('ko-KR');
   }catch(e){
     // 2차: 시트 CSV 게시본 (최대 5분 지연)
     try{
       const txt = (await (await fetch(CSV_URL + '&t=' + Date.now())).text()).trim();
-      const names = Object.keys(states);
       txt.split(/\r?\n/).forEach(line => {
         const cols = line.split(',').map(s => s.replace(/^"|"$/g,'').trim());
-        const nm = names.find(n => cols.includes(n));
-        if(nm) states[nm] = normalizeStatus(cols.find(c => /판매완료|예약가능/.test(c)) || '');
+        const hit = cols.find(c => roomKey(c) in states);
+        if(hit){
+          const k = roomKey(hit);
+          SHEET_ROOM_NAMES[k] = hit;
+          states[k] = normalizeStatus(cols.find(c => /판매완료|예약가능/.test(c)) || '');
+        }
       });
       $('stamp').textContent = '📄 시트 게시본 조회 (최대 5분 지연) · ' + new Date().toLocaleTimeString('ko-KR');
     }catch(e2){
@@ -472,8 +511,10 @@ async function loadStatus(){
 function updateSummary(){
   const cnt = {};
   LODGES.forEach(l => { cnt[l.name] = { sold:0, general:0, avail:0 }; });
-  LODGES.forEach(l => l.rooms.forEach(r => {
-    const st = ROOM_STATES[r] || '예약가능';
+  /* 8팀 정원은 「원목도그하우스제작」 체험 기준입니다.
+     같은 객실의 「자개목걸이제작」 상품은 다른 프로그램이라 팀 수에 넣지 않습니다. */
+  LODGES.forEach(l => l.rooms.filter(r => !/자[게개]목걸이제작$/.test(r)).forEach(r => {
+    const st = ROOM_STATES[roomKey(r)] || '예약가능';
     if(st === '체험 판매완료')      cnt[l.name].sold++;
     else if(st === '객실 판매완료') cnt[l.name].general++;
     else                            cnt[l.name].avail++;
@@ -849,27 +890,45 @@ async function loadReferralList(){
   }
 }
 
+/* 상태 저장 — 같은 객실의 체험 상품을 함께 바꿉니다
+ * 예) 「머슴달래-원목도그하우스제작」의 버튼을 누르면
+ *     「머슴달래-자개목걸이제작」도 같은 상태로 저장됩니다.
+ * 시트에 적힌 방이름(자게/자개 표기 차이 포함)을 그대로 보내야 저장이 되므로,
+ * 조회 때 기억해 둔 SHEET_ROOM_NAMES 의 원문을 우선 사용합니다. */
+async function saveOneRoom(room, status){
+  const sheetName = SHEET_ROOM_NAMES[roomKey(room)] || room;
+  const url = conf.url + '?room=' + encodeURIComponent(sheetName)
+            + '&status=' + encodeURIComponent(status)
+            + '&key=' + encodeURIComponent(conf.key);
+  const data = JSON.parse(await (await fetch(url)).text());
+  if(!data.ok) throw new Error(data.error || '알 수 없는 오류');
+  return data.status;
+}
+
 async function setRoomStatus(room, status, btnEl){
   const lodge = LODGES.find(l => l.rooms.includes(room));
   if(!lodge || !canEdit(lodge.name)){
     showMsg('이 숙소를 변경할 권한이 없습니다', false);
     return;
   }
-  const group = btnEl && btnEl.closest ? btnEl.closest('.stgroup') : null;
-  const buttons = group ? [...group.querySelectorAll('button')] : [];
+  // 같은 객실명을 가진 모든 체험 상품을 함께 변경합니다
+  const base = baseRoomOf(room);
+  const targets = lodge.rooms.filter(r => baseRoomOf(r) === base);
+  const card = btnEl && btnEl.closest ? btnEl.closest('.card') : null;
+  const buttons = card ? [...card.querySelectorAll('.stbtn')] : [];
   buttons.forEach(b => b.disabled = true);
-  try{
-    const url = conf.url + '?room=' + encodeURIComponent(room)
-              + '&status=' + encodeURIComponent(status)
-              + '&key=' + encodeURIComponent(conf.key);
-    const data = JSON.parse(await (await fetch(url)).text());
-    if(data.ok){
-      showMsg(`「${room}」 → ${data.status} 저장 완료`, true);
-    }else{
-      showMsg('저장 실패: ' + (data.error || '알 수 없는 오류'), false);
-    }
-  }catch(e){
-    showMsg('저장 실패: API에 연결할 수 없습니다', false);
+
+  const done = [], failed = [];
+  for(const r of targets){
+    try{ await saveOneRoom(r, status); done.push(r); }
+    catch(e){ failed.push(r + ' (' + e.message + ')'); }
+  }
+  if(failed.length === 0){
+    showMsg(`「${base}」 ${done.length}개 상품 → ${status} 저장 완료`, true);
+  }else if(done.length){
+    showMsg(`일부만 저장됨 — 실패: ${failed.join(', ')}`, false);
+  }else{
+    showMsg('저장 실패: ' + failed.join(', '), false);
   }
   loadStatus();
 }
