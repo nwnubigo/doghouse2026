@@ -414,19 +414,25 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .ref-rank-note{margin-top:16px;background:var(--accent-bg);border:1px dashed var(--accent);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--accent-d);line-height:1.7;text-align:center}
 @media(max-width:480px){.ref-rank{padding:20px 12px}.ref-rank-table{font-size:11px}}
 
-/* ── 다음 회차 안내 문자 요청 ── */
-.nextbox{position:relative;margin:34px auto 0;max-width:640px;background:rgba(255,255,255,.97);border-radius:22px;padding:26px 22px 22px;box-shadow:0 14px 34px rgba(0,0,0,.2);text-align:center}
-.nx-badge{display:inline-block;background:var(--accent-bg);color:var(--accent-d);font-size:12.5px;font-weight:900;border-radius:999px;padding:6px 15px}
-.nx-title{font-family:'Jua',sans-serif;font-size:23px;color:var(--brown-d);margin:12px 0 10px}
+/* ── 다음 회차 안내 문자 요청 — 추천하기(주황)와 반대되는 청록 배경으로 대비 ── */
+.nextsec{background:linear-gradient(135deg,#2F93C7 0%,#1C6B90 55%,#124A66 100%);padding:70px 20px;text-align:center;position:relative;overflow:hidden}
+.nextsec::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 18%,rgba(255,255,255,.17) 0,transparent 45%),radial-gradient(circle at 12% 84%,rgba(255,255,255,.13) 0,transparent 45%);pointer-events:none}
+.nx-kicker{position:relative;display:inline-block;background:#fff;color:#12556F;font-weight:900;font-size:14px;letter-spacing:.02em;padding:10px 22px;border-radius:999px;margin-bottom:20px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.nx-sec-title{position:relative;font-family:'Jua',sans-serif;color:#fff;font-size:32px;line-height:1.45;text-shadow:0 4px 16px rgba(0,0,0,.3)}
+.nx-hl{position:relative;display:inline-block;color:#08384E;padding:0 4px}
+.nx-hl::before{content:"";position:absolute;left:-4px;right:-4px;top:34%;bottom:4%;background:#7BE0FF;transform:rotate(-1.6deg);z-index:-1;border-radius:7px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+@media(max-width:560px){.nx-sec-title{font-size:24px}.nx-kicker{font-size:12.5px;padding:8px 16px}.nextsec{padding:56px 16px}}
+.nextbox{position:relative;margin:30px auto 0;max-width:640px;background:rgba(255,255,255,.97);border-radius:22px;padding:26px 22px 22px;box-shadow:0 16px 38px rgba(0,0,0,.26);text-align:center}
+.nx-title{font-family:'Jua',sans-serif;font-size:23px;color:#12556F;margin:2px 0 10px}
 .nx-desc{font-size:14px;color:var(--ink-soft);line-height:1.85}
 .nx-desc b{color:var(--brown-d)}
-.nx-btn{margin-top:18px;background:var(--brown);color:#fff;border:none;border-radius:999px;padding:15px 30px;font-family:'Jua',sans-serif;font-size:16.5px;cursor:pointer;box-shadow:0 8px 20px rgba(90,62,31,.28);transition:.15s}
-.nx-btn:hover{background:var(--brown-d);transform:translateY(-2px)}
-.nx-list{margin-top:20px;background:var(--sand);border-radius:14px;padding:15px 16px;text-align:left}
-.nx-list-title{font-size:13px;font-weight:900;color:var(--brown-d);margin-bottom:9px;text-align:center}
-.nx-list-title b{color:var(--accent-d)}
+.nx-btn{margin-top:18px;background:#1C6B90;color:#fff;border:none;border-radius:999px;padding:15px 30px;font-family:'Jua',sans-serif;font-size:16.5px;cursor:pointer;box-shadow:0 8px 20px rgba(18,74,102,.32);transition:.15s}
+.nx-btn:hover{background:#124A66;transform:translateY(-2px)}
+.nx-list{margin-top:20px;background:var(--blue-bg);border-radius:14px;padding:15px 16px;text-align:left}
+.nx-list-title{font-size:13px;font-weight:900;color:#12556F;margin-bottom:9px;text-align:center}
+.nx-list-title b{color:#0E7BA8}
 .nx-items{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
-.nx-chip{background:#fff;border:1px solid var(--sand-d);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--brown-d);white-space:nowrap}
+.nx-chip{background:#fff;border:1px solid #C7E4F2;border-radius:999px;padding:6px 13px;font-size:12.5px;color:#12556F;white-space:nowrap}
 .nx-more{align-self:center;font-size:12.5px;color:var(--ink-soft);padding:6px 4px}
 .nx-empty{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:6px 0}
 .nx-note{margin-top:13px;font-size:11.5px;color:var(--ink-soft);line-height:1.7}
@@ -437,6 +443,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .refmodal-form label{display:block;font-size:12.5px;font-weight:700;color:var(--brown-d);margin-bottom:5px}
 .refmodal-form label .opt{color:var(--ink-soft);font-weight:400}
 @media(max-width:480px){.nextbox{padding:22px 14px 18px}.nx-title{font-size:20px}}
+.nextsec .nx-desc b{color:#12556F}
 
 .ref-banner{position:fixed;top:14px;left:50%;transform:translate(-50%,-140%);background:var(--brown-d);color:#fff;font-size:14px;padding:12px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:300;transition:transform .4s ease;max-width:90vw;text-align:center}
 .ref-banner.show{transform:translate(-50%,0)}
@@ -1067,23 +1074,6 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <p class="ref-sub rv">내 추천 링크로 예약이 확정되면, 예약 <b class="ref-sub-hl">1건당 편의점 상품권 2만원</b>을 드려요!</p>
     <button class="refbtn ref-pulse rv" style="margin-top:30px" onclick="openReferModal()">📣 추천하기</button>
 
-    <!-- ── 다음 회차(9/12) 안내 문자 요청 ── -->
-    <div class="nextbox rv" id="nextBox">
-      <p class="nx-badge">📩 이번엔 자리가 없으신가요?</p>
-      <h3 class="nx-title">다음 회차 안내 문자 요청</h3>
-      <p class="nx-desc">
-        이번 회차는 <b>선착순 8팀</b>으로 마감될 수 있어요.<br>
-        <b>2026. 9. 12.(토) 1박 2일</b> 일정으로 다음 회차를 진행하게 되면,<br>
-        미리 남겨주신 번호로 <b>가장 먼저 문자 안내</b>를 드릴게요.
-      </p>
-      <button class="nx-btn" onclick="openNextModal()">📩 다음 회차 안내 문자 요청하기</button>
-      <div class="nx-list" id="nxList">
-        <p class="nx-list-title">이미 신청해 주신 분들 <b id="nxCount">0</b>팀</p>
-        <div id="nxItems"><p class="nx-empty">불러오는 중…</p></div>
-      </div>
-      <p class="nx-note">※ 남겨주신 정보는 다음 회차 안내 문자 발송에만 사용하고, 안내 후 파기합니다.</p>
-    </div>
-
     <div class="ref-rank rv" id="refRankBox">
       <h3 class="ref-rank-title">🏆 추천인 랭킹</h3>
       <div class="ref-rank-tabs">
@@ -1096,6 +1086,28 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         추천으로 예약이 확정되면, 확정 <b>1건당</b> 편의점 상품권 <b>2만원</b>을 드려요.<br>
         두 경우 모두 <b>8월 5일</b>에 문자로 보내드립니다!
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 다음 회차(9/12) 안내 문자 요청 — 추천하기와 반대 색으로 대비 ═══════════ -->
+<section class="sec nextsec" id="next">
+  <div class="inner">
+    <p class="nx-kicker rv">📩 이번엔 자리가 없으신가요?</p>
+    <h2 class="nx-sec-title rv">다음 회차<br><span class="nx-hl">가장 먼저 알려드릴게요</span></h2>
+    <div class="nextbox rv" id="nextBox">
+      <h3 class="nx-title">2026. 9. 12.(토) 1박 2일</h3>
+      <p class="nx-desc">
+        이번 회차는 <b>선착순 8팀</b>으로 마감될 수 있어요.<br>
+        위 일정으로 다음 회차를 진행하게 되면,<br>
+        미리 남겨주신 번호로 <b>가장 먼저 문자 안내</b>를 드릴게요.
+      </p>
+      <button class="nx-btn" onclick="openNextModal()">📩 다음 회차 안내 문자 요청하기</button>
+      <div class="nx-list" id="nxList">
+        <p class="nx-list-title">이미 신청해 주신 분들 <b id="nxCount">0</b>팀</p>
+        <div id="nxItems"><p class="nx-empty">불러오는 중…</p></div>
+      </div>
+      <p class="nx-note">※ 남겨주신 정보는 다음 회차 안내 문자 발송에만 사용하고, 안내 후 파기합니다.</p>
     </div>
   </div>
 </section>
