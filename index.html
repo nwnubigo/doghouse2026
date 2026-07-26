@@ -254,6 +254,16 @@ section[id]{scroll-margin-top:62px}
 .tl .h{font-weight:700;font-size:16px;color:var(--brown-d);margin:2px 0}
 .tl p{font-size:14px;color:var(--ink-soft)}
 .tl .star{color:var(--blue);font-weight:700}
+/* 일정 항목별 장소·주소 */
+.tl .pl{display:block;margin-top:6px;font-size:13px;line-height:1.65;background:var(--sand);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:7px 11px;color:var(--brown-d)}
+.tl .pl b{font-weight:900}
+.tl .pl span{display:block;color:var(--ink-soft);font-size:12.5px}
+/* 무박2일 안내 카드 */
+.day-card.d2{background:var(--accent-bg);border-color:#F2C9B4}
+.day-card.d2 .day-label .d{background:var(--accent-d)}
+.d2-lead{font-size:14.5px;color:var(--brown-d);margin:-8px 0 18px;line-height:1.8}
+.d2-lead b{color:var(--accent-d)}
+.d2-note{margin-top:16px;font-size:13px;color:var(--ink-soft);background:#fff;border:1px dashed #E3B79F;border-radius:12px;padding:12px 15px;line-height:1.8}
 
 /* ---------- 참가 조건 ---------- */
 .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -320,13 +330,14 @@ section[id]{scroll-margin-top:62px}
 .rgroup-head h4{font-family:'Jua',sans-serif;font-size:21px;color:#FFD98A}
 .rgroup-head .rg-sub{font-size:13px;opacity:.9}
 .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.room-grid.one{grid-template-columns:1fr}
+/* 무박2일은 카드가 1개뿐이지만, 다른 숙소 카드와 같은 가로폭(2열 중 1칸)을 유지합니다 */
+.room-grid.one{grid-template-columns:1fr 1fr}
 .rg-addr{font-size:13px;color:#F4E3C8;margin:-8px 0 13px;opacity:.92;text-align:left}
 .rcard .rnote{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:2px}
 .rcard .rnote b{color:var(--brown-d)}
 .rcard.day2 .rname::after{content:"숙박 없음";display:inline-block;vertical-align:3px;margin-left:8px;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:900;color:var(--accent-d);background:var(--accent-bg);border-radius:5px;padding:2px 8px}
 .rcard.soldout.day2 .rname::after{color:#9C8F7D;background:#E4DCCE}
-@media(max-width:640px){.room-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.room-grid,.room-grid.one{grid-template-columns:1fr}}
 .rcard{background:#fff;color:var(--ink);border-radius:16px;padding:18px 18px 16px;text-align:left;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.22);display:flex;flex-direction:column;gap:6px}
 .rcard .rname{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
 .rcard .rorig-line{font-size:12.5px;color:#9C8F7D;line-height:1}
@@ -386,6 +397,30 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .ref-rank-empty{font-size:13px;color:var(--ink-soft);text-align:center;padding:20px 0}
 .ref-rank-note{margin-top:16px;background:var(--accent-bg);border:1px dashed var(--accent);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--accent-d);line-height:1.7;text-align:center}
 @media(max-width:480px){.ref-rank{padding:20px 12px}.ref-rank-table{font-size:11px}}
+
+/* ── 다음 회차 안내 문자 요청 ── */
+.nextbox{position:relative;margin:34px auto 0;max-width:640px;background:rgba(255,255,255,.97);border-radius:22px;padding:26px 22px 22px;box-shadow:0 14px 34px rgba(0,0,0,.2);text-align:center}
+.nx-badge{display:inline-block;background:var(--accent-bg);color:var(--accent-d);font-size:12.5px;font-weight:900;border-radius:999px;padding:6px 15px}
+.nx-title{font-family:'Jua',sans-serif;font-size:23px;color:var(--brown-d);margin:12px 0 10px}
+.nx-desc{font-size:14px;color:var(--ink-soft);line-height:1.85}
+.nx-desc b{color:var(--brown-d)}
+.nx-btn{margin-top:18px;background:var(--brown);color:#fff;border:none;border-radius:999px;padding:15px 30px;font-family:'Jua',sans-serif;font-size:16.5px;cursor:pointer;box-shadow:0 8px 20px rgba(90,62,31,.28);transition:.15s}
+.nx-btn:hover{background:var(--brown-d);transform:translateY(-2px)}
+.nx-list{margin-top:20px;background:var(--sand);border-radius:14px;padding:15px 16px;text-align:left}
+.nx-list-title{font-size:13px;font-weight:900;color:var(--brown-d);margin-bottom:9px;text-align:center}
+.nx-list-title b{color:var(--accent-d)}
+.nx-items{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.nx-chip{background:#fff;border:1px solid var(--sand-d);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--brown-d);white-space:nowrap}
+.nx-more{align-self:center;font-size:12.5px;color:var(--ink-soft);padding:6px 4px}
+.nx-empty{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:6px 0}
+.nx-note{margin-top:13px;font-size:11.5px;color:var(--ink-soft);line-height:1.7}
+.refmodal-form textarea{border:1px solid var(--sand-d);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;width:100%;resize:vertical;min-height:74px}
+.refmodal-form textarea:focus{outline:none;border-color:var(--accent)}
+.nx-row{display:flex;gap:10px}
+.nx-row>label{flex:1}
+.refmodal-form label{display:block;font-size:12.5px;font-weight:700;color:var(--brown-d);margin-bottom:5px}
+.refmodal-form label .opt{color:var(--ink-soft);font-weight:400}
+@media(max-width:480px){.nextbox{padding:22px 14px 18px}.nx-title{font-size:20px}}
 
 .ref-banner{position:fixed;top:14px;left:50%;transform:translate(-50%,-140%);background:var(--brown-d);color:#fff;font-size:14px;padding:12px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:300;transition:transform .4s ease;max-width:90vw;text-align:center}
 .ref-banner.show{transform:translate(-50%,0)}
@@ -687,26 +722,55 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <div class="sec-head rv">
       <span class="sec-num">SCHEDULE</span>
       <h2 class="sec-title">1박 2일 세부 일정</h2>
+      <p class="sec-sub">각 순서가 진행되는 장소와 주소를 함께 안내해 드려요. 숙박 없이 참여하시는 <b>무박 2일</b> 일정은 아래에 따로 정리했습니다.</p>
     </div>
 
     <div class="day-card rv">
       <div class="day-label"><span class="d">DAY 1</span><span>7. 31. (금)</span></div>
       <ul class="tl">
-        <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 접수</p><p>참가팀 도착 및 접수 (체험 공간)</p></li>
-        <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정 (마당 그늘막 · 대형 선풍기 운영)</p></li>
-        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램 (3개 섹션 동시 운영)</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램 — 가족 내 역할 분담<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span></p></li>
-        <li><span class="t">18:00 – 20:00</span><p class="h">팜파티</p><p>들꽃다물농장 흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p></li>
-        <li><span class="t">20:00 ~</span><p class="h">숙박</p><p>반려견 동반 민박 · 펜션 이동 및 휴식</p></li>
+        <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 접수</p><p>참가팀 도착 및 접수 (체험 공간)</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정 (마당 그늘막 · 대형 선풍기 운영)</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램 (3개 섹션 동시 운영)</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램 — 가족 내 역할 분담<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span></p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">18:00 – 20:00</span><p class="h">팜파티</p><p>흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p>
+          <span class="pl">📍 <b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></span></li>
+        <li><span class="t">20:00 ~</span><p class="h">숙박</p><p>반려견 동반 민박 · 펜션으로 이동 후 휴식 (예약하신 숙소로 이동)</p>
+          <span class="pl">📍 <b>지리산 순이네흙집 민박</b><span>전북 남원시 산내면 중황길 173</span></span>
+          <span class="pl">📍 <b>지리산 별헤는밤 펜션</b><span>전북 남원시 산내면 산내달궁길 42</span></span></li>
       </ul>
     </div>
 
     <div class="day-card rv">
       <div class="day-label"><span class="d g">DAY 2</span><span>8. 1. (토)</span></div>
       <ul class="tl">
-        <li><span class="t">~ 09:30</span><p class="h">조식 (선택)</p><p>숙소 자체 조식 또는 인근 식당 (숙소별 상이 — 신청 시 안내) ※ 식당은 7kg 미만 소형견 동반 가능</p></li>
-        <li><span class="t">10:00 – 12:00</span><p class="h">마무리 체험</p><p>도그하우스 꾸미기 · 마감 작업, 팀별 기념 촬영</p></li>
-        <li><span class="t">12:00 – 13:00</span><p class="h">마무리 · 해산</p><p>만족도 조사 및 해산</p></li>
+        <li><span class="t">~ 09:30</span><p class="h">조식 (선택)</p><p>숙소 자체 조식 또는 인근 식당 (숙소별 상이 — 신청 시 안내) ※ 식당은 7kg 미만 소형견 동반 가능</p>
+          <span class="pl">📍 <b>예약하신 숙소</b><span>순이네흙집(산내면 중황길 173) · 별헤는밤 펜션(산내면 산내달궁길 42)</span></span></li>
+        <li><span class="t">10:00 – 12:00</span><p class="h">마무리 체험</p><p>도그하우스 꾸미기 · 마감 작업, 팀별 기념 촬영</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">12:00 – 13:00</span><p class="h">마무리 · 해산</p><p>만족도 조사 및 해산</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
       </ul>
+    </div>
+
+    <!-- ── 무박 2일 참가자 일정 ── -->
+    <div class="day-card d2 rv">
+      <div class="day-label"><span class="d">무박 2일</span><span>7. 31. (금) · 당일 귀가</span></div>
+      <p class="d2-lead">숙박 없이 <b>1일차 프로그램만</b> 참여하고 팜파티 석식 후 귀가하시는 일정이에요. 모든 순서는 <b>옻칠목공체험관광협동조합</b>에서 시작합니다.</p>
+      <ul class="tl">
+        <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 접수</p><p>참가팀 도착 및 접수 (체험 공간)</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span><br>※ 무박 2일은 <b>당일 완성</b>을 목표로 진행하며, 완성한 도그하우스는 그날 가져가실 수 있어요.</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li><span class="t">18:00 – 20:00</span><p class="h">팜파티 석식</p><p>흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p>
+          <span class="pl">📍 <b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></span></li>
+        <li><span class="t">20:00 ~</span><p class="h">마무리 · 귀가</p><p>기념 촬영 및 만족도 조사 후 해산 (숙박 · 조식 · 2일차 마무리 체험은 포함되지 않습니다)</p>
+          <span class="pl">📍 <b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></span></li>
+      </ul>
+      <p class="d2-note">※ 무박 2일도 숙박 팀과 함께 <b>총 8팀 정원</b>을 나눠 씁니다. 야간 운전이 부담되시면 1박 2일 일정을 권해 드려요.<br>※ 참가비에 숙박비 · 조식이 포함되지 않아 1박 2일 상품보다 저렴하게 책정됩니다.</p>
     </div>
   </div>
 </section>
@@ -827,11 +891,10 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     </div>
     <table class="refund-table rv">
       <tr><th>행사 7일 전까지</th><td><b>참가비 전액 환불</b></td></tr>
-      <tr><th>행사 3~6일 전</th><td>참가비의 <b>50% 환불</b></td></tr>
+      <tr><th>행사 3일 전</th><td>참가비의 <b>50% 환불</b></td></tr>
       <tr><th>행사 2일 전 ~ 당일</th><td>환불 불가</td></tr>
       <tr><th>주최 측 사유 취소</th><td>천재지변 · 최소 인원 미달 등으로 행사가 취소될 경우 <b>전액 환불</b></td></tr>
-      <!-- TODO: 반려견 사유 환불 기준 확정 시 교체 -->
-      <tr><th>반려견 사유 취소</th><td>반려견의 질병 · 발정 등 사유 발생 시 진료 확인서 제출 — <span class="tbd">환불 기준 추후 안내</span></td></tr>
+      <tr><th>반려견 사유 취소</th><td>반려견의 질병 · 발정 등 사유 발생 시 진료 확인서 제출</td></tr>
     </table>
   </div>
 </section>
@@ -857,7 +920,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <p style="font-size:14px;opacity:.9;margin-top:6px">원하는 객실의 [예약하기]를 누르면 네이버 예약으로 이동합니다 · 팀당 1객실<br>모든 가격은 지역단위 농촌관광 남원누비고 사업 지원으로 <b style="color:#FFD98A">정가 대비 30% 할인</b>된 가격입니다</p>
 
       <div class="rgroup">
-        <div class="rgroup-head"><h4>지리산 순이네흙집 민박</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
+        <div class="rgroup-head"><h4>지리산 순이네흙집 민박 1박 2일</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
         <p class="rg-addr">📍 주소 : 전북 남원시 산내면 중황길 173</p>
         <div class="room-grid">
           <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
@@ -901,7 +964,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       </div>
 
       <div class="rgroup">
-        <div class="rgroup-head"><h4>지리산 별헤는밤 펜션</h4><span class="rg-sub">원목 인테리어 · 인근 식당 조식(선택) · 4팀</span></div>
+        <div class="rgroup-head"><h4>지리산 별헤는밤 펜션 1박 2일</h4><span class="rg-sub">원목 인테리어 · 인근 식당 조식(선택) · 4팀</span></div>
         <p class="rg-addr">📍 주소 : 전북 남원시 산내면 산내달궁길 42</p>
         <div class="room-grid">
           <!-- TODO: 별헤는밤 펜션 네이버 예약 URL 확정 시 아래 4개 링크 교체 -->
@@ -954,7 +1017,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="st-chip">예약 가능</span>
             <span class="rname">무박2일 체험</span>
             <span class="rprice">가격 준비 중</span>
-            <span class="rnote">1일차 도그하우스 만들기 · 반려견 케어 체험 · 팜파티 석식까지 참여하고 <b>숙박 없이</b> 귀가하는 일정입니다. 숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 씁니다.</span>
+            <span class="rnote">1일차 체험 · 팜파티 석식까지 참여하고 <b>숙박 없이</b> 귀가합니다.<br>숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 써요.</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
         </div>
@@ -980,6 +1043,23 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <h2 class="ref-title rv">이런 좋은 프로그램은<br><span class="ref-hl">알려 보시개~</span> <span class="ref-emoji">🐾</span></h2>
     <p class="ref-sub rv">내 추천 링크로 예약이 확정되면, 예약 <b class="ref-sub-hl">1건당 편의점 상품권 2만원</b>을 드려요!</p>
     <button class="refbtn ref-pulse rv" style="margin-top:30px" onclick="openReferModal()">📣 추천하기</button>
+
+    <!-- ── 다음 회차(9/12) 안내 문자 요청 ── -->
+    <div class="nextbox rv" id="nextBox">
+      <p class="nx-badge">📩 이번엔 자리가 없으신가요?</p>
+      <h3 class="nx-title">다음 회차 안내 문자 요청</h3>
+      <p class="nx-desc">
+        이번 회차는 <b>선착순 8팀</b>으로 마감될 수 있어요.<br>
+        <b>2026. 9. 12.(토) 1박 2일</b> 일정으로 다음 회차를 진행하게 되면,<br>
+        미리 남겨주신 번호로 <b>가장 먼저 문자 안내</b>를 드릴게요.
+      </p>
+      <button class="nx-btn" onclick="openNextModal()">📩 다음 회차 안내 문자 요청하기</button>
+      <div class="nx-list" id="nxList">
+        <p class="nx-list-title">이미 신청해 주신 분들 <b id="nxCount">0</b>팀</p>
+        <div id="nxItems"><p class="nx-empty">불러오는 중…</p></div>
+      </div>
+      <p class="nx-note">※ 남겨주신 정보는 다음 회차 안내 문자 발송에만 사용하고, 안내 후 파기합니다.</p>
+    </div>
 
     <div class="ref-rank rv" id="refRankBox">
       <h3 class="ref-rank-title">🏆 추천인 랭킹</h3>
@@ -1034,6 +1114,28 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       <p class="refresult-clicks"><b id="refClicksOut">0</b>명이 이 링크로 들어왔어요</p>
       <p class="refresult-note">🎁 이 링크로 오신 분이 예약을 완료하시면 예약 1건당 편의점 상품권 2만원을 드려요! 참가 신청서(구글폼)에 추천코드가 자동으로 채워집니다.</p>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════ 다음 회차 안내 문자 요청 모달 ═══════════ -->
+<div class="refmodal" id="nextModal" onclick="if(event.target===this)closeNextModal()">
+  <div class="refmodal-card">
+    <button class="refmodal-close" onclick="closeNextModal()" aria-label="닫기">✕</button>
+    <h3>📩 다음 회차 안내 문자 요청</h3>
+    <p class="refmodal-desc"><b>2026. 9. 12.(토) 1박 2일</b> 일정으로 다음 회차가 열리면 문자로 가장 먼저 안내해 드릴게요.<br>아래 정보를 남겨 주세요.</p>
+    <div class="refmodal-form">
+      <label>이름<input type="text" id="nxName" placeholder="예: 조수영" maxlength="20" autocomplete="name"></label>
+      <label>핸드폰번호<input type="tel" id="nxPhone" placeholder="010-1234-5678" maxlength="13" autocomplete="tel"></label>
+      <label>거주지역<input type="text" id="nxArea" placeholder="예: 남원시 / 전주시 / 서울 강남구" maxlength="40"></label>
+      <div class="nx-row">
+        <label>참석인원<input type="number" id="nxPeople" placeholder="3" min="1" max="20" inputmode="numeric"></label>
+        <label>동반 반려견 수<input type="number" id="nxDogs" placeholder="1" min="0" max="20" inputmode="numeric"></label>
+      </div>
+      <label>기타사항 <span class="opt">(선택)</span><textarea id="nxMemo" placeholder="희망하시는 점, 반려견 특이사항 등을 자유롭게 적어 주세요" maxlength="300"></textarea></label>
+      <button class="refbtn" onclick="submitNext()">📩 안내 문자 요청하기</button>
+    </div>
+    <p class="refmodal-msg" id="nxMsg"></p>
+    <p class="refresult-note">※ 남겨주신 정보는 다음 회차 안내 문자 발송에만 사용하고, 안내 후 파기합니다. 공개 목록에는 <b>조XX, 남원시, 3명, 1마리</b>처럼 이름을 가려서 표시돼요.</p>
   </div>
 </div>
 
@@ -1479,6 +1581,107 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       });
   }
   loadRefRank();
+
+  /* ═══════════ 다음 회차(9/12) 안내 문자 요청 ═══════════
+   * 이번 회차에 함께하지 못하신 분들의 연락처를 미리 받아 두었다가,
+   * 다음 회차 일정이 확정되면 문자로 가장 먼저 안내해 드리는 기능입니다.
+   * 공개 목록에는 「조XX, 남원시, 3명, 1마리」처럼 이름을 가려서만 표시합니다. */
+  window.openNextModal = function(){
+    document.getElementById('nextModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeNextModal = function(){
+    document.getElementById('nextModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  const nxPhoneInput = document.getElementById('nxPhone');
+  if(nxPhoneInput){
+    nxPhoneInput.addEventListener('input', () => {
+      let v = nxPhoneInput.value.replace(/[^0-9]/g,'').slice(0,11);
+      if(v.length > 7) v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+      else if(v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+      nxPhoneInput.value = v;
+    });
+  }
+
+  const NX_SHOW_MAX = 12;   // 공개 목록에 한 번에 보여줄 최대 인원
+
+  function renderNextList(d){
+    const items = document.getElementById('nxItems');
+    const countEl = document.getElementById('nxCount');
+    const box = document.getElementById('nxList');
+    if(!items) return;
+    if(!d || !d.ok){
+      // 앱스크립트가 아직 최신 버전으로 배포되지 않은 경우 — 조용히 목록만 숨깁니다.
+      if(box) box.style.display = 'none';
+      return;
+    }
+    const list = d.list || [];
+    if(box) box.style.display = 'block';
+    if(countEl) countEl.textContent = list.length;
+    if(!list.length){
+      items.innerHTML = '<p class="nx-empty">아직 신청하신 분이 없어요. 첫 번째로 남겨보세요! 🐾</p>';
+      return;
+    }
+    const esc = s => String(s == null ? '' : s).replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+    const shown = list.slice(0, NX_SHOW_MAX);
+    let html = '<div class="nx-items">' +
+      shown.map(x => '<span class="nx-chip">' + esc(x.text) + '</span>').join('');
+    if(list.length > shown.length){
+      html += '<span class="nx-more">외 ' + (list.length - shown.length) + '팀</span>';
+    }
+    items.innerHTML = html + '</div>';
+  }
+
+  function loadNextList(){
+    fetch(REF_API_URL + '?action=waitPublic&t=' + Date.now())
+      .then(r => r.json())
+      .then(renderNextList)
+      .catch(() => renderNextList(null));
+  }
+
+  let nxBusy = false;
+  window.submitNext = function(){
+    const msg = document.getElementById('nxMsg');
+    const name = document.getElementById('nxName').value.trim();
+    const phone = document.getElementById('nxPhone').value.trim();
+    const area = document.getElementById('nxArea').value.trim();
+    const people = document.getElementById('nxPeople').value.trim();
+    const dogs = document.getElementById('nxDogs').value.trim();
+    const memo = document.getElementById('nxMemo').value.trim();
+    if(!name){ msg.textContent = '이름을 입력해 주세요.'; return; }
+    if(!/^01[0-9]-?\d{3,4}-?\d{4}$/.test(phone)){ msg.textContent = '휴대폰 번호 형식을 확인해 주세요. (예: 010-1234-5678)'; return; }
+    if(!area){ msg.textContent = '거주지역을 입력해 주세요. (예: 남원시)'; return; }
+    if(!people || Number(people) < 1){ msg.textContent = '참석인원을 입력해 주세요.'; return; }
+    if(nxBusy) return;
+    nxBusy = true;
+    msg.textContent = '요청을 보내는 중...';
+    const q = '?action=waitAdd'
+      + '&name='   + encodeURIComponent(name)
+      + '&phone='  + encodeURIComponent(phone)
+      + '&area='   + encodeURIComponent(area)
+      + '&people=' + encodeURIComponent(people)
+      + '&dogs='   + encodeURIComponent(dogs || '0')
+      + '&memo='   + encodeURIComponent(memo)
+      + '&t=' + Date.now();
+    fetch(REF_API_URL + q)
+      .then(r => r.json())
+      .then(d => {
+        nxBusy = false;
+        if(!d || !d.ok){
+          msg.textContent = (d && d.error) || '요청에 실패했습니다. 앱스크립트가 아직 최신 버전으로 배포되지 않았을 수 있어요. 잠시 후 다시 시도해 주세요.';
+          return;
+        }
+        msg.textContent = '✅ ' + (d.message || '접수되었습니다!');
+        document.getElementById('nxMemo').value = '';
+        loadNextList();
+        setTimeout(() => { window.closeNextModal(); msg.textContent = ''; }, 2200);
+      })
+      .catch(() => { nxBusy = false; msg.textContent = '네트워크 오류입니다. 잠시 후 다시 시도해 주세요.'; });
+  };
+
+  loadNextList();
 })();
 </script>
 </body>

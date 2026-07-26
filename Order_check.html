@@ -116,6 +116,37 @@ header p{font-size:12.5px;opacity:.85}
 .day-list .del{border:1px solid var(--line);background:#fff;color:var(--red);border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
 .day-list .del.confirm{background:var(--red);color:#fff;border-color:var(--red)}
 .day-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:16px 0}
+/* ── 다음 회차 안내 문자 요청 ── */
+.wait-head{font-family:'Jua',sans-serif;font-size:17px;color:var(--brown-d);margin-bottom:3px;font-weight:400}
+.wait-sub{font-size:12px;color:var(--soft);margin-bottom:12px;line-height:1.6}
+.wait-perm{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;margin-bottom:12px}
+.wait-perm.ro{background:var(--sand);color:var(--soft)}
+.wait-perm.rw{background:#E7F3E9;color:#2E7D46}
+.wait-cnt{font-size:11.5px;color:var(--soft);text-align:right;margin-bottom:6px}
+.wait-list{list-style:none}
+.wait-list li{border-bottom:1px dashed var(--line);padding:12px 2px}
+.wait-list li:last-child{border-bottom:none}
+.wait-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.wait-top .idx{flex:0 0 20px;font-size:11.5px;color:var(--soft);font-weight:900}
+.wait-top .nm{font-weight:900;font-size:15px;color:var(--brown-d)}
+.wait-top .ph{font-size:13px;color:var(--ink)}
+.wait-top .pub{font-size:11px;color:var(--soft);background:var(--sand);border-radius:999px;padding:3px 9px}
+.wait-meta{margin:6px 0 0 28px;font-size:12.5px;color:var(--soft);line-height:1.7}
+.wait-meta b{color:var(--brown-d);font-weight:700}
+.wait-memo{margin:6px 0 0 28px;font-size:12.5px;color:var(--ink);background:var(--sand);border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap}
+.wait-acts{margin:9px 0 0 28px;display:flex;gap:6px;flex-wrap:wrap}
+.wait-acts button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 11px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.wait-acts .ed{color:var(--brown-d)}
+.wait-acts .del{color:var(--red)}
+.wait-acts .del.confirm{background:var(--red);color:#fff;border-color:var(--red)}
+.wait-edit{margin:9px 0 0 28px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.wait-edit label{font-size:11px;color:var(--soft);font-weight:700}
+.wait-edit input,.wait-edit textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13.5px;font-family:inherit;margin-top:3px}
+.wait-edit input:focus,.wait-edit textarea:focus{outline:none;border-color:var(--brown)}
+.wait-edit .full{grid-column:1/-1}
+.wait-edit textarea{min-height:58px;resize:vertical}
+.wait-empty{font-size:12.5px;color:var(--soft);text-align:center;padding:18px 0}
+@media(max-width:420px){.wait-edit{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -147,10 +178,13 @@ header p{font-size:12.5px;opacity:.85}
   <div class="role-bar" id="roleBar" style="display:none"><span id="roleName"></span><button onclick="logout()">로그아웃</button></div>
   <div class="msg" id="msg"></div>
 
-  <!-- ═══ 관리자 탭 (통합 관리자 전용 — 객실 관리 / 추천인 코드 현황) ═══ -->
+  <!-- ═══ 관리자 탭 ═══
+       객실 관리 / 다음회차 안내 문자 요청 : 모든 관리자에게 보입니다
+       추천인 코드 현황                    : 통합 관리자에게만 보입니다 -->
   <div class="tabbar" id="tabBar" style="display:none">
     <button class="tabbtn active" id="tabBtnRooms" onclick="showAdminTab('rooms')">🏠 객실예약상태 관리</button>
-    <button class="tabbtn" id="tabBtnRef" onclick="showAdminTab('ref')">🎁 추천인 코드 현황</button>
+    <button class="tabbtn" id="tabBtnWait" onclick="showAdminTab('wait')">📩 다음회차 안내 문자 요청</button>
+    <button class="tabbtn" id="tabBtnRef" style="display:none" onclick="showAdminTab('ref')">🎁 추천인 코드 현황</button>
   </div>
 
   <div id="roomsPane">
@@ -209,7 +243,21 @@ header p{font-size:12.5px;opacity:.85}
     <div id="refListWrap"><p class="ref-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에 저장됩니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <!-- ═══ 다음 회차 안내 문자 요청 명단 ═══
+       조회 : 모든 관리자 / 수정·삭제 : 통합 관리자만 (상위 키 보유 시에만 버튼이 나타납니다) -->
+  <div class="card" id="waitCard" style="display:none">
+    <h2 class="wait-head">📩 다음회차 안내 문자 요청</h2>
+    <p class="wait-sub">이번 회차에 함께하지 못해 <b>2026. 9. 12.(토) 1박 2일</b> 일정 안내를 미리 요청하신 분들입니다.<br>상세페이지에는 「조XX, 남원시, 3명, 1마리」처럼 이름을 가려서만 공개됩니다.</p>
+    <span class="wait-perm ro" id="waitPerm">🔒 조회 전용</span>
+    <div class="bar">
+      <button class="btn re" onclick="loadWaitList()">🔄 새로고침</button>
+      <a class="btn lk" href="https://docs.google.com/spreadsheets/d/1NJdmg1Ce1CHmpH9JxG6VRBR3kqBOW0NR4UZ-NEAyFZE/edit" target="_blank" rel="noopener">📊 다음회차요청 시트</a>
+    </div>
+    <p class="wait-cnt" id="waitCnt"></p>
+    <div id="waitListWrap"><p class="wait-empty">불러오는 중…</p></div>
+  </div>
+
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에, 다음회차 안내 문자 요청은 「다음회차요청」 탭에 저장됩니다.<br>「다음회차 안내 문자 요청」은 모든 관리자가 볼 수 있지만, 내용 수정·삭제는 통합 관리자만 할 수 있습니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
@@ -237,12 +285,14 @@ const conf = {
  * 별헤는밤 전용 / 순이네흙집 전용 / 옻칠목공체험관광협동조합 / 통합 관리자 4종
  * encKey   = 해당 비밀번호로 암호화된 관리키
  * lodges   = 객실 상태를 변경할 수 있는 숙소 (빈 배열이면 객실은 조회만 가능)
- * dayAdmin = 무박2일 체험자 명단을 등록·삭제할 수 있는 권한 */
+ * dayAdmin = 무박2일 체험자 명단을 등록·삭제할 수 있는 권한
+ * encSuper = 「다음회차 안내 문자 요청」의 수정·삭제에 필요한 상위 키(암호화).
+ *            통합 관리자 비밀번호로만 풀리므로, 다른 관리자는 조회만 할 수 있습니다. */
 const AUTH_ROLES = {
   '0992c291bc06df951a966bfc9a37cfb711e525f873874e4d946dffed1b34f6de': { name:'별헤는밤 펜션 관리자',  lodges:['지리산 별헤는밤 펜션'], encKey:'RB9N2vCfOF0navrHxyj+QGoEbxpfZEj11c7bH7iaSw4sUHkVoU8=' },
   '4bfd76c762250b2dc3a0d4fff2bdead6d935e87e7c0211994150c35a09724e67': { name:'순이네흙집 관리자',     lodges:['지리산 순이네흙집 민박'], encKey:'GAO75l8Wucztx1hjmdadrWgx/JWRKGm8OyboChC0l0P122ysOJs=' },
   '7a8c35db4e0bc38feb2d256a38954959f4d57a212ddca9892cda32d474b8d033': { name:'옻칠목공체험관광협동조합', lodges:[], encKey:'1udiP7TMqpNNd7X8R7UkBYC+sQil+5HBdwqdAMuGHEXptLgUP6k=', dayAdmin:true },
-  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', refAdmin:true, dayAdmin:true }
+  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', encSuper:'VEJF7HIEIr/HFqvMxQJei0kBTz4aozqdvZ+aF7vxEUKC8CnIo+rMmSzOGno=', refAdmin:true, dayAdmin:true }
 };
 let ROLE = null;
 
@@ -275,6 +325,13 @@ async function checkPw(){
       const adminKey = await decryptAdminKey(pw, role.encKey);
       sessionStorage.setItem('nubigo_admin_key', adminKey);
     }catch(e){/* 복호화 실패 시 조회 전용으로 동작 */}
+    /* 상위 키(수정·삭제 권한)는 통합 관리자 비밀번호로만 복호화됩니다 */
+    sessionStorage.removeItem('nubigo_super_key');
+    if(role.encSuper){
+      try{
+        sessionStorage.setItem('nubigo_super_key', await decryptAdminKey(pw, role.encSuper));
+      }catch(e){/* 실패 시 수정·삭제 버튼이 나타나지 않습니다 */}
+    }
     sessionStorage.setItem('nubigo_role_hash', h);
     enter(role);
   }else{
@@ -290,27 +347,32 @@ function enter(role){
   $('lock').style.display = 'none';
   $('roleBar').style.display = 'flex';
   $('roleName').textContent = '🔑 ' + role.name;
+  /* 탭 바는 모든 관리자에게 보이고, 추천인 탭만 통합 관리자에게 추가로 열립니다 */
+  $('tabBar').style.display = 'flex';
   if(role.refAdmin){
-    $('tabBar').style.display = 'flex';
-    showAdminTab('rooms');
+    $('tabBtnRef').style.display = 'block';
     loadReferralList();
   }
+  showAdminTab('rooms');
   $('sumCard').style.display = 'block';
   if(role.dayAdmin) $('dayCard').style.display = 'block';
   loadStatus();
   loadDayList();
+  loadWaitList();
 }
 
 function showAdminTab(tab){
-  const isRef = tab === 'ref';
-  $('roomsPane').style.display = isRef ? 'none' : 'block';
-  $('refAdminCard').style.display = isRef ? 'block' : 'none';
-  $('tabBtnRooms').classList.toggle('active', !isRef);
-  $('tabBtnRef').classList.toggle('active', isRef);
+  $('roomsPane').style.display    = tab === 'rooms' ? 'block' : 'none';
+  $('refAdminCard').style.display = tab === 'ref'   ? 'block' : 'none';
+  $('waitCard').style.display     = tab === 'wait'  ? 'block' : 'none';
+  $('tabBtnRooms').classList.toggle('active', tab === 'rooms');
+  $('tabBtnRef').classList.toggle('active',   tab === 'ref');
+  $('tabBtnWait').classList.toggle('active',  tab === 'wait');
 }
 function logout(){
   sessionStorage.removeItem('nubigo_role_hash');
   sessionStorage.removeItem('nubigo_admin_key');
+  sessionStorage.removeItem('nubigo_super_key');
   location.reload();
 }
 const canEdit = lodgeName => !!conf.url && !!ROLE && ROLE.lodges.includes(lodgeName);
@@ -555,10 +617,191 @@ async function delDayGuest(id, btnEl){
   updateSummary();
 }
 
+/* ═══ 다음 회차 안내 문자 요청 명단 ═══
+ * 조회      : 관리키(ADMIN_KEY)만 있으면 모든 관리자가 가능합니다.
+ * 수정·삭제 : 통합 관리자 비밀번호로만 풀리는 상위 키(SUPER_KEY)가 있어야 합니다.
+ *             (상위 키가 없으면 버튼 자체가 그려지지 않고, 서버에서도 거부합니다) */
+let WAIT_LIST = [];
+let WAIT_EDIT_ID = null;   // 지금 수정 중인 행의 ID
+const superKey = () => sessionStorage.getItem('nubigo_super_key') || '';
+const canEditWait = () => !!superKey();
+
+async function loadWaitList(){
+  const wrap = $('waitListWrap');
+  const perm = $('waitPerm');
+  if(perm){
+    perm.className = 'wait-perm ' + (canEditWait() ? 'rw' : 'ro');
+    perm.textContent = canEditWait()
+      ? '✏️ 통합 관리자 — 조회 · 수정 · 삭제 가능'
+      : '🔒 조회 전용 — 수정·삭제는 통합 관리자만 가능합니다';
+  }
+  if(!conf.url || !conf.key){
+    if(wrap) wrap.innerHTML = '<p class="wait-empty">API 연결 또는 관리키가 필요합니다.</p>';
+    return;
+  }
+  try{
+    const url = conf.url + '?action=waitList&key=' + encodeURIComponent(conf.key) + '&t=' + Date.now();
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      WAIT_LIST = data.list || [];
+    }else{
+      WAIT_LIST = [];
+      if(wrap) wrap.innerHTML = '<p class="wait-empty">불러오기 실패: ' + esc(data.error || '알 수 없는 오류')
+        + '<br>(운영자: 예약상태API가 최신 코드로 재배포되었는지 확인해 주세요)</p>';
+      $('waitCnt').textContent = '';
+      return;
+    }
+  }catch(e){
+    WAIT_LIST = [];
+    if(wrap) wrap.innerHTML = '<p class="wait-empty">불러오기 실패: API에 연결할 수 없습니다.</p>';
+    return;
+  }
+  renderWaitList();
+}
+
+/* 공개 표시 형식과 동일하게 이름을 가립니다 (조수영 → 조XX) */
+function maskNameX(name){
+  const n = String(name || '').trim();
+  if(n.length <= 1) return n;
+  return n.charAt(0) + 'X'.repeat(n.length - 1);
+}
+
+function renderWaitList(){
+  const wrap = $('waitListWrap');
+  if(!wrap) return;
+  const editable = canEditWait();
+  $('waitCnt').textContent = WAIT_LIST.length ? `요청 ${WAIT_LIST.length}팀` : '';
+  if(!WAIT_LIST.length){
+    wrap.innerHTML = '<p class="wait-empty">아직 다음 회차 안내를 요청하신 분이 없습니다.</p>';
+    return;
+  }
+  wrap.innerHTML = '<ul class="wait-list">' + WAIT_LIST.map((w, i) => {
+    if(w.id && w.id === WAIT_EDIT_ID) return waitEditRow(w, i);
+    let when = '';
+    if(w.created){ const d = new Date(w.created); if(!isNaN(d)) when = (d.getMonth()+1) + '/' + d.getDate(); }
+    const pub = [maskNameX(w.name), w.area, (w.people || 0) + '명', (w.dogs || 0) + '마리']
+                  .filter(Boolean).join(', ');
+    const meta = [
+      w.area ? '거주지역 <b>' + esc(w.area) + '</b>' : '',
+      '참석 <b>' + esc(w.people || 0) + '명</b>',
+      '반려견 <b>' + esc(w.dogs || 0) + '마리</b>',
+      when ? '신청 ' + when : ''
+    ].filter(Boolean).join(' · ');
+    return `<li>
+      <div class="wait-top">
+        <span class="idx">${i+1}</span>
+        <span class="nm">${esc(w.name)}</span>
+        <span class="ph">${esc(w.phone)}</span>
+        <span class="pub">공개표시 : ${esc(pub)}</span>
+      </div>
+      <p class="wait-meta">${meta}</p>
+      ${w.memo ? `<p class="wait-memo">${esc(w.memo)}</p>` : ''}
+      ${editable ? `<div class="wait-acts">
+        <button type="button" class="ed" onclick="editWaitRow('${esc(w.id)}')">✏️ 수정</button>
+        <button type="button" class="del" onclick="delWaitRow('${esc(w.id)}', this)">삭제</button>
+      </div>` : ''}
+    </li>`;
+  }).join('') + '</ul>';
+}
+
+function waitEditRow(w, i){
+  return `<li>
+    <div class="wait-top"><span class="idx">${i+1}</span><span class="nm">✏️ 수정 중</span></div>
+    <div class="wait-edit">
+      <label>이름<input type="text" id="weName" value="${esc(w.name)}" maxlength="20"></label>
+      <label>핸드폰번호<input type="tel" id="wePhone" value="${esc(w.phone)}" maxlength="13"></label>
+      <label>거주지역<input type="text" id="weArea" value="${esc(w.area)}" maxlength="40"></label>
+      <label>참석인원<input type="number" id="wePeople" value="${esc(w.people)}" min="0" max="99"></label>
+      <label>동반 반려견 수<input type="number" id="weDogs" value="${esc(w.dogs)}" min="0" max="99"></label>
+      <label>안내 발송 여부<input type="text" id="weSent" value="${esc(w.sent)}" maxlength="20" placeholder="예: 발송완료"></label>
+      <label class="full">기타사항<textarea id="weMemo" maxlength="300">${esc(w.memo)}</textarea></label>
+    </div>
+    <div class="wait-acts">
+      <button type="button" class="ed" id="weSaveBtn" onclick="saveWaitRow('${esc(w.id)}')">💾 저장</button>
+      <button type="button" onclick="cancelWaitEdit()">취소</button>
+    </div>
+  </li>`;
+}
+
+function editWaitRow(id){
+  if(!canEditWait()){ showMsg('수정 권한이 없습니다 — 통합 관리자로 로그인해 주세요', false); return; }
+  WAIT_EDIT_ID = id;
+  renderWaitList();
+}
+function cancelWaitEdit(){
+  WAIT_EDIT_ID = null;
+  renderWaitList();
+}
+
+async function saveWaitRow(id){
+  if(!canEditWait()){ showMsg('수정 권한이 없습니다 — 통합 관리자로 로그인해 주세요', false); return; }
+  const v = el => { const n = $(el); return n ? n.value.trim() : ''; };
+  const name = v('weName');
+  if(!name){ showMsg('이름을 입력해 주세요', false); return; }
+  const btn = $('weSaveBtn');
+  if(btn){ btn.disabled = true; btn.textContent = '저장 중…'; }
+  try{
+    const url = conf.url + '?action=waitUpdate&id=' + encodeURIComponent(id)
+              + '&name='   + encodeURIComponent(name)
+              + '&phone='  + encodeURIComponent(v('wePhone'))
+              + '&area='   + encodeURIComponent(v('weArea'))
+              + '&people=' + encodeURIComponent(v('wePeople'))
+              + '&dogs='   + encodeURIComponent(v('weDogs'))
+              + '&memo='   + encodeURIComponent(v('weMemo'))
+              + '&sent='   + encodeURIComponent(v('weSent'))
+              + '&superkey=' + encodeURIComponent(superKey())
+              + '&t=' + Date.now();
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      WAIT_LIST = data.list || WAIT_LIST;
+      WAIT_EDIT_ID = null;
+      showMsg(`「${name}」님의 요청 내용을 수정했어요`, true);
+    }else{
+      showMsg('수정 실패: ' + (data.error || '알 수 없는 오류'), false);
+      if(btn){ btn.disabled = false; btn.textContent = '💾 저장'; }
+      return;
+    }
+  }catch(e){
+    showMsg('수정 실패: API에 연결할 수 없습니다', false);
+    if(btn){ btn.disabled = false; btn.textContent = '💾 저장'; }
+    return;
+  }
+  renderWaitList();
+}
+
+/* 삭제는 실수 방지를 위해 두 번 눌러야 실행됩니다 */
+async function delWaitRow(id, btnEl){
+  if(!canEditWait()){ showMsg('삭제 권한이 없습니다 — 통합 관리자로 로그인해 주세요', false); return; }
+  if(btnEl && !btnEl.classList.contains('confirm')){
+    btnEl.classList.add('confirm');
+    btnEl.textContent = '정말 삭제?';
+    clearTimeout(btnEl._t);
+    btnEl._t = setTimeout(() => { btnEl.classList.remove('confirm'); btnEl.textContent = '삭제'; }, 4000);
+    return;
+  }
+  if(btnEl){ btnEl.disabled = true; btnEl.textContent = '삭제 중…'; }
+  try{
+    const url = conf.url + '?action=waitDelete&id=' + encodeURIComponent(id)
+              + '&superkey=' + encodeURIComponent(superKey()) + '&t=' + Date.now();
+    const data = JSON.parse(await (await fetch(url)).text());
+    if(data.ok){
+      WAIT_LIST = data.list || [];
+      showMsg(`「${data.removed || ''}」 요청을 삭제했어요`, true);
+    }else{
+      showMsg('삭제 실패: ' + (data.error || '알 수 없는 오류'), false);
+    }
+  }catch(e){
+    showMsg('삭제 실패: API에 연결할 수 없습니다', false);
+  }
+  WAIT_EDIT_ID = null;
+  renderWaitList();
+}
+
 /* 새로고침 — 객실 상태와 무박2일 명단을 함께 다시 불러옵니다 */
 function refreshAll(){
   loadStatus();
   loadDayList();
+  loadWaitList();
 }
 
 async function loadReferralList(){
