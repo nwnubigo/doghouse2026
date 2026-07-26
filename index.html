@@ -264,6 +264,14 @@ section[id]{scroll-margin-top:62px}
 .d2-lead{font-size:14.5px;color:var(--brown-d);margin:-8px 0 18px;line-height:1.8}
 .d2-lead b{color:var(--accent-d)}
 .d2-note{margin-top:16px;font-size:13px;color:var(--ink-soft);background:#fff;border:1px dashed #E3B79F;border-radius:12px;padding:12px 15px;line-height:1.8}
+/* 무박2일 카드 안에서 「1일차 / 2일차」를 나누는 구분선 */
+.d2-split{display:flex;align-items:center;gap:10px;margin:22px 0 16px}
+.d2-split span{flex:none;font-family:'Jua',sans-serif;font-size:15px;color:#fff;background:var(--green);border-radius:999px;padding:5px 14px}
+.d2-split small{flex:none;font-size:13px;color:var(--brown-d);font-weight:700}
+.d2-split i{flex:1;height:1px;background:#E3B79F;display:block}
+/* 2일차에 다시 합류하는 순서 — 숙박팀과 동일함을 표시 */
+.tl li.same::before{background:var(--green);border-color:var(--green)}
+.tl .same-tag{display:inline-block;margin-left:6px;font-size:11.5px;font-weight:900;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px;vertical-align:2px}
 
 /* ---------- 참가 조건 ---------- */
 .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -756,21 +764,32 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 
     <!-- ── 무박 2일 참가자 일정 ── -->
     <div class="day-card d2 rv">
-      <div class="day-label"><span class="d">무박 2일</span><span>7. 31. (금) · 당일 귀가</span></div>
-      <p class="d2-lead">숙박 없이 <b>1일차 프로그램만</b> 참여하고 팜파티 석식 후 귀가하시는 일정이에요. 모든 순서는 <b>옻칠목공체험관광협동조합</b>에서 시작합니다.</p>
+      <div class="day-label"><span class="d">무박 2일</span><span>7. 31. (금) ~ 8. 1. (토) · 숙박 없이 참여</span></div>
+      <p class="d2-lead">숙박만 하지 않을 뿐, 프로그램은 그대로예요. <b>1일차 팜파티 석식까지 참여한 뒤 귀가</b>하시고, <b>2일차 오전 10시에 다시 모여</b> 숙박 팀과 <b>똑같은 마무리 일정</b>을 함께합니다. 모든 순서는 <b>옻칠목공체험관광협동조합</b>에서 시작합니다.</p>
       <ul class="tl">
         <li><span class="t">12:00 – 13:00</span><p class="h">도착 · 접수</p><p>참가팀 도착 및 접수 (체험 공간)</p>
           <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
         <li><span class="t">13:00 – 14:00</span><p class="h">오리엔테이션</p><p>반려견 안전수칙 안내, 팀별 공간 배정</p>
           <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
-        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span><br>※ 무박 2일은 <b>당일 완성</b>을 목표로 진행하며, 완성한 도그하우스는 그날 가져가실 수 있어요.</p>
+        <li><span class="t">14:00 – 17:00</span><p class="h">체험 프로그램</p><p>① 도그하우스 만들기 ② 우드 소품 만들기 ③ 반려견 케어 프로그램<br><span class="star">★ 15~16시경 「마른하늘에 물벼락, 적셔버러」 쿨링 이벤트!</span></p>
           <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
         <li><span class="t">18:00 – 20:00</span><p class="h">팜파티 석식</p><p>흑돼지 삼겹살 팜파티 (반려견 동반 야외 좌석)</p>
           <span class="pl">📍 <b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></span></li>
-        <li><span class="t">20:00 ~</span><p class="h">마무리 · 귀가</p><p>기념 촬영 및 만족도 조사 후 해산 (숙박 · 조식 · 2일차 마무리 체험은 포함되지 않습니다)</p>
+        <li><span class="t">20:00 ~</span><p class="h">1일차 마무리 · 귀가</p><p>석식 후 자택으로 귀가하시면 됩니다. (숙소 이동 · 숙박 · 조식은 포함되지 않아요)<br>※ 만들던 도그하우스는 체험장에 그대로 보관해 두고, 2일차에 이어서 마무리합니다.</p>
           <span class="pl">📍 <b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></span></li>
       </ul>
-      <p class="d2-note">※ 무박 2일도 숙박 팀과 함께 <b>총 8팀 정원</b>을 나눠 씁니다. 야간 운전이 부담되시면 1박 2일 일정을 권해 드려요.<br>※ 참가비에 숙박비 · 조식이 포함되지 않아 1박 2일 상품보다 저렴하게 책정됩니다.</p>
+
+      <div class="d2-split"><span>2일차</span><small>8. 1. (토) · 10:00부터 숙박 팀과 동일</small><i></i></div>
+      <ul class="tl">
+        <li class="same"><span class="t">10:00</span><p class="h">재집결</p><p>체험장으로 다시 오셔서 숙박 팀과 합류합니다. (조식은 각자 해결 · 주차는 체험장 마당 이용)</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li class="same"><span class="t">10:00 – 12:00</span><p class="h">마무리 체험<span class="same-tag">숙박 팀과 동일</span></p><p>도그하우스 꾸미기 · 마감 작업, 팀별 기념 촬영</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+        <li class="same"><span class="t">12:00 – 13:00</span><p class="h">마무리 · 해산<span class="same-tag">숙박 팀과 동일</span></p><p>만족도 조사 및 해산 — 완성한 도그하우스를 가지고 돌아가세요!</p>
+          <span class="pl">📍 <b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></span></li>
+      </ul>
+
+      <p class="d2-note">※ 무박 2일은 <b>숙박과 조식만 빠질 뿐</b>, 체험 · 팜파티 · 2일차 마무리 일정은 숙박 팀과 똑같이 참여하십니다.<br>※ 무박 2일도 숙박 팀과 함께 <b>총 8팀 정원</b>을 나눠 씁니다. 1일차 야간 운전과 2일차 아침 이동이 부담되시면 1박 2일 일정을 권해 드려요.<br>※ 참가비에 숙박비 · 조식이 포함되지 않아 1박 2일 상품보다 저렴하게 책정됩니다.</p>
     </div>
   </div>
 </section>
@@ -1008,7 +1027,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
       </div>
 
       <div class="rgroup">
-        <div class="rgroup-head"><h4>옻칠목공체험관광협동조합 · 무박2일</h4><span class="rg-sub">숙박 없이 체험만 참여 · 남은 팀 수만큼 신청 가능</span></div>
+        <div class="rgroup-head"><h4>옻칠목공체험관광협동조합 · 무박2일</h4><span class="rg-sub">숙박·조식만 빼고 이틀 프로그램 모두 참여 · 남은 팀 수만큼 신청 가능</span></div>
         <p class="rg-addr">📍 주소 : 전북 남원시 이백면 서당골길 31</p>
         <div class="room-grid one">
           <!-- 가격·예약링크는 시트 「무박2일」 행에서 자동으로 채워집니다 -->
@@ -1017,7 +1036,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="st-chip">예약 가능</span>
             <span class="rname">무박2일 체험</span>
             <span class="rprice">가격 준비 중</span>
-            <span class="rnote">1일차 체험 · 팜파티 석식까지 참여하고 <b>숙박 없이</b> 귀가합니다.<br>숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 써요.</span>
+            <span class="rnote">1일차 팜파티 석식 후 <b>귀가</b>했다가, 2일차 <b>오전 10시</b>에 다시 모여 숙박 팀과 <b>동일한 마무리 일정</b>을 함께합니다.<br>숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 써요.</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
         </div>
