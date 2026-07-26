@@ -355,6 +355,7 @@ section[id]{scroll-margin-top:62px}
 @media(max-width:640px){.room-grid,.room-grid.one{grid-template-columns:1fr}}
 .rcard{background:#fff;color:var(--ink);border-radius:16px;padding:18px 18px 16px;text-align:left;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.22);display:flex;flex-direction:column;gap:6px}
 .rcard .rname{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
+.rcard .rname .rsuf{display:block;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:800;color:var(--accent-d);letter-spacing:-.01em;margin-top:1px}
 .rcard .rorig-line{font-size:12.5px;color:#9C8F7D;line-height:1}
 .rcard .rorig-line s{text-decoration:line-through}
 .rcard .rdc{display:inline-block;background:var(--accent-bg);color:var(--accent-d);font-size:11px;font-weight:900;border-radius:5px;padding:1px 7px;margin-left:6px;text-decoration:none;vertical-align:1px}
@@ -555,7 +556,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         </ul>
       </div></div>
       <div class="ov-row"><div class="ov-th">모집 인원</div><div class="ov-td"><b>반려견 동반 가족 8팀</b> (선착순) — 팀당 2인 이상이면 참여하실 수 있어요</div></div>
-      <div class="ov-row"><div class="ov-th">참가 대상</div><div class="ov-td">소형견(체중 <b>7kg 미만</b>)을 동반한 가족</div></div>
+      <div class="ov-row"><div class="ov-th">참가 대상</div><div class="ov-td">소형견(체중 <b>7kg 미만</b>[별헤는밤 펜션 이용객에 한함])을 동반한 가족</div></div>
       <div class="ov-row"><div class="ov-th">참가비</div><div class="ov-td"><b>체험 · 팜파티 석식 · 숙박 포함(조식은 선택 옵션) 가격</b><br><small style="color:var(--ink-soft)">모든 상품의 가격은 지역단위 농촌관광 <b>남원누비고 사업</b>으로 <b style="color:var(--accent-d)">30% 할인된 가격</b>에 제공됩니다</small></div></div>
       <div class="ov-row"><div class="ov-th">주최·주관</div><div class="ov-td">남원시농촌종합지원센터 (팜투어 남원누비고)</div></div>
       <div class="ov-row"><div class="ov-th">신청 방법</div><div class="ov-td">희망 숙소 <b>네이버 예약 신청</b> → <b>참가 신청서(구글폼) 작성</b> → 운영자 확인 후 <b>예약 확정</b> (숙소별 4팀, 확정 순 마감)</div></div>
@@ -862,7 +863,6 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <ul class="agree-list rv">
       <li><span class="at">반려견 참가 조건 확인</span>우리 반려견이 위 참가 가능 조건(7kg 미만 소형견 포함[별헤는밤 숙소 이용자에 한함])에 해당함을 확인했으며, 사실과 다를 경우 현장에서 참여가 제한될 수 있고 이 경우 환불 규정이 적용됨에 동의합니다.</li>
       <li><span class="at">안전 수칙 준수</span>현장 안전 수칙을 확인했으며, 이를 준수할 것에 동의합니다. 반복적인 미준수 시 운영진의 안내에 따라 프로그램 참여가 중단될 수 있습니다.</li>
-      <li><span class="at">반려견 관련 사고 책임</span>반려견이 다른 사람 · 반려견 · 시설물에 입힌 피해에 대한 1차적 책임은 견주에게 있음을 확인합니다. (민법 제759조) 주최 측은 행사 배상책임보험에 가입하여 운영합니다.</li>
       <li><span class="at">시설 이용</span>숙소 · 체험장 시설의 파손 또는 오염(배변 등) 발생 시 복구 비용이 청구될 수 있음에 동의합니다.</li>
       <li><span class="at">사진 · 영상 촬영 및 활용</span>본 프로그램은 언론(문화일보) 취재 및 홍보 콘텐츠 촬영(드론 포함)이 함께 진행됩니다. 참가자와 반려견이 포함된 사진 · 영상이 언론 보도 및 남원누비고 홍보에 활용되는 것에 동의합니다.</li>
       <li><span class="at">개인정보 수집 · 이용</span>참가자 정보 및 반려견 정보(견종 · 나이 · 체중 · 성향 · 접종 이력)를 프로그램 운영과 안전관리 목적으로 수집 · 이용하는 것에 동의합니다. 수집된 정보는 행사 종료 후 관련 법령에 따라 파기됩니다.</li>
@@ -947,37 +947,37 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <p class="rg-addr">📍 주소 : 전북 남원시 산내면 중황길 173</p>
         <div class="room-grid">
           <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
-          <div class="rcard" data-room="sooni-1" data-name="머슴달래" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
+          <div class="rcard" data-room="sooni-1" data-name="머슴달래-원목도그하우스제작" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">머슴달래</span>
+            <span class="rname">머슴달래<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">150,000 ~ 280,000원</span>
             <span class="rcond">기준 2인(최대 2인) · 독채(침실1, 이불세트2, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-2" data-name="도토라지" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
+          <div class="rcard" data-room="sooni-2" data-name="도토라지-원목도그하우스제작" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">도토라지</span>
+            <span class="rname">도토라지<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">150,000 ~ 280,000원</span>
             <span class="rcond">기준 8인(최대 8인) · 독채(침실2, 이불세트8, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-3" data-name="박졸갈래" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
+          <div class="rcard" data-room="sooni-3" data-name="박졸갈래-원목도그하우스제작" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">박졸갈래</span>
+            <span class="rname">박졸갈래<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">150,000 ~ 280,000원</span>
             <span class="rcond">기준 4인(최대 4인) · 독채(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
             <a class="naver-btn" href="https://booking.naver.com/booking/3/bizes/22665/items" target="_blank" rel="noopener"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="sooni-4" data-name="콩덕벅지" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
+          <div class="rcard" data-room="sooni-4" data-name="콩덕벅지-원목도그하우스제작" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">콩덕벅지</span>
+            <span class="rname">콩덕벅지<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">150,000 ~ 280,000원</span>
             <span class="rcond">기준 6인(최대 6인) · 독채(침실1, 이불세트6, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 3</span>
@@ -991,37 +991,37 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <p class="rg-addr">📍 주소 : 전북 남원시 산내면 산내달궁길 42</p>
         <div class="room-grid">
           <!-- TODO: 별헤는밤 펜션 네이버 예약 URL 확정 시 아래 4개 링크 교체 -->
-          <div class="rcard" data-room="star-1" data-name="오로라" data-book="">
+          <div class="rcard" data-room="star-1" data-name="오로라-원목도그하우스제작" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">오로라</span>
+            <span class="rname">오로라<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">200,000 ~ 350,000원</span>
             <span class="rcond">기준 5인(최대 7인) · 일반객실(침실1, 이불세트5, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 11</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-2" data-name="별 넷" data-book="">
+          <div class="rcard" data-room="star-2" data-name="별 넷-원목도그하우스제작" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 넷</span>
+            <span class="rname">별 넷<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 27</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-3" data-name="별 여섯" data-book="">
+          <div class="rcard" data-room="star-3" data-name="별 여섯-원목도그하우스제작" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 여섯</span>
+            <span class="rname">별 여섯<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 4인(최대 6인) · 일반객실(침실1, 이불세트4, 욕실1)</span>
             <span class="rrate"><span class="star">★ 4.75</span> · 리뷰 17</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
-          <div class="rcard" data-room="star-4" data-name="별 일곱" data-book="">
+          <div class="rcard" data-room="star-4" data-name="별 일곱-원목도그하우스제작" data-book="">
             <span class="so-ribbon">SOLD OUT</span>
             <span class="st-chip">예약 가능</span>
-            <span class="rname">별 일곱</span>
+            <span class="rname">별 일곱<span class="rsuf">-원목도그하우스제작</span></span>
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실1, 이불세트3, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 30</span>
@@ -1211,8 +1211,20 @@ const ROOM_STATUS_URL = 'https://script.google.com/macros/s/AKfycbwIxDVMif4-0Ml9
 const ROOM_STATUS_FALLBACK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTaYgi67Yda53ZiVJfSz8tUbGDBwzAHRo5UZV9mJTE_Hb5sZa6lxUcU4X50DATO596ppkwAEhSIhmRW/pub?output=csv';   // 시트 CSV 게시본 (예비)
 const SOLD_OUT_ROOMS  = [];   // ← 수동 관리 시 판매완료 방이름을 추가 (예: ['도토라지'])
 
+/* 시트의 방이름에 「-원목도그하우스제작」이 붙어 있어도 같은 객실로 인식합니다 */
+const normRoom = v => String(v == null ? '' : v).replace(/\s+/g, '').replace(/[-\u2013\u2014]?원목도그하우스제작$/, '');
+function findCard(name){
+  const key = normRoom(name);
+  if(!key) return null;
+  const list = document.querySelectorAll('.rcard[data-name]');
+  for(let i = 0; i < list.length; i++){
+    if(normRoom(list[i].getAttribute('data-name')) === key) return list[i];
+  }
+  return null;
+}
+
 function applyRoomState(name, sold){
-  const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
+  const card = findCard(name);
   if(!card) return;
   card.classList.toggle('soldout', sold);
   const isDay = card.classList.contains('day2');
@@ -1249,13 +1261,14 @@ function applyRoomState(name, sold){
 // 1차: 기본값 적용
 document.querySelectorAll('.rcard[data-name]').forEach(card => {
   const name = card.getAttribute('data-name');
-  card.dataset.status = SOLD_OUT_ROOMS.includes(name) ? '체험 판매완료' : '예약가능';
-  applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
+  const sold = SOLD_OUT_ROOMS.map(normRoom).includes(normRoom(name));
+  card.dataset.status = sold ? '체험 판매완료' : '예약가능';
+  applyRoomState(name, sold);
 });
 
 /* 시트에서 가격 문구·예약링크 반영 (시트 열 구성: 숙소명|방이름|판매상태|가격|예약링크) */
 function applyRoomInfo(name, price, link){
-  const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
+  const card = findCard(name);
   if(!card) return;
   if(price){
     const el = card.querySelector('.rprice');
@@ -1291,7 +1304,7 @@ function applyRoomInfo(name, price, link){
 
 // 2차: 예약상태API(실시간) → 실패 시 시트 CSV 게시본(예비)에서 상태·가격·링크 반영
 (function(){
-  const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => c.getAttribute('data-name'));
+  const ROOM_NAMES = [...document.querySelectorAll('.rcard[data-name]')].map(c => normRoom(c.getAttribute('data-name')));
 
   // 따옴표·쉼표(가격의 150,000원 등)를 처리하는 CSV 한 줄 파서
   function parseCsvLine(line){
@@ -1324,7 +1337,7 @@ function applyRoomInfo(name, price, link){
   function applyRoom(name, status, price, link){
     applyRoomInfo(name, price, link);                       // 가격·링크 먼저
     const st = normStatus(status);
-    const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
+    const card = findCard(name);
     if(card) card.dataset.status = st;                      // 팀 수 계산에 사용
     // 무박2일은 자체 판매상태가 아니라 '전체 8팀 정원'으로만 마감을 판단합니다
     if(card && card.classList.contains('day2')) return;
@@ -1338,13 +1351,13 @@ function applyRoomInfo(name, price, link){
       const rooms = Array.isArray(data) ? data : (data.rooms || []);
       rooms.forEach(it => {
         const name = String(it.room || '').trim();
-        if(ROOM_NAMES.includes(name)) applyRoom(name, it.status, it.price, it.link);
+        if(ROOM_NAMES.includes(normRoom(name))) applyRoom(name, it.status, it.price, it.link);
       });
     } else {
       txt.split(/\r?\n/).forEach(line => {
         const cols = parseCsvLine(line);        // [숙소명, 방이름, 판매상태, 가격, 예약링크]
         const name = (cols[1] || '').trim();
-        if(ROOM_NAMES.includes(name)) applyRoom(name, cols[2], cols[3], cols[4]);
+        if(ROOM_NAMES.includes(normRoom(name))) applyRoom(name, cols[2], cols[3], cols[4]);
       });
     }
   }
