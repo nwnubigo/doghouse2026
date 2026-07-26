@@ -417,7 +417,8 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 /* ── 다음 회차 안내 문자 요청 — 추천하기(주황)와 반대되는 청록 배경으로 대비 ── */
 .nextsec{background:linear-gradient(135deg,#2F93C7 0%,#1C6B90 55%,#124A66 100%);padding:70px 20px;text-align:center;position:relative;overflow:hidden}
 .nextsec::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 18%,rgba(255,255,255,.17) 0,transparent 45%),radial-gradient(circle at 12% 84%,rgba(255,255,255,.13) 0,transparent 45%);pointer-events:none}
-.nx-kicker{position:relative;display:inline-block;background:#fff;color:#12556F;font-weight:900;font-size:14px;letter-spacing:.02em;padding:10px 22px;border-radius:999px;margin-bottom:20px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.nx-kicker{position:relative;display:inline-block;background:#fff;color:#12556F;font-weight:900;font-size:14px;letter-spacing:.02em;padding:10px 22px;border-radius:999px;margin-bottom:20px;box-shadow:0 6px 16px rgba(0,0,0,.2);animation:nxPulseBadge 1.8s ease-in-out infinite}
+@keyframes nxPulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .nx-sec-title{position:relative;font-family:'Jua',sans-serif;color:#fff;font-size:32px;line-height:1.45;text-shadow:0 4px 16px rgba(0,0,0,.3)}
 .nx-hl{position:relative;display:inline-block;color:#08384E;padding:0 4px}
 .nx-hl::before{content:"";position:absolute;left:-4px;right:-4px;top:34%;bottom:4%;background:#7BE0FF;transform:rotate(-1.6deg);z-index:-1;border-radius:7px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
@@ -426,8 +427,10 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .nx-title{font-family:'Jua',sans-serif;font-size:23px;color:#12556F;margin:2px 0 10px}
 .nx-desc{font-size:14px;color:var(--ink-soft);line-height:1.85}
 .nx-desc b{color:var(--brown-d)}
-.nx-btn{margin-top:18px;background:#1C6B90;color:#fff;border:none;border-radius:999px;padding:15px 30px;font-family:'Jua',sans-serif;font-size:16.5px;cursor:pointer;box-shadow:0 8px 20px rgba(18,74,102,.32);transition:.15s}
+.nx-btn{position:relative;margin-top:18px;background:#1C6B90;color:#fff;border:none;border-radius:999px;padding:15px 30px;font-family:'Jua',sans-serif;font-size:16.5px;cursor:pointer;box-shadow:0 8px 20px rgba(18,74,102,.32);transition:.15s}
 .nx-btn:hover{background:#124A66;transform:translateY(-2px)}
+.nx-pulse::after{content:"";position:absolute;inset:0;border-radius:999px;border:3px solid #2F93C7;opacity:.7;animation:nxRing 1.8s ease-out infinite;pointer-events:none}
+@keyframes nxRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
 .nx-list{margin-top:20px;background:var(--blue-bg);border-radius:14px;padding:15px 16px;text-align:left}
 .nx-list-title{font-size:13px;font-weight:900;color:#12556F;margin-bottom:9px;text-align:center}
 .nx-list-title b{color:#0E7BA8}
@@ -1093,7 +1096,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 <!-- ═══════════ 다음 회차(9/12) 안내 문자 요청 — 추천하기와 반대 색으로 대비 ═══════════ -->
 <section class="sec nextsec" id="next">
   <div class="inner">
-    <p class="nx-kicker rv">📩 이번엔 자리가 없으신가요?</p>
+    <p class="nx-kicker rv">📩 이번 일정 참석이 어려우신가요?</p>
     <h2 class="nx-sec-title rv">다음 회차<br><span class="nx-hl">가장 먼저 알려드릴게요</span></h2>
     <div class="nextbox rv" id="nextBox">
       <h3 class="nx-title">2026. 9. 12.(토) 1박 2일</h3>
@@ -1102,7 +1105,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         위 일정으로 다음 회차를 진행하게 되면,<br>
         미리 남겨주신 번호로 <b>가장 먼저 문자 안내</b>를 드릴게요.
       </p>
-      <button class="nx-btn" onclick="openNextModal()">📩 다음 회차 안내 문자 요청하기</button>
+      <button class="nx-btn nx-pulse" onclick="openNextModal()">📩 다음 회차 안내 문자 요청하기</button>
       <div class="nx-list" id="nxList">
         <p class="nx-list-title">이미 신청해 주신 분들 <b id="nxCount">0</b>팀</p>
         <div id="nxItems"><p class="nx-empty">불러오는 중…</p></div>
@@ -1582,24 +1585,39 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       wrap.innerHTML = '<p class="ref-rank-empty">아직 추천인이 없어요. 첫 번째 추천인이 되어보세요! 🐾</p>';
       return;
     }
-    const sorted = refRankList.slice().sort((a, b) => {
+    /* 시트 값이 문자열('3')·공백·빈칸으로 들어와도 숫자로 비교되도록 정규화합니다 */
+    const num = v => { const n = Number(String(v == null ? 0 : v).replace(/[^0-9.-]/g, '')); return isFinite(n) ? n : 0; };
+    const list = refRankList.map(x => ({
+      code: x.code || '',
+      name: x.name || '',
+      phoneMasked: x.phoneMasked || '',
+      clicks: num(x.clicks),
+      confirmed: num(x.confirmed)
+    }));
+    const totalConfirmed = list.reduce((s, x) => s + x.confirmed, 0);
+    const sorted = list.slice().sort((a, b) => {
       return refRankMode === 'confirmed'
-        ? (b.confirmed - a.confirmed) || (b.clicks - a.clicks)
-        : (b.clicks - a.clicks) || (b.confirmed - a.confirmed);
+        ? (b.confirmed - a.confirmed) || (b.clicks - a.clicks) || a.code.localeCompare(b.code)
+        : (b.clicks - a.clicks) || (b.confirmed - a.confirmed) || a.code.localeCompare(b.code);
     });
     const rankClass = n => n === 1 ? 'rank1' : n === 2 ? 'rank2' : n === 3 ? 'rank3' : '';
     const rows = sorted.map((x, i) => `
       <tr class="${rankClass(i + 1)}">
         <td>${i + 1}</td>
-        <td class="nm">${x.name || ''}</td>
-        <td>${x.phoneMasked || ''}</td>
+        <td class="nm">${x.name}</td>
+        <td>${x.phoneMasked}</td>
         <td>${x.code}</td>
         <td>${x.clicks}</td>
         <td>${x.confirmed}</td>
       </tr>`).join('');
+    /* 예약확정순인데 확정 건이 하나도 없으면 접속자순과 순서가 같아져
+       「정렬이 안 된다」고 오해하기 쉬우므로 이유를 안내합니다 */
+    const note = (refRankMode === 'confirmed' && totalConfirmed === 0)
+      ? '<p class="ref-rank-empty" style="margin-top:10px">아직 <b>예약이 확정된 추천 건이 없어요.</b> 확정 건이 등록되면 이 순서가 바뀝니다.</p>'
+      : '';
     wrap.innerHTML = `<div style="overflow-x:auto"><table class="ref-rank-table">
       <thead><tr><th>순위</th><th>추천인</th><th>연락처</th><th>추천코드</th><th>접속수</th><th>예약확정수</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`;
+      <tbody>${rows}</tbody></table></div>` + note;
   }
 
   window.showRefRank = function(mode){
