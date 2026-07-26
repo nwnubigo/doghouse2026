@@ -68,7 +68,22 @@ section[id]{scroll-margin-top:62px}
 @media(max-width:560px){.hero-title{font-size:38px}}
 .hero-date{margin-top:16px;font-size:16px;font-weight:700;letter-spacing:.04em}
 .hero-date span{display:inline-block;background:rgba(0,0,0,.35);padding:6px 16px;border-radius:8px}
-.hero-cta{display:inline-block;margin-top:22px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Jua',sans-serif;font-size:19px;padding:15px 46px;border-radius:999px;box-shadow:0 8px 22px rgba(233,104,60,.45);transition:.2s}
+/* ---------- HERO 실시간 예약 현황 ---------- */
+.hero-stat{margin-top:20px;background:rgba(20,12,6,.42);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px 16px 13px;max-width:340px;text-align:left}
+.hero-stat.is-full{background:rgba(120,26,14,.5);border-color:rgba(255,180,160,.45)}
+.hs-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hs-label{font-size:12.5px;font-weight:700;color:#F4E3C8;letter-spacing:-.2px}
+.hs-rest{font-size:12px;font-weight:900;color:#7BE0A0;background:rgba(0,0,0,.28);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.hero-stat.is-full .hs-rest{color:#FFC7BA}
+.hs-num{font-family:'Jua',sans-serif;font-size:15px;color:#fff;margin-top:7px;line-height:1.1}
+.hs-num b{font-size:30px;color:#FFD98A;font-weight:400;margin-right:2px}
+.hs-bar{display:block;height:7px;border-radius:999px;background:rgba(255,255,255,.22);overflow:hidden;margin-top:9px}
+.hs-bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#FFD98A,var(--accent));transition:width .8s ease}
+.hero-stat.is-full .hs-bar i{background:linear-gradient(90deg,#FF9E85,#E8452A)}
+.hs-note{font-size:11.5px;color:#EBDCC6;margin-top:7px;line-height:1.6}
+@media(max-width:560px){.hero-stat{max-width:none;margin-top:16px;padding:12px 14px}.hs-num b{font-size:26px}}
+
+.hero-cta{display:inline-block;margin-top:18px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Jua',sans-serif;font-size:19px;padding:15px 46px;border-radius:999px;box-shadow:0 8px 22px rgba(233,104,60,.45);transition:.2s}
 .hero-cta:hover{background:var(--accent-d);transform:translateY(-2px)}
 
 /* ── 모바일 히어로 : 겹침 방지를 위해 흐름 배치로 전환 ── */
@@ -106,6 +121,11 @@ section[id]{scroll-margin-top:62px}
 .ov-th{flex:0 0 128px;background:var(--sand);color:var(--brown-d);font-weight:700;font-size:14.5px;padding:16px 18px;display:flex;align-items:center}
 .ov-td{flex:1;padding:16px 20px;font-size:15px}
 .ov-td b{color:var(--brown-d)}
+.ov-places{list-style:none;margin:10px 0 0;padding:11px 13px;background:var(--sand-l,#FBF5EA);border:1px solid var(--line);border-radius:10px}
+.ov-places li{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:13.5px;line-height:1.75;padding:3px 0}
+.ov-places li+li{border-top:1px dashed var(--line)}
+.ov-places li b{flex:0 0 auto;color:var(--brown-d)}
+.ov-places li span{color:var(--ink-soft)}
 .tbd{display:inline-block;background:var(--accent-bg);color:var(--accent-d);border:1px dashed var(--accent);font-size:13px;font-weight:700;padding:2px 10px;border-radius:6px}
 @media(max-width:560px){.ov-th{flex-basis:96px;font-size:13.5px;padding:14px 12px}.ov-td{padding:14px 14px;font-size:14px}}
 
@@ -300,6 +320,12 @@ section[id]{scroll-margin-top:62px}
 .rgroup-head h4{font-family:'Jua',sans-serif;font-size:21px;color:#FFD98A}
 .rgroup-head .rg-sub{font-size:13px;opacity:.9}
 .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.room-grid.one{grid-template-columns:1fr}
+.rg-addr{font-size:13px;color:#F4E3C8;margin:-8px 0 13px;opacity:.92;text-align:left}
+.rcard .rnote{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:2px}
+.rcard .rnote b{color:var(--brown-d)}
+.rcard.day2 .rname::after{content:"숙박 없음";display:inline-block;vertical-align:3px;margin-left:8px;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:900;color:var(--accent-d);background:var(--accent-bg);border-radius:5px;padding:2px 8px}
+.rcard.soldout.day2 .rname::after{color:#9C8F7D;background:#E4DCCE}
 @media(max-width:640px){.room-grid{grid-template-columns:1fr}}
 .rcard{background:#fff;color:var(--ink);border-radius:16px;padding:18px 18px 16px;text-align:left;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.22);display:flex;flex-direction:column;gap:6px}
 .rcard .rname{font-family:'Jua',sans-serif;font-size:19px;color:var(--brown-d)}
@@ -402,7 +428,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
   <a href="#agreement">동의 사항</a>
   <a href="#packing">준비물</a>
   <a href="#refund">환불 규정</a>
-  <a href="#apply" class="book">숙소 예약</a>
+  <a href="#apply" class="book">체험 예약</a>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -423,6 +449,16 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <p class="hero-kicker">우리 강아지의 첫 번째 집 만들기</p>
     <h1 class="hero-title"><span class="qm">「</span>실내용 원목 도그하우스 만들기<span class="qm">」</span><br><span style="font-size:.62em;color:#FFD98A">애견 동반 지리산 여행</span></h1>
     <p class="hero-date"><span>2026. 7. 31.(금) 12:00 ~ 8. 1.(토) 13:00</span></p>
+    <!-- 실시간 예약 현황 — 체험 판매완료 객실 + 무박2일 체험자 = 8팀 정원 -->
+    <div class="hero-stat" id="heroStat">
+      <div class="hs-top">
+        <span class="hs-label">🐾 실시간 예약 현황</span>
+        <span class="hs-rest" id="hsRest">불러오는 중…</span>
+      </div>
+      <div class="hs-num"><b id="hsBooked">–</b><span> / <span id="hsCap">8</span>팀 예약</span></div>
+      <div class="hs-bar"><i id="hsGauge"></i></div>
+      <p class="hs-note" id="hsNote">잠시만 기다려 주세요</p>
+    </div>
     <a class="hero-cta" href="#apply">참가 신청하기</a>
   </div>
 </header>
@@ -460,7 +496,14 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     </div>
     <div class="ov-card rv">
       <div class="ov-row"><div class="ov-th">일정</div><div class="ov-td"><b>2026. 7. 31.(금) 12:00 ~ 8. 1.(토) 13:00</b> (1박 2일)<br><small style="color:var(--ink-soft)">※ 1일차 12시 도착 · 접수</small></div></div>
-      <div class="ov-row"><div class="ov-th">장소</div><div class="ov-td">전북 남원시 일원 (옻칠목공체험관광협동조합 · 들꽃다물농장 · 반려견 동반 민박)</div></div>
+      <div class="ov-row"><div class="ov-th">장소</div><div class="ov-td">전북 남원시 일원 (옻칠목공체험관광협동조합 · 들꽃다물농장 · 순이네흙집 민박 · 별헤는밤 펜션)
+        <ul class="ov-places">
+          <li><b>옻칠목공체험관광협동조합</b><span>전북 남원시 이백면 서당골길 31</span></li>
+          <li><b>들꽃다물농장</b><span>전북 남원시 운봉읍 황산로 784-27</span></li>
+          <li><b>순이네흙집</b><span>전북 남원시 산내면 중황길 173</span></li>
+          <li><b>별헤는밤 펜션</b><span>전북 남원시 산내면 산내달궁길 42</span></li>
+        </ul>
+      </div></div>
       <div class="ov-row"><div class="ov-th">모집 인원</div><div class="ov-td"><b>반려견 동반 가족 8팀</b> (선착순) — 팀당 2인 이상이면 참여하실 수 있어요</div></div>
       <div class="ov-row"><div class="ov-th">참가 대상</div><div class="ov-td">소형견(체중 <b>7kg 미만</b>)을 동반한 가족</div></div>
       <div class="ov-row"><div class="ov-th">참가비</div><div class="ov-td"><b>체험 · 팜파티 석식 · 숙박 포함(조식은 선택 옵션) 가격</b><br><small style="color:var(--ink-soft)">모든 상품의 가격은 지역단위 농촌관광 <b>남원누비고 사업</b>으로 <b style="color:var(--accent-d)">30% 할인된 가격</b>에 제공됩니다</small></div></div>
@@ -815,6 +858,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 
       <div class="rgroup">
         <div class="rgroup-head"><h4>지리산 순이네흙집 민박</h4><span class="rg-sub">황토 흙집 · 조식 자체 제공(선택) · 4팀</span></div>
+        <p class="rg-addr">📍 주소 : 전북 남원시 산내면 중황길 173</p>
         <div class="room-grid">
           <!-- TODO: 순이네흙집 객실별 요금·정원·리뷰 확정 시 수정 -->
           <div class="rcard" data-room="sooni-1" data-name="머슴달래" data-book="https://booking.naver.com/booking/3/bizes/22665/items">
@@ -858,6 +902,7 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 
       <div class="rgroup">
         <div class="rgroup-head"><h4>지리산 별헤는밤 펜션</h4><span class="rg-sub">원목 인테리어 · 인근 식당 조식(선택) · 4팀</span></div>
+        <p class="rg-addr">📍 주소 : 전북 남원시 산내면 산내달궁길 42</p>
         <div class="room-grid">
           <!-- TODO: 별헤는밤 펜션 네이버 예약 URL 확정 시 아래 4개 링크 교체 -->
           <div class="rcard" data-room="star-1" data-name="오로라" data-book="">
@@ -894,6 +939,22 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
             <span class="rprice">100,000 ~ 200,000원</span>
             <span class="rcond">기준 2인(최대 4인) · 일반객실(침실1, 이불세트3, 욕실1)</span>
             <span class="rrate"><span class="star">★ 5</span> · 리뷰 30</span>
+            <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rgroup">
+        <div class="rgroup-head"><h4>옻칠목공체험관광협동조합 · 무박2일</h4><span class="rg-sub">숙박 없이 체험만 참여 · 남은 팀 수만큼 신청 가능</span></div>
+        <p class="rg-addr">📍 주소 : 전북 남원시 이백면 서당골길 31</p>
+        <div class="room-grid one">
+          <!-- 가격·예약링크는 시트 「무박2일」 행에서 자동으로 채워집니다 -->
+          <div class="rcard day2" data-room="day-1" data-name="무박2일" data-book="">
+            <span class="so-ribbon">SOLD OUT</span>
+            <span class="st-chip">예약 가능</span>
+            <span class="rname">무박2일 체험</span>
+            <span class="rprice">가격 준비 중</span>
+            <span class="rnote">1일차 도그하우스 만들기 · 반려견 케어 체험 · 팜파티 석식까지 참여하고 <b>숙박 없이</b> 귀가하는 일정입니다. 숙소 예약 팀과 함께 <b>총 8팀</b> 정원을 나눠 씁니다.</span>
             <a class="naver-btn" href="#" onclick="alert('예약 링크는 곧 연결됩니다!');return false;"><span class="nlogo">N</span>예약하기</a>
           </div>
         </div>
@@ -1007,6 +1068,9 @@ const spy=new IntersectionObserver(es=>{es.forEach(e=>{
   const el=document.getElementById(id); if(el) spy.observe(el);
 });
 
+/* 참가 신청서(구글폼) — 무박2일 예약 버튼에서도 사용하므로 먼저 선언합니다 */
+const APPLY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform';
+
 /* ═══════════ 객실 판매 상태 관리 (방이름 기준) ═══════════
  * 관리 : 구글시트 「도그하우스 숙박예약상황」에서 방이름별 판매상태
  * (판매중/판매완료)를 바꾸면, 방문자가 페이지를 열 때마다 자동 반영됩니다.
@@ -1026,12 +1090,13 @@ function applyRoomState(name, sold){
   const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
   if(!card) return;
   card.classList.toggle('soldout', sold);
+  const isDay = card.classList.contains('day2');
   const chip = card.querySelector('.st-chip');
-  if(chip) chip.textContent = sold ? '판매완료' : '예약 가능';
+  if(chip) chip.textContent = sold ? (isDay ? '접수 마감' : '판매완료') : '예약 가능';
   const btn  = card.querySelector('.naver-btn');
   const link = card.getAttribute('data-book');
   if(sold){
-    btn.textContent = '판매완료';
+    btn.textContent = isDay ? '접수 마감 (정원 8팀)' : '판매완료';
     btn.removeAttribute('href');
     btn.removeAttribute('target');
     btn.onclick = e => e.preventDefault();
@@ -1042,6 +1107,13 @@ function applyRoomState(name, sold){
       btn.setAttribute('target', '_blank');
       btn.setAttribute('rel', 'noopener');
       btn.onclick = null;
+    } else if(isDay){
+      // 무박2일은 숙박 예약이 없으므로, 시트에 링크가 없으면 참가 신청서로 바로 연결합니다
+      btn.setAttribute('href', APPLY_FORM_URL);
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'noopener');
+      btn.onclick = null;
+      btn.innerHTML = '📝 무박2일 신청하기';
     } else {
       btn.setAttribute('href', '#');
       btn.onclick = e => { e.preventDefault(); alert('예약 링크는 곧 연결됩니다!'); };
@@ -1052,6 +1124,7 @@ function applyRoomState(name, sold){
 // 1차: 기본값 적용
 document.querySelectorAll('.rcard[data-name]').forEach(card => {
   const name = card.getAttribute('data-name');
+  card.dataset.status = SOLD_OUT_ROOMS.includes(name) ? '체험 판매완료' : '예약가능';
   applyRoomState(name, SOLD_OUT_ROOMS.includes(name));
 });
 
@@ -1113,9 +1186,24 @@ function applyRoomInfo(name, price, link){
     return out.map(s => s.trim());
   }
 
+  /* 시트 값을 3종 상태로 정규화 — 옛 이름('판매완료'/'일반판매완료')도 그대로 인식합니다.
+     세 값이 모두 '판매완료'를 포함하므로 구체적인 쪽을 먼저 검사해야 합니다. */
+  function normStatus(raw){
+    const v = String(raw || '').trim();
+    if(/객실\s*판매완료|일반\s*판매완료/.test(v)) return '객실 판매완료';
+    if(/체험\s*판매완료/.test(v))                 return '체험 판매완료';
+    if(/판매완료|soldout/i.test(v))               return '체험 판매완료';
+    return '예약가능';
+  }
+
   function applyRoom(name, status, price, link){
     applyRoomInfo(name, price, link);                       // 가격·링크 먼저
-    applyRoomState(name, /판매완료|soldout/i.test(status||'')); // 상태(버튼·링크 적용)
+    const st = normStatus(status);
+    const card = document.querySelector(`.rcard[data-name="${CSS.escape(name)}"]`);
+    if(card) card.dataset.status = st;                      // 팀 수 계산에 사용
+    // 무박2일은 자체 판매상태가 아니라 '전체 8팀 정원'으로만 마감을 판단합니다
+    if(card && card.classList.contains('day2')) return;
+    applyRoomState(name, st !== '예약가능');                 // 상태(버튼·링크 적용)
   }
 
   function applyText(txt){
@@ -1147,8 +1235,59 @@ function applyRoomInfo(name, price, link){
     ]);
     if(csvTxt){ try{ applyText(csvTxt); }catch(e){} }
     if(apiTxt){ try{ applyText(apiTxt); }catch(e){} }
+    loadTeamSummary();
   })();
 })();
+
+/* ═══════════ 실시간 예약 현황 (8팀 정원) ═══════════
+ * 「체험 판매완료」 객실 수 + 무박2일 체험자 수 = 현재 예약 팀 수.
+ * 「객실 판매완료」(행사와 무관한 현장·전화 손님)는 팀 수에 넣지 않습니다.
+ * 무박2일 인원은 예약상태API의 공개 요약(action=summary)에서만 알 수 있으므로,
+ * API가 아직 갱신되지 않았다면 객실 수만으로 계산하고 그 사실을 문구에 밝힙니다. */
+const TEAM_CAPACITY = 8;
+
+function countSoldRoomsOnPage(){
+  return [...document.querySelectorAll('.rcard[data-name]')]
+    .filter(c => !c.classList.contains('day2') && c.dataset.status === '체험 판매완료').length;
+}
+
+function renderTeamSummary(booked, day, partial){
+  const box = document.getElementById('heroStat');
+  if(!box) return;
+  const rest = TEAM_CAPACITY - booked;
+  const full = rest <= 0;
+  box.classList.toggle('is-full', full);
+  document.getElementById('hsBooked').textContent = booked;
+  document.getElementById('hsCap').textContent = TEAM_CAPACITY;
+  document.getElementById('hsRest').textContent = full ? '마감되었어요' : ('잔여 ' + rest + '팀');
+  document.getElementById('hsGauge').style.width =
+    Math.min(100, Math.round(booked / TEAM_CAPACITY * 100)) + '%';
+
+  let note;
+  if(full) note = '선착순 8팀이 모두 찼습니다. 취소 자리가 생기면 다시 열려요.';
+  else if(partial) note = '숙소 예약 ' + booked + '팀 기준이며, 무박2일 신청 팀은 곧 반영됩니다.';
+  else note = '숙소 ' + (booked - day) + '팀 + 무박2일 ' + day + '팀 · 지금 신청하면 참여하실 수 있어요!';
+  document.getElementById('hsNote').textContent = note;
+
+  // 무박2일 카드 — 8팀이 다 찼을 때만 SOLD OUT, 아니면 예약 링크를 그대로 보여줍니다
+  const dayCard = document.querySelector('.rcard.day2[data-name]');
+  if(dayCard) applyRoomState(dayCard.getAttribute('data-name'), full);
+}
+
+async function loadTeamSummary(){
+  let booked = null, day = 0, partial = true;
+  try{
+    const txt = await (await fetch(ROOM_STATUS_URL + '?action=summary&t=' + Date.now())).text();
+    const d = JSON.parse(txt);
+    if(d && d.ok && typeof d.booked === 'number'){
+      booked = d.booked;
+      day = d.day || 0;
+      partial = false;
+    }
+  }catch(e){ /* 구버전 API·네트워크 오류 → 아래 예비 계산 */ }
+  if(booked === null) booked = countSoldRoomsOnPage();
+  renderTeamSummary(booked, day, partial);
+}
 
 /* ═══════════ 추천인 이벤트 ═══════════
  * 관리 : 구글시트 「도그하우스 숙박예약상황」의 '추천인코드' 탭에서
@@ -1159,7 +1298,6 @@ function applyRoomInfo(name, price, link){
  * setupReferralEvent() 실행 후 아래 두 값을 '설정' 탭의 값으로 바꿔주면
  * 참가 신청서에 추천코드가 자동으로 채워집니다 (안 바꿔도 폼 자체는 정상 동작).
  */
-const APPLY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform';
 const APPLY_FORM_PREFILL_TEMPLATE = 'https://docs.google.com/forms/d/e/1FAIpQLSfb4tHNoKINmYqMUXWfzJm7J2YA5zoD75iLRfbG05778qB0ig/viewform?usp=pp_url&entry.1397953627=__REF__';
 // 네이버 QR/단축주소(포스터·카드뉴스에 쓰는 그 링크) — 추천 링크로 들어온 방문도
 // 이 주소의 접속통계에 함께 반영되도록, 화면에 보이지 않는 iframe으로 한 번 "핑"만 보냅니다.
