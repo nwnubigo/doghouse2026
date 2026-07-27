@@ -150,6 +150,26 @@ section[id]{scroll-margin-top:62px}
 .feature-list li b{color:var(--brown-d)}
 
 /* ---------- 도그하우스 갤러리 ---------- */
+.exp2-note{text-align:center;font-size:14.5px;font-weight:700;color:var(--brown-d);background:var(--paper2,#FBF4E8);border:1.5px dashed var(--brown);border-radius:12px;padding:12px 16px;margin:18px 0 16px}
+.exp2-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+@media(max-width:720px){.exp2-grid{grid-template-columns:1fr}}
+.exp-card{background:#fff;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(90,60,30,.08)}
+.exp-card .eh{padding:14px 16px 10px}
+.exp-badge{display:inline-block;font-size:11.5px;font-weight:900;letter-spacing:.06em;color:#fff;border-radius:999px;padding:4px 12px;margin-bottom:8px}
+.exp-a .exp-badge{background:var(--brown)}
+.exp-b .exp-badge{background:#7A4A8F}
+.exp-card h4{font-family:'Jua',sans-serif;font-size:20px;color:var(--brown-d);letter-spacing:-.2px}
+.exp-card .photo{border-radius:0}
+.exp-card .photo img{height:230px}
+.exp-card .photo.sub img{height:190px}
+@media(max-width:560px){.exp-card .photo img{height:200px}.exp-card .photo.sub img{height:170px}}
+.exp-kit{list-style:none;padding:13px 16px 16px;margin:0;display:flex;flex-direction:column;gap:7px}
+.exp-kit li{font-size:13.5px;color:var(--ink);padding-left:24px;position:relative;line-height:1.45}
+.exp-kit li::before{content:'✔';position:absolute;left:2px;top:0;font-size:12px;font-weight:900}
+.exp-a .exp-kit li::before{color:var(--brown)}
+.exp-b .exp-kit li::before{color:#7A4A8F}
+.exp-kit .kit-head{font-weight:900;color:var(--brown-d);padding-left:0;font-size:12.5px;letter-spacing:.04em}
+.exp-kit .kit-head::before{content:none}
 .dh-hero{margin-bottom:14px}
 .dh-hero img{width:100%;height:430px;object-fit:cover}
 @media(max-width:560px){.dh-hero img{height:300px}}
@@ -604,18 +624,42 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
     <div class="rv">
       <span class="point-tag">POINT 01 · 메인 체험</span>
       <h3 class="p-title">🔨 도그하우스 만들기 &amp; 옻칠자개목걸이 만들기</h3>
-      <p class="p-desc">전문 목공 체험장에서 <b>원목 키트</b>로 우리 강아지만의 집을 직접 조립하고 마감합니다. 세상에 하나뿐인 우리 아이의 첫 번째 집이 완성됩니다.</p>
+      <p class="p-desc">전문 목공 체험장에서 진행하는 메인 체험은 <b>두 가지 중 하나를 선택</b>합니다. 예약하실 때 상품명 뒤에 붙은 체험 이름(<b>-원목도그하우스제작</b> · <b>-자개목걸이제작</b>)을 보고 원하시는 체험이 포함된 상품을 고르시면 됩니다.</p>
     </div>
-    <div class="photo dh-hero rv"><img src="images/doghouse_green.jpg" alt="꾸미기까지 마친 원목 도그하우스 샘플"><span class="cap">직접 만드는 원목 도그하우스 (샘플)</span></div>
-    <div class="gal4 rv">
-      <div class="photo"><img src="images/doghouse_palm.jpg" alt="도그하우스 꾸미기 샘플"></div>
-      <div class="photo"><img src="images/doghouse_kit.jpg" alt="조립 중인 원목 도그하우스"></div>
-      <div class="photo"><img src="images/doghouse_faces.jpg" alt="강아지 얼굴 나무 장식"></div>
-      <div class="photo"><img src="images/workshop_in1.jpg" alt="목공 체험장 내부"></div>
+    <p class="exp2-note rv">🔀 메인 체험은 <b>둘 중 하나</b>예요 — 예약 상품명 끝의 체험 이름을 확인해 주세요!</p>
+    <div class="exp2-grid rv">
+      <div class="exp-card exp-a">
+        <div class="eh">
+          <span class="exp-badge">체험 ① 원목도그하우스제작</span>
+          <h4>🔨 도그하우스 만들기</h4>
+        </div>
+        <div class="photo"><img src="images/도그하우스만들기_원목도그하우스_완성작.jpg" alt="원목 도그하우스 완성작 — 구름과 야자수 장식을 붙인 강아지 집"><span class="cap">직접 만드는 원목 도그하우스 (완성 샘플)</span></div>
+        <div class="photo sub"><img src="images/도그하우스만들기_강아지컵받침2_애견이름표목걸이.jpg" alt="강아지 얼굴 우드 컵받침 2개와 애견 이름표 목걸이"><span class="cap">함께 만드는 강아지 컵받침 2개 + 애견 이름표 목걸이</span></div>
+        <ul class="exp-kit">
+          <li class="kit-head">이렇게 만들어 가져가요</li>
+          <li><b>원목 도그하우스 1개</b> — 조립부터 꾸미기까지 직접</li>
+          <li><b>우드 컵받침 2개</b> — 강아지 얼굴 그리기</li>
+          <li><b>애견 이름표 목걸이 1개</b> — 우리 아이 이름 새기기</li>
+        </ul>
+      </div>
+      <div class="exp-card exp-b">
+        <div class="eh">
+          <span class="exp-badge">체험 ② 자개목걸이제작</span>
+          <h4>📿 옻칠자개목걸이 만들기</h4>
+        </div>
+        <div class="photo"><img src="images/옻칠자개목걸이만들기_자개목걸이2_컵받침2_애견이름표목걸이.jpg" alt="옻칠자개목걸이 2개, 강아지 얼굴 컵받침 2개, 애견 이름표 목걸이"><span class="cap">옻칠자개목걸이 2개 + 컵받침 2개 + 애견 이름표 목걸이</span></div>
+        <div class="photo sub"><img src="images/옻칠자개목걸이만들기_옻칠자개목걸이_완성작.jpg" alt="영롱한 자개를 붙여 완성한 옻칠자개목걸이 펜던트 2종"><span class="cap">영롱한 빛깔의 옻칠자개목걸이 (완성 샘플)</span></div>
+        <ul class="exp-kit">
+          <li class="kit-head">이렇게 만들어 가져가요</li>
+          <li><b>옻칠자개목걸이 2개</b> — 자개를 붙여 나만의 무늬로</li>
+          <li><b>우드 컵받침 2개</b> — 강아지 얼굴 그리기</li>
+          <li><b>애견 이름표 목걸이 1개</b> — 우리 아이 이름 새기기</li>
+        </ul>
+      </div>
     </div>
     <ul class="feature-list rv">
       <li><b>둘이 오셔도 걱정 없어요</b> — 2인 팀도 완성할 수 있도록 과정을 조정했고, 꾸미기 작업은 둘째 날 이어서 하실 수 있습니다.</li>
-      <li><b>완성한 도그하우스는 집으로 가져가실 수 있습니다.</b> (승용차 트렁크 적재 가능 크기 — 가로 40cm, 세로 50cm, 높이 40cm)</li>
+      <li><b>완성한 작품은 모두 집으로 가져가실 수 있습니다.</b> (도그하우스는 승용차 트렁크 적재 가능 크기 — 가로 40cm, 세로 50cm, 높이 40cm)</li>
       <li>전문 목공 강사가 전 과정을 함께하며, 아이들도 안전하게 참여할 수 있습니다.</li>
     </ul>
   </div>
