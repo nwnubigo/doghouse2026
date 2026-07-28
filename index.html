@@ -481,8 +481,8 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .refmodal-card h3{font-family:'Jua',sans-serif;color:var(--brown-d);font-size:21px;margin-bottom:10px}
 .refmodal-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
 .refmodal-form{display:flex;flex-direction:column;gap:10px}
-.refmodal-form input{border:1px solid var(--sand-d);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;width:100%}
-.refmodal-form input:focus{outline:none;border-color:var(--accent)}
+.refmodal-form input,.refmodal-form select{border:1px solid var(--sand-d);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;width:100%;background:#fff;color:inherit}
+.refmodal-form input:focus,.refmodal-form select:focus{outline:none;border-color:var(--accent)}
 .refmodal-form button{margin-top:4px}
 .refmodal-msg{margin-top:12px;font-size:13px;color:var(--accent-d);min-height:18px}
 
@@ -1329,6 +1329,14 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
         <label>참석인원 <span class="req">*</span><input type="number" id="nxPeople" placeholder="3" min="1" max="20" inputmode="numeric"></label>
         <label>동반 반려견 수 <span class="req">*</span><input type="number" id="nxDogs" placeholder="1" min="0" max="20" inputmode="numeric"></label>
       </div>
+      <label>참여하고 싶은 프로그램 <span class="req">*</span>
+        <select id="nxProg">
+          <option value="">선택해 주세요</option>
+          <option value="도그하우스">도그하우스</option>
+          <option value="옻칠자개목걸이">옻칠자개목걸이</option>
+          <option value="도그하우스 + 옻칠자개목걸이">도그하우스 + 옻칠자개목걸이</option>
+        </select>
+      </label>
       <label>기타사항 <span class="opt">(선택)</span><textarea id="nxMemo" placeholder="희망하시는 점, 반려견 특이사항 등을 자유롭게 적어 주세요" maxlength="300"></textarea></label>
       <button class="refbtn" onclick="submitNext()">📩 안내 문자 요청하기</button>
     </div>
@@ -1936,7 +1944,7 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
     if(e.key === 'Escape' || e.key === 'Enter'){ e.preventDefault(); window.nxAlertClose(); }
   });
   /* 다시 입력하기 시작하면 빨간 표시를 지웁니다 */
-  ['nxName','nxPhone','nxArea','nxPeople','nxDogs'].forEach(id => {
+  ['nxName','nxPhone','nxArea','nxPeople','nxDogs','nxProg'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.addEventListener('input', () => {
       const label = el.closest('label');
@@ -1952,6 +1960,7 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
     const area = document.getElementById('nxArea').value.trim();
     const people = document.getElementById('nxPeople').value.trim();
     const dogs = document.getElementById('nxDogs').value.trim();
+    const prog = document.getElementById('nxProg').value;
     const memo = document.getElementById('nxMemo').value.trim();
 
     /* 필수 항목 검사 — 위에서부터 순서대로, 처음 걸린 칸 하나만 알려 드립니다 */
@@ -1963,7 +1972,8 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       { id:'nxPeople', bad: !people, msg:'참석인원을 입력해 주세요.' },
       { id:'nxPeople', bad: !(Number(people) >= 1), msg:'참석인원은 1명 이상으로 입력해 주세요.' },
       { id:'nxDogs',   bad: !dogs, msg:'동반 반려견 수를 입력해 주세요.\n(없으시면 0을 입력해 주세요)' },
-      { id:'nxDogs',   bad: !(Number(dogs) >= 0), msg:'동반 반려견 수는 0 이상의 숫자로 입력해 주세요.' }
+      { id:'nxDogs',   bad: !(Number(dogs) >= 0), msg:'동반 반려견 수는 0 이상의 숫자로 입력해 주세요.' },
+      { id:'nxProg',   bad: !prog, msg:'참여하고 싶은 프로그램을 선택해 주세요.' }
     ];
     for(let i = 0; i < checks.length; i++){
       if(checks[i].bad){
@@ -1982,7 +1992,7 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       + '&area='   + encodeURIComponent(area)
       + '&people=' + encodeURIComponent(people)
       + '&dogs='   + encodeURIComponent(dogs)
-      + '&memo='   + encodeURIComponent(memo)
+      + '&memo='   + encodeURIComponent('[희망 프로그램] ' + prog + (memo ? ' / ' + memo : ''))
       + '&t=' + Date.now();
     fetch(REF_API_URL + q)
       .then(r => r.json())
@@ -1994,6 +2004,7 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
         }
         msg.textContent = '✅ ' + (d.message || '접수되었습니다!');
         document.getElementById('nxMemo').value = '';
+        document.getElementById('nxProg').value = '';
         loadNextList();
         setTimeout(() => { window.closeNextModal(); msg.textContent = ''; }, 2200);
       })
