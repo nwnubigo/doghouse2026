@@ -1769,8 +1769,8 @@ const NAVER_SHORT_URL = 'https://m.site.naver.com/2d5Xj';
       { id:'nxArea',   bad: !area, msg:'거주지역을 입력해 주세요.\n(예: 남원시)' },
       { id:'nxPeople', bad: !people, msg:'참석인원을 입력해 주세요.' },
       { id:'nxPeople', bad: !(Number(people) >= 1), msg:'참석인원은 1명 이상으로 입력해 주세요.' },
-      { id:'nxDogs',   bad: !dogs, msg:'동반 반려견 수를 입력해 주세요.\n(없으시면 0을 입력해 주세요)' },
-      { id:'nxDogs',   bad: !(Number(dogs) >= 0), msg:'동반 반려견 수는 0 이상의 숫자로 입력해 주세요.' },
+      { id:'nxDogs',   bad: !dogs, msg:'동반 반려견 수를 입력해 주세요.' },
+      { id:'nxDogs',   bad: !(Number(dogs) >= 1), msg:'동반 반려견 수는 1마리 이상으로 입력해 주세요.' },
       { id:'nxProg',   bad: !prog, msg:'참여하고 싶은 프로그램을 선택해 주세요.' }
     ];
     for(let i = 0; i < checks.length; i++){
