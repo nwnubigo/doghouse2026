@@ -260,25 +260,44 @@ header p{font-size:12.5px;opacity:.85}
     <div id="waitListWrap"><p class="wait-empty">불러오는 중…</p></div>
   </div>
 
-  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>객실은 <b>체험 종류별로 상품이 나뉘어</b> 있고(원목도그하우스제작 · 자개목걸이제작), <b>방이름 순</b>으로 정렬해 두었습니다. 같은 객실의 상품은 <b>버튼 한 번으로 함께 변경</b>됩니다. 8팀 정원 계산에는 <b>원목도그하우스제작 상품만</b> 반영됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에, 다음회차 안내 문자 요청은 「다음회차요청」 탭에 저장됩니다.<br>「다음회차 안내 문자 요청」은 모든 관리자가 볼 수 있지만, 내용 수정·삭제는 통합 관리자만 할 수 있습니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
+  <p class="foot">시트 값을 직접 고쳐도 되고, 이 페이지의 상태 버튼을 써도 됩니다 — 결과는 같은 시트에 저장됩니다.<br>이 화면에 보이는 상품은 <b>구글시트에 등록된 것만</b> 표시됩니다 — 시트에서 상품을 추가·삭제하거나 이름을 바꾸면 이 화면도 그대로 따라갑니다. 상품은 숙소별로 묶어 <b>방이름 순</b>으로 정렬하며, 같은 객실에 상품이 여러 개면 <b>버튼 한 번으로 함께 변경</b>됩니다. 8팀 정원 계산에는 <b>숙박 객실</b>만 <b>1실당 1팀</b>으로 반영됩니다.<br>「체험 판매완료」는 이번 행사의 체험 예약 마감, 「객실 판매완료」는 행사와 무관한 현장·전화 손님의 마감을 뜻해요 (상세페이지에는 둘 다 품절로 표시되지만, 위 예약 팀 수에는 「체험 판매완료」만 반영됩니다). 시트에 예전 이름(판매완료·일반판매완료)으로 적혀 있어도 그대로 인식합니다.<br>무박2일 체험자 명단은 같은 스프레드시트의 「무박2일체험자」 탭에, 다음회차 안내 문자 요청은 「다음회차요청」 탭에 저장됩니다.<br>「다음회차 안내 문자 요청」은 모든 관리자가 볼 수 있지만, 내용 수정·삭제는 통합 관리자만 할 수 있습니다.<br>로그인하면 예약상태API에 자동으로 연결됩니다.</p>
 </div>
 
 <script>
-/* 객실 정의 (숙소별)
- * 같은 객실이 체험 종류별로 상품이 나뉘어 있습니다.
- *   머슴달래-원목도그하우스제작 / 머슴달래-자개목걸이제작
- * baseRooms(객실명) × EXPERIENCES(체험명) 로 상품 목록을 만들고, 방이름 순으로 정렬합니다. */
-const EXPERIENCES = ['원목도그하우스제작', '자개목걸이제작'];
-const LODGES = [
-  { name:'지리산 순이네흙집 민박', sub:'황토 흙집 · 객실 4곳 · 4팀', baseRooms:['머슴달래','도토라지','박졸갈래','콩덕벅지'] },
-  { name:'지리산 별헤는밤 펜션',   sub:'원목 펜션 · 객실 4곳 · 4팀', baseRooms:['오로라','별 넷','별 여섯','별 일곱'] }
-];
-/* 각 숙소의 상품 목록(방이름)을 만들고 방이름 순으로 정렬합니다 */
-LODGES.forEach(l => {
-  l.rooms = [];
-  l.baseRooms.forEach(b => EXPERIENCES.forEach(x => l.rooms.push(b + '-' + x)));
-  l.rooms.sort((a, b) => a.localeCompare(b, 'ko'));
-});
+/* ═══ 상품 목록은 「구글시트」에서만 가져옵니다 ═══
+ * 이 파일에는 객실·상품을 적어 두지 않습니다.
+ * 시트(예약상태 탭)에 있는 행이 곧 이 화면에 표시되는 상품입니다.
+ *   · 시트에서 상품을 추가/삭제/이름변경 하면 이 화면도 그대로 따라갑니다.
+ *   · 시트에 없는 상품은 표시되지 않습니다. */
+let LODGES = [];   // [{ name, sub, rooms:[시트에 적힌 방이름] }] — loadStatus()에서 채웁니다
+
+/* 숙소 이름별 부제(설명). 여기에 없는 숙소는 이름만 표시합니다. */
+const LODGE_SUB = {
+  '지리산 순이네흙집 민박': '황토 흙집 · 숙박',
+  '지리산 별헤는밤 펜션'  : '원목 펜션 · 숙박',
+  '들꽃다물농장'          : '당일 참여 · 점심 팜파티'
+};
+/* 8팀 정원 계산에 반영하는 「숙박」 숙소. 그 밖의 숙소는 카드로 보이기만 하고 팀 수에는 넣지 않습니다. */
+const STAY_LODGES = ['지리산 순이네흙집 민박', '지리산 별헤는밤 펜션'];
+
+/* 시트에서 받은 목록으로 숙소·상품 구성을 다시 만듭니다 */
+function buildLodges(list){
+  const map = new Map();
+  list.forEach(it => {
+    const lodge = String(it.lodging || '').trim() || '기타';
+    const room  = String(it.room || '').trim();
+    if(!room) return;
+    if(!map.has(lodge)) map.set(lodge, []);
+    const arr = map.get(lodge);
+    if(!arr.some(r => roomKey(r) === roomKey(room))) arr.push(room);
+  });
+  const ord = n => { const i = STAY_LODGES.indexOf(n); return i < 0 ? 99 : i; };
+  LODGES = [...map.entries()].map(([name, rooms]) => {
+    rooms.sort((a, b) => a.localeCompare(b, 'ko'));
+    const sub = (LODGE_SUB[name] ? LODGE_SUB[name] + ' · ' : '') + '상품 ' + rooms.length + '개';
+    return { name, sub, rooms };
+  }).sort((a, b) => ord(a.name) - ord(b.name) || a.name.localeCompare(b.name, 'ko'));
+}
 
 /* 방이름 정규화 — 시트 표기와 이 페이지의 표기가 달라도 같은 상품으로 봅니다
  *  · 공백 무시                       (「별 넷-…」 = 「별넷-…」)
@@ -312,6 +331,7 @@ const conf = {
  * 별헤는밤 전용 / 순이네흙집 전용 / 옻칠목공체험관광협동조합 / 통합 관리자 4종
  * encKey   = 해당 비밀번호로 암호화된 관리키
  * lodges   = 객실 상태를 변경할 수 있는 숙소 (빈 배열이면 객실은 조회만 가능)
+ * allLodges= true 이면 시트에 있는 모든 숙소를 변경할 수 있습니다 (통합 관리자)
  * dayAdmin = 무박2일 체험자 명단을 등록·삭제할 수 있는 권한
  * encSuper = 「다음회차 안내 문자 요청」의 수정·삭제에 필요한 상위 키(암호화).
  *            통합 관리자 비밀번호로만 풀리므로, 다른 관리자는 조회만 할 수 있습니다. */
@@ -319,7 +339,7 @@ const AUTH_ROLES = {
   '0992c291bc06df951a966bfc9a37cfb711e525f873874e4d946dffed1b34f6de': { name:'별헤는밤 펜션 관리자',  lodges:['지리산 별헤는밤 펜션'], encKey:'RB9N2vCfOF0navrHxyj+QGoEbxpfZEj11c7bH7iaSw4sUHkVoU8=' },
   '4bfd76c762250b2dc3a0d4fff2bdead6d935e87e7c0211994150c35a09724e67': { name:'순이네흙집 관리자',     lodges:['지리산 순이네흙집 민박'], encKey:'GAO75l8Wucztx1hjmdadrWgx/JWRKGm8OyboChC0l0P122ysOJs=' },
   '7a8c35db4e0bc38feb2d256a38954959f4d57a212ddca9892cda32d474b8d033': { name:'옻칠목공체험관광협동조합', lodges:[], encKey:'1udiP7TMqpNNd7X8R7UkBYC+sQil+5HBdwqdAMuGHEXptLgUP6k=', dayAdmin:true },
-  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', encSuper:'VEJF7HIEIr/HFqvMxQJei0kBTz4aozqdvZ+aF7vxEUKC8CnIo+rMmSzOGno=', refAdmin:true, dayAdmin:true }
+  '96d84865dfa9b2778d20b612c4123ecfed0aa0193b50ab4dff0122641b02aafd': { name:'통합 관리자 (남원누비고)', lodges:['지리산 순이네흙집 민박','지리산 별헤는밤 펜션'], allLodges:true, encKey:'b3VQXQ32diXepSMxyvr2cFU5gPVSkXnsmrnj/qDCNcr3SrQwDqE=', encSuper:'VEJF7HIEIr/HFqvMxQJei0kBTz4aozqdvZ+aF7vxEUKC8CnIo+rMmSzOGno=', refAdmin:true, dayAdmin:true }
 };
 let ROLE = null;
 
@@ -402,7 +422,7 @@ function logout(){
   sessionStorage.removeItem('nubigo_super_key');
   location.reload();
 }
-const canEdit = lodgeName => !!conf.url && !!ROLE && ROLE.lodges.includes(lodgeName);
+const canEdit = lodgeName => !!conf.url && !!ROLE && (ROLE.allLodges === true || ROLE.lodges.includes(lodgeName));
 
 function showMsg(text, ok){
   const m = $('msg');
@@ -421,6 +441,10 @@ const STATUS_SHORT = { '예약가능':'예약가능', '체험 판매완료':'체
 
 function render(states){
   // states: { 방이름: '예약가능' | '체험 판매완료' | '객실 판매완료' }
+  if(!LODGES.length){
+    $('rooms').innerHTML = '<div class="card"><p class="hintrow">구글시트에 등록된 상품이 없습니다 — 시트의 「예약상태」 탭을 확인해 주세요.</p></div>';
+    return;
+  }
   $('rooms').innerHTML = LODGES.map(l => {
     const editable = canEdit(l.name);
     let hint = '';
@@ -467,39 +491,70 @@ function normalizeStatus(raw){
   return '예약가능';
 }
 
+/* 시트 게시본 CSV 파싱 (열: 숙소명, 방이름, 판매상태, 가격, 예약링크) */
+function parseRoomCsv(text){
+  const rows = [];
+  let row = [], cell = '', quoted = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    if(quoted){
+      if(c === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else quoted = false; }
+      else cell += c;
+    }else if(c === '"'){ quoted = true; }
+    else if(c === ','){ row.push(cell); cell = ''; }
+    else if(c === '\n'){ row.push(cell); rows.push(row); row = []; cell = ''; }
+    else if(c !== '\r'){ cell += c; }
+  }
+  row.push(cell);
+  if(row.length > 1 || row[0]) rows.push(row);
+  const out = [];
+  rows.forEach((r, i) => {
+    const lodging = (r[0] || '').trim(), room = (r[1] || '').trim(), status = (r[2] || '').trim();
+    if(!lodging || !room) return;
+    if(i === 0 && /숙소|방이름/.test(lodging + room)) return;   // 머리글 줄
+    out.push({ lodging, room, status });
+  });
+  return out;
+}
+
+/* 상품 목록과 상태를 「구글시트」에서만 읽어 옵니다.
+ * 1차: 앱스크립트 API(실시간) → 2차: 시트 게시본 CSV(최대 5분 지연)
+ * 둘 다 실패하면 목록을 만들지 않고 안내만 표시합니다. */
 async function loadStatus(){
   $('stamp').textContent = '상태를 불러오는 중…';
-  const states = {};
-  LODGES.forEach(l => l.rooms.forEach(r => states[roomKey(r)] = '예약가능'));
+  let list = null, src = '';
   try{
-    // 1차: 앱스크립트 API (실시간)
-    const txt = (await (await fetch(conf.url + '?t=' + Date.now())).text()).trim();
+    const txt  = (await (await fetch(conf.url + '?t=' + Date.now())).text()).trim();
     const data = JSON.parse(txt);
-    (data.rooms || []).forEach(it => {
-      const k = roomKey(it.room);
-      SHEET_ROOM_NAMES[k] = String(it.room || '').trim();   // 저장할 때 쓸 시트 원문 이름
-      if(k in states) states[k] = normalizeStatus(it.status);
-    });
-    $('stamp').textContent = '✅ 실시간 조회 (앱스크립트 API) · ' + new Date().toLocaleTimeString('ko-KR');
+    if(!Array.isArray(data.rooms)) throw new Error('rooms 없음');
+    list = data.rooms.map(it => ({ lodging: it.lodging, room: it.room, status: it.status }));
+    src  = '✅ 실시간 조회 (앱스크립트 API) · ';
   }catch(e){
-    // 2차: 시트 CSV 게시본 (최대 5분 지연)
     try{
       const txt = (await (await fetch(CSV_URL + '&t=' + Date.now())).text()).trim();
-      txt.split(/\r?\n/).forEach(line => {
-        const cols = line.split(',').map(s => s.replace(/^"|"$/g,'').trim());
-        const hit = cols.find(c => roomKey(c) in states);
-        if(hit){
-          const k = roomKey(hit);
-          SHEET_ROOM_NAMES[k] = hit;
-          states[k] = normalizeStatus(cols.find(c => /판매완료|예약가능/.test(c)) || '');
-        }
-      });
-      $('stamp').textContent = '📄 시트 게시본 조회 (최대 5분 지연) · ' + new Date().toLocaleTimeString('ko-KR');
-    }catch(e2){
-      $('stamp').textContent = '⚠ 상태를 불러오지 못했습니다 — 네트워크를 확인하세요';
-    }
+      list = parseRoomCsv(txt);
+      src  = '📄 시트 게시본 조회 (최대 5분 지연) · ';
+    }catch(e2){ list = null; }
   }
+
+  if(!list){
+    $('stamp').textContent = '⚠ 상태를 불러오지 못했습니다 — 네트워크를 확인하세요';
+    $('rooms').innerHTML = '<div class="card"><p class="hintrow">구글시트에서 상품 목록을 불러오지 못했습니다. 잠시 후 「새로고침」을 눌러 주세요.</p></div>';
+    return;
+  }
+
+  const states = {};
+  SHEET_ROOM_NAMES = {};
+  list.forEach(it => {
+    const k = roomKey(it.room);
+    if(!k) return;
+    SHEET_ROOM_NAMES[k] = String(it.room || '').trim();   // 저장할 때 쓸 시트 원문 이름
+    states[k] = normalizeStatus(it.status);
+  });
+  buildLodges(list);
+
   ROOM_STATES = states;
+  $('stamp').textContent = src + new Date().toLocaleTimeString('ko-KR') + ' · 시트 상품 ' + list.length + '개';
   render(states);
   updateSummary();
 }
@@ -510,15 +565,22 @@ async function loadStatus(){
  * 무박2일 체험자  = 숙박 없이 체험만 참여하는 팀 → 팀 수에 포함 */
 function updateSummary(){
   const cnt = {};
-  LODGES.forEach(l => { cnt[l.name] = { sold:0, general:0, avail:0 }; });
-  /* 8팀 정원은 「원목도그하우스제작」 체험 기준입니다.
-     같은 객실의 「자개목걸이제작」 상품은 다른 프로그램이라 팀 수에 넣지 않습니다. */
-  LODGES.forEach(l => l.rooms.filter(r => !/자[게개]목걸이제작$/.test(r)).forEach(r => {
-    const st = ROOM_STATES[roomKey(r)] || '예약가능';
-    if(st === '체험 판매완료')      cnt[l.name].sold++;
-    else if(st === '객실 판매완료') cnt[l.name].general++;
-    else                            cnt[l.name].avail++;
-  }));
+  STAY_LODGES.forEach(n => { cnt[n] = { sold:0, general:0, avail:0 }; });
+  /* 8팀 정원은 「숙박 객실」 기준입니다.
+     같은 객실에 체험 상품이 여러 개 있어도 1실로만 셉니다.
+     숙박이 아닌 숙소(예: 들꽃다물농장 당일 상품)는 카드로 보이기만 하고 팀 수에는 넣지 않습니다. */
+  LODGES.filter(l => STAY_LODGES.includes(l.name)).forEach(l => {
+    const seen = new Set();
+    l.rooms.forEach(r => {
+      const base = baseRoomOf(r);
+      if(seen.has(base)) return;
+      seen.add(base);
+      const st = ROOM_STATES[roomKey(r)] || '예약가능';
+      if(st === '체험 판매완료')      cnt[l.name].sold++;
+      else if(st === '객실 판매완료') cnt[l.name].general++;
+      else                            cnt[l.name].avail++;
+    });
+  });
 
   const sooni = cnt['지리산 순이네흙집 민박'] || {sold:0,general:0,avail:0};
   const star  = cnt['지리산 별헤는밤 펜션']   || {sold:0,general:0,avail:0};
