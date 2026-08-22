@@ -552,6 +552,62 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 .vcard .vp{font-size:13px;color:#F4E3C8;line-height:1.6}
 .vcard .vh{font-size:13.5px;font-weight:900;color:#FFD98A;margin-top:6px}
 .vcard .va{font-size:12.5px;color:#E6D6BC;opacity:.9;margin-top:3px}
+/* ══ 9/12 · 옻칠자개 섹션 ══ */
+.lac{background:linear-gradient(160deg,#2B1116 0%,#41191F 46%,#220F13 100%);color:#F6ECE2;position:relative;overflow:hidden}
+.lac::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 10%,rgba(140,220,210,.17),transparent 46%),radial-gradient(circle at 84% 80%,rgba(228,166,220,.15),transparent 48%);pointer-events:none}
+.lac .inner{position:relative;z-index:1}
+.lac .point-tag{background:linear-gradient(90deg,#8FE3D6,#CBB4F0 55%,#F3B9C8);color:#2B1116;font-weight:700}
+.lac .p-title{color:#FFF3E4}
+.lac .p-desc{color:#E8D5C6}
+.lac .p-desc b{color:#FFD9A8}
+.najeon{background:linear-gradient(92deg,#A8E7DC,#CDBEF5 42%,#F7C0CE 72%,#FFE0A8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lac-show{margin-top:22px;border-radius:22px;overflow:hidden;border:1.5px solid rgba(255,220,180,.28);box-shadow:0 18px 46px rgba(0,0,0,.45);position:relative}
+.lac-show img{width:100%;height:360px;object-fit:cover;display:block}
+@media(max-width:560px){.lac-show img{height:230px}}
+.lac-quote{margin:24px auto 0;max-width:730px;text-align:center;font-family:'Jua',sans-serif;font-size:22px;line-height:1.6;color:#FFE9CF}
+.lac-quote .najeon{font-size:1.06em}
+.lac-quote b{color:#FFD9A8}
+.lac-quote small{display:block;margin-top:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.7;color:#CFB29C;letter-spacing:.01em}
+@media(max-width:560px){.lac-quote{font-size:18.5px}}
+/* 완성작 세트 */
+.setbox{display:grid;grid-template-columns:1.05fr .95fr;background:#fff;border:1.5px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 26px rgba(90,60,30,.10)}
+.setbox .sp{position:relative;background:#EEE7DA;min-height:340px}
+.setbox .sp img{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;display:block}
+.setbox .si{padding:24px 26px 26px}
+.set-tag{display:inline-block;font-size:11.5px;font-weight:900;letter-spacing:.08em;color:#fff;background:#7A4A8F;border-radius:999px;padding:5px 13px;margin-bottom:10px}
+.setbox h4{font-family:'Jua',sans-serif;font-size:23px;color:var(--brown-d);margin-bottom:14px;line-height:1.35}
+.set-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 14px;padding:0}
+.set-list li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--ink);background:var(--sand);border-radius:12px;padding:11px 14px}
+.set-list .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--brown);color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center;margin-top:2px}
+.set-list b{color:var(--brown-d)}
+.set-list small{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.set-note{font-size:13px;line-height:1.75;color:var(--ink-soft);background:#FFF6E9;border:1px dashed var(--brown);border-radius:10px;padding:10px 13px}
+.set-note b{color:var(--accent-d)}
+@media(max-width:760px){.setbox{grid-template-columns:1fr}.setbox .sp{min-height:290px}}
+/* 강사 배너 */
+.teacher{display:flex;align-items:center;gap:14px;margin-top:20px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:0 4px 14px rgba(90,60,30,.07)}
+.teacher .ic{flex:none;width:46px;height:46px;border-radius:50%;background:var(--green);font-size:23px;display:grid;place-items:center}
+.teacher p{font-size:15.5px;color:var(--ink);line-height:1.6}
+.teacher b{color:var(--brown-d)}
+.teacher small{display:block;margin-top:3px;font-size:13px;color:var(--ink-soft)}
+/* 2인 1팀 교대 */
+.duo-turn{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;margin-top:20px}
+.duo-turn .photo{min-height:300px}
+.duo-turn .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.turn-box{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:22px 24px;box-shadow:0 4px 14px rgba(90,60,30,.06)}
+.turn-box h4{font-family:'Jua',sans-serif;font-size:21px;color:var(--brown-d);margin-bottom:10px}
+.turn-box p{font-size:14.5px;color:var(--ink-soft);line-height:1.8}
+.turn-box p b{color:var(--ink)}
+@media(max-width:760px){.duo-turn{grid-template-columns:1fr}.duo-turn .photo{min-height:230px}}
+/* 도구 카드 */
+.tool2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+.tcard{background:var(--sand);border:1.5px solid var(--sand-d);border-radius:18px;padding:20px 22px}
+.tcard .tn{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.1em;color:#fff;background:var(--brown);border-radius:999px;padding:4px 11px;margin-bottom:9px}
+.tcard h5{font-family:'Jua',sans-serif;font-size:20px;color:var(--brown-d);margin-bottom:7px}
+.tcard p{font-size:14px;color:var(--ink-soft);line-height:1.75}
+.tcard p b{color:var(--ink)}
+@media(max-width:640px){.tool2{grid-template-columns:1fr}}
+
 .openbox{max-width:620px;margin:22px auto 0;background:rgba(0,0,0,.26);border:1.5px solid rgba(255,217,138,.55);border-radius:16px;padding:18px 20px;text-align:center}
 .openbox .ob-t{font-family:'Jua',sans-serif;font-size:21px;color:#FFD98A;margin-bottom:8px}
 .openbox p{font-size:13.5px;line-height:1.75;color:#F4E3C8}
@@ -731,46 +787,60 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
 </section>
 
 <!-- ═══════════ POINT 2. 옻칠자개목걸이 (14:30) ═══════════ -->
-<section class="sec" style="background:var(--green-bg);padding-top:64px">
+<section class="sec lac" id="lacquer">
   <div class="inner">
     <div class="rv">
       <span class="point-tag">POINT 02 · 오후 2시 반 · 메인 체험</span>
       <h3 class="p-title">📿 옻칠자개목걸이 만들기</h3>
-      <p class="p-desc">이번 회차의 메인 체험은 <b>옻칠자개목걸이 만들기</b> 한 가지입니다. 검게 옻칠한 원목 위에 영롱한 <b>자개</b>를 한 조각씩 붙여, 세상에 하나뿐인 무늬를 만듭니다. 전문 목공 강사가 <b>오리엔테이션부터 마감까지 3시간</b> 전 과정을 함께합니다.<br><small style="color:var(--ink-soft)">※ 7월 회차의 「원목 도그하우스 만들기」는 이번 회차에서는 진행하지 않습니다.</small></p>
+      <p class="p-desc">이번 회차의 <b>메인 체험</b>입니다. 검게 <b>옻칠한 원목</b> 위에 영롱한 <b>자개</b>를 한 조각씩 붙여, <b>세상에 하나뿐인 나만의 목걸이</b>를 만듭니다. 빛이 드는 각도에 따라 색이 달라지는 자개의 무늬는, 같은 재료로 만들어도 두 번 다시 같은 것이 나오지 않습니다.</p>
     </div>
-    <div class="exp2-grid rv">
-      <div class="exp-card exp-b">
-        <div class="eh">
-          <span class="exp-badge">완성작</span>
-          <h4>📿 옻칠자개목걸이 2점</h4>
-        </div>
-        <div class="photo"><img src="images/옻칠자개목걸이만들기_옻칠자개목걸이_완성작.jpg" alt="영롱한 자개를 붙여 완성한 옻칠자개목걸이 펜던트 2종"><span class="cap">영롱한 빛깔의 옻칠자개목걸이 (완성 샘플)</span></div>
-        <ul class="exp-kit">
-          <li class="kit-head">이렇게 만들어 가져가요</li>
-          <li><b>옻칠자개목걸이 2개</b> — 자개를 붙여 나만의 무늬로</li>
-          <li>천년을 간다는 <b>옻칠·자개 전통 기법</b>을 하루 만에 경험</li>
-          <li>완성작은 <b>그날 바로</b> 가지고 돌아가실 수 있어요</li>
+    <div class="lac-show rv">
+      <img src="images/lacquer_necklace_4.jpg" alt="자개를 붙여 완성한 옻칠자개목걸이 펜던트 4종">
+      <span class="cap">완성작 예시 · 조각의 크기와 방향에 따라 무늬가 달라집니다</span>
+    </div>
+    <p class="lac-quote rv"><span class="najeon">천 년을 간다는 옻칠, 빛을 품은 자개.</span><br>그 전통 기법을 <b>하루</b>, 손끝으로 만납니다.
+      <small>螺鈿(나전) · 조개껍데기의 영롱한 안쪽 면을 얇게 갈아 무늬로 붙이는 우리 전통 공예입니다.<br>※ 7월 회차의 「원목 도그하우스 만들기」는 이번 회차에서는 진행하지 않습니다.</small></p>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--green-bg);padding-top:56px">
+  <div class="inner">
+    <div class="setbox rv">
+      <div class="sp"><img src="images/lacquer_set_full.jpg" alt="옻칠자개목걸이와 강아지 얼굴 우드 컵받침, 애견 이름표로 이루어진 완성작 세트"></div>
+      <div class="si">
+        <span class="set-tag">완성작 예시</span>
+        <h4>한 팀이 이만큼 만들어 갑니다</h4>
+        <ul class="set-list">
+          <li><span class="n">1</span><div><b>옻칠자개목걸이 1개</b><small>옻칠한 원목 위에 자개를 붙여 나만의 무늬로</small></div></li>
+          <li><span class="n">2</span><div><b>우드 컵받침 1개</b><small>우리 아이 얼굴을 닮은 모양으로</small></div></li>
+          <li><span class="n">3</span><div><b>애견 이름표 1개</b><small>이름을 그려 넣어 목줄에 바로 달아 주세요</small></div></li>
         </ul>
-      </div>
-      <div class="exp-card exp-a">
-        <div class="eh">
-          <span class="exp-badge">함께 만들어요</span>
-          <h4>🐶 우리 아이 이름표 · 컵받침</h4>
-        </div>
-        <div class="photo"><img src="images/옻칠자개목걸이만들기_자개목걸이2_컵받침2_애견이름표목걸이.jpg" alt="옻칠자개목걸이 2개, 강아지 얼굴 컵받침 2개, 애견 이름표 목걸이"><span class="cap">목걸이 2개 + 컵받침 2개 + 애견 이름표</span></div>
-        <ul class="exp-kit">
-          <li class="kit-head">같은 시간에 함께 진행돼요</li>
-          <li><b>우드 컵받침 2개</b> — 강아지 얼굴 그리기</li>
-          <li><b>애견 이름표 목걸이 1개</b> — 우리 아이 이름 새기기</li>
-          <li>가족이 <b>역할을 나누어</b> 참여할 수 있습니다</li>
-        </ul>
+        <p class="set-note">＊ <b>더 만들고 싶으시면</b> 현장에서 추가 결제 후 원하는 만큼 만드실 수 있습니다.<br>＊ 완성작은 <b>그날 바로</b> 가지고 돌아가십니다.</p>
       </div>
     </div>
-    <ul class="feature-list rv">
-      <li><b>둘이 오셔도 충분해요</b> — 2인 팀 기준으로 공정을 조정했고, 한 사람이 만드는 동안 다른 한 사람은 반려견을 돌보며 교대합니다.</li>
-      <li><b>완성한 작품은 모두 집으로 가져가실 수 있습니다.</b> 부피가 작아 이동도 부담 없어요.</li>
-      <li>공방 옆에 <b>옻칠 전시장</b>이 있어, 기다리는 동안 전통 옻칠 공예품을 함께 둘러보실 수 있습니다.</li>
-    </ul>
+
+    <div class="teacher rv">
+      <span class="ic">🧑‍🏫</span>
+      <p><b>옻칠목공 전문강사가 전 과정을 함께합니다.</b><small>오리엔테이션부터 마감까지 — 처음이어도, 손에 쥐어 드리며 하나씩 알려 드립니다.</small></p>
+    </div>
+
+    <div class="duo-turn rv">
+      <div class="photo"><img src="images/lacquer_walk_sunset.jpg" alt="공방 근처 산책로에서 바라본 노을 풍경"><span class="cap">공방 근처 산책로</span></div>
+      <div class="turn-box">
+        <h4>🐕 만드는 동안 우리 아이는요?</h4>
+        <p><b>2인 1팀 교대</b>로 진행합니다. 한 사람이 만드는 동안 다른 한 사람은 반려견을 돌보고, 중간에 자리를 바꿉니다.<br><br>마당과 <b>공방 근처 산책로</b>를 활용해 산책도 가능합니다. 반려견들이 서로 부딪치지 않도록 <b>팀 사이 거리를 두고</b> 안내해 드립니다.</p>
+      </div>
+    </div>
+
+    <div class="rv" style="margin-top:30px">
+      <p class="disp" style="font-size:21px;color:var(--brown-d);margin-bottom:14px;text-align:center">🏛 체험은 이런 곳에서 진행됩니다</p>
+      <div class="grid3">
+        <div class="photo"><img src="images/lacquer_studio.jpg" alt="옻칠목공체험관광협동조합 체험장 내부" style="height:200px"><span class="cap">체험장</span></div>
+        <div class="photo"><img src="images/lacquer_gallery.jpg" alt="옻칠 공예품이 진열된 전시장" style="height:200px"><span class="cap">옻칠 전시장</span></div>
+        <div class="photo"><img src="images/lacquer_building.jpg" alt="옻칠목공체험관광협동조합 건물 외관" style="height:200px"><span class="cap">공방 외관</span></div>
+      </div>
+      <p style="margin-top:13px;font-size:13.5px;color:var(--ink-soft);text-align:center;line-height:1.75">기다리는 동안 <b>옻칠 전시장</b>에서 전통 옻칠 공예품을 둘러보실 수 있습니다.<br>📍 옻칠목공체험관광협동조합 · 전북 남원시 이백면 서당골길 31</p>
+    </div>
   </div>
 </section>
 
@@ -779,14 +849,22 @@ footer .f-brand{font-family:'Jua',sans-serif;color:#F0E4D2;font-size:16px;margin
   <div class="inner">
     <div class="rv">
       <span class="point-tag brown">POINT 03 · 메인 체험과 동시 진행</span>
-      <h3 class="p-title">🌿 컵받침 · 이름표 등 우드 소품 만들기</h3>
-      <p class="p-desc">옻칠자개목걸이 제작과 <b>같은 시간에 진행</b>되는 소품 체험 — 한 사람이 목걸이를 붙이는 동안 다른 사람은 소품을 만들며 <b>역할을 나눕니다</b>. 우리 아이 얼굴을 닮은 컵받침과 이름을 새긴 이름표를 만들어 보세요.</p>
+      <h3 class="p-title">🌿 우드 컵받침 · 애견 이름표 만들기</h3>
+      <p class="p-desc"><b>스크롤쏘</b>로 모양을 오려 내고, <b>우드 버닝기</b>로 선과 이름을 그려 넣어 만듭니다. 정해진 도안이 없어 <b>원하는 형태와 컬러로</b> 제작하실 수 있습니다 — 우리 아이 얼굴을 그대로 옮겨 담는 분이 가장 많습니다.</p>
     </div>
-    <div class="grid3 rv">
-      <div class="photo"><img src="images/coaster_dog.jpg" alt="강아지 얼굴 우드 컵받침" style="height:200px"></div>
-      <div class="photo"><img src="images/coaster_cat.jpg" alt="고양이 얼굴 우드 컵받침" style="height:200px"></div>
-      <div class="photo"><img src="images/goods_keyring.jpg" alt="우드 키링과 인형 소품" style="height:200px"></div>
+    <div class="tool2 rv">
+      <div class="tcard"><span class="tn">TOOL 01</span><h5>🪚 스크롤쏘</h5><p>얇은 톱날로 원목을 오려 <b>모양</b>을 만듭니다. 곡선도 자유롭게 — 강사가 옆에서 함께 잡아 드립니다.</p></div>
+      <div class="tcard"><span class="tn">TOOL 02</span><h5>🔥 우드 버닝기</h5><p>달군 인두로 나무를 태워 <b>선과 이름</b>을 새깁니다. 여기에 색을 올리면 우리 아이 얼굴이 완성됩니다.</p></div>
     </div>
+    <div class="duo rv" style="margin-top:18px">
+      <div class="photo"><img src="images/wood_coaster_tag.jpg" alt="강아지 얼굴 우드 컵받침 2개와 이름을 새긴 애견 이름표"><span class="cap">우드 컵받침 · 애견 이름표</span></div>
+      <div class="photo"><img src="images/wood_tag_samples.jpg" alt="색을 입힌 애견 이름표와 키링 샘플 여러 종"><span class="cap">색을 입힌 이름표 샘플</span></div>
+    </div>
+    <ul class="feature-list rv">
+      <li><b>정해진 도안이 없습니다.</b> 모양도 색도 원하는 대로 — 그래서 같은 자리에서 만들어도 결과물이 전부 다릅니다.</li>
+      <li><b>아이도 함께할 수 있어요.</b> 색칠과 그리기는 아이 손으로, 톱질은 어른과 강사가 맡습니다.</li>
+      <li><b>완성작은 부피가 작아</b> 돌아가는 길이 가볍습니다.</li>
+    </ul>
   </div>
 </section>
 
