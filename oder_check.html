@@ -2,7 +2,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="refresh" content="0; url=./admin.html">
-<script>location.replace('./admin.html' + location.search + location.hash);</script>
+<script>
+/* 자기 자신으로 이동해 무한 새로고침이 생기는 것을 막습니다 */
+(function(){
+  var target = 'admin.html';
+  var here = (location.pathname.split('/').pop() || '').toLowerCase();
+  if (here !== target.toLowerCase()) {
+    location.replace('./' + target + location.search + location.hash);
+  }
+})();
+</script>
 <title>이동 중…</title></head>
 <body style="font-family:sans-serif;text-align:center;padding:40px 20px">
 관리 페이지로 이동합니다… <a href="./admin.html">바로가기</a>
